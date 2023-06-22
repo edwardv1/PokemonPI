@@ -28,9 +28,9 @@ const getAllPokemons = async(req, res) => {
                 types: infoPokemon.types.map((data) => data.type.name)
             }  
         })
-        //const allPokemons = await Promise.all(cleanPokemonsApi);
+        const allPokemons = await Promise.all(cleanPokemonsApi);
         //return AllPokemons;
-        return [...pokemonsDB, ...cleanPokemonsApi];  //envio un array con todos los pokemones
+        return [...pokemonsDB, ...allPokemons];  //envio un array con todos los pokemones
         //Puedo usar Concat tambien return pokemonsDB.concat(pokemonsApi)
     } catch (error) {
         throw new Error(error.message);
