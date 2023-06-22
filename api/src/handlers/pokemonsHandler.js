@@ -21,21 +21,9 @@ const getAllPokemonsHandler = async (req, res) => {
 }
 
 // Recibe la info por params
-/*
+
 const getPokemonsByIdHandler = async (req, res) => {
-    const { id } = req.params;  // UUUID: hjfe43-2574kl-564sdfg-7564f o id: 2 
-    try {
-        //extrae info del endpoint, y ejecuta el controller
-        const response = await getPokemonById(id)  
-        console.log(response);
-        return res.status(200).send(response)
-   } catch (error) {
-        return res.status(400).json({error: "hola"})
-   }
-}
-*/
-const getPokemonsByIdHandler = async (req, res) => {
-    const {id} = req.params
+    const {id} = req.params  // UUUID: hjfe43-2574kl-564sdfg-7564f o id: 2 
     try {
         const pokemonsId = await getPokemonById(id)
         res.status(200).send(pokemonsId)        

@@ -15,13 +15,14 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      valdate: {
-        notEmpty: true
-      }
+      unique: true
     },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        isUrl: true,
+      }
     },
     hp: {
       type: DataTypes.INTEGER,
@@ -65,13 +66,14 @@ module.exports = (sequelize) => {
         min: 0,
       }
     },
-  }, { timestamps: false });
+  }, { freezeTableName: true, timestamps: false });
 };
 
 
 //DataTypes.UUID: combinacion de nros, letras y guines (codigo alfanumerico)
 //defaultValue: DataTypes.UUIDV4: Algoritmo que crea un nro aleatorio de identificacion
 
+//freezeTableName: true --> forzamos nombreTabla === nombreModelo
 
 //! Son obligatorios 
 // ID -> id

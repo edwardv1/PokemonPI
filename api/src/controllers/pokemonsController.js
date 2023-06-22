@@ -28,9 +28,9 @@ const getAllPokemons = async(req, res) => {
                 types: infoPokemon.types.map((data) => data.type.name)
             }  
         })
-        const allPokemons = await Promise.all(cleanPokemonsApi);
+        //const allPokemons = await Promise.all(cleanPokemonsApi);
         //return AllPokemons;
-        return [...pokemonsDB, ...allPokemons];  //envio un array con todos los pokemones
+        return [...pokemonsDB, ...cleanPokemonsApi];  //envio un array con todos los pokemones
         //Puedo usar Concat tambien return pokemonsDB.concat(pokemonsApi)
     } catch (error) {
         throw new Error(error.message);
@@ -89,6 +89,8 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
         const type = await Type.findAll({ where: { name: types } }); // Buscar el tipo por nombre, validar con [op.in] si el tipo no se encuentra
         if (!type) throw new Error(`Type '${types}' does not exist.`);
         pokemonDb.setTypes(type); // Establecer la relación entre el pokemon y el tipo
+
+        //VERIFICAR SI RETORNO LOS POKEMONES DE LA BDD AQUI O EN OTRA FUNCION
         //const findpoke = await Pokemon.findOne({where:{name}, include: [Type]});
         //console.log(findpoke);
 
@@ -98,14 +100,34 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
    }
 }
 
+// Función para obtener la info de la DB
+const getPokemonsDb = async () => {
+    const allPokemonsDb = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+      },
+    });
+  
+    const pokemones = allPokemonsDb.map( pokemon => {
+      return {
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.image,
+        attack: pokemon.attack,
+        hp: pokemon.hp,
+        defense: pokemon.defense,
+        speed: pokemon.speed,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        types: pokemon.Types.map( types => types.name),
+      };
+    });
+    return pokemones;
+  };
+
 
 module.exports = {
-    getAllPokemons, getPokemonById, getPokemonByName, createPokemon
+    getAllPokemons, getPokemonById, getPokemonByName, createPokemon, getPokemonsDb
 }
 
-/*
-include: {
-            model: Type,
-            attributes: ["name"]
-          }
-*/
