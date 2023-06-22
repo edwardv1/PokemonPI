@@ -8,13 +8,16 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUID,     //hjfe43-2574kl-564sdfg-7564f
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      valdate: {
+        notEmpty: true
+      }
     },
     image: {
       type: DataTypes.STRING,
@@ -25,7 +28,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         min: 0,
-        //max: 255
       }
     },
     attack: {
@@ -33,7 +35,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         min: 0,
-        //max: 255
       }
     },
     defense: {
@@ -41,32 +42,46 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         min: 0,
-        //max: 255
       }
     },
     speed: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         min: 0,
-        //max: 255
       }
     },
     height: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         min: 0,
-        //max: 255
       }
     },
     weight: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         min: 0,
-        //max: 255
       }
-    }
+    },
   }, { timestamps: false });
 };
+
+
+//DataTypes.UUID: combinacion de nros, letras y guines (codigo alfanumerico)
+//defaultValue: DataTypes.UUIDV4: Algoritmo que crea un nro aleatorio de identificacion
+
+
+//! Son obligatorios 
+// ID -> id
+// Nombre -> name
+// Imagen -> image
+// Vida -> hp
+// Ataque -> attack
+// Defensa -> defense
+
+//! No son obligatorios 
+// Velocidad -> speed
+// Altura -> height
+// Peso -> weight
