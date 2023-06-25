@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    height: 100vh; /* Ajusta la altura de la pantalla como desees */
+}
+
+.div1 {
+    flex: 20%;
+}
+  
+.div2 {
+    flex: 80%;
+}

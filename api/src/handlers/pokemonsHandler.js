@@ -26,7 +26,7 @@ const getPokemonsByIdHandler = async (req, res) => {
     const {id} = req.params  // UUUID: hjfe43-2574kl-564sdfg-7564f o id: 2 
     try {
         const pokemonsId = await getPokemonById(id)
-        res.status(200).send(pokemonsId)        
+        res.status(200).json(pokemonsId)        
     } catch (error) {
         res.status(400).send({message: error.message})
     }
@@ -38,6 +38,8 @@ const getPokemonsByIdHandler = async (req, res) => {
 
 const createPokemonsHandler = async (req,res) => {  
     const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
+
+    //AGREGAR TRY CATCH
     
     if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Faltan datos obligatorios.")
     try {

@@ -1,10 +1,37 @@
 const axios = require('axios');
 const { Pokemon, Type } = require('../db');
 
+
+// Función para obtener la info de la DB
+const getPokemonsDb = async () => {
+    const allPokemonsDb = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+      },
+    });
+  
+    const pokemons = allPokemonsDb?.map( pokemon => {
+      return {
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.image,
+        attack: pokemon.attack,
+        hp: pokemon.hp,
+        defense: pokemon.defense,
+        speed: pokemon.speed,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        types: pokemon.types.map( types => types.name),
+      };
+    });
+    return pokemons;
+};
+
 const getAllPokemons = async(req, res) => {
     
     try {
-        const pokemonsDB = await Pokemon.findAll();
+        let pokemonsDB = await getPokemonsDb();
         //if(pokemonsDB) return pokemonsDB;
         //si no existe pokemon, hacer el getAll a la API
     
@@ -32,6 +59,7 @@ const getAllPokemons = async(req, res) => {
         //return AllPokemons;
         return [...pokemonsDB, ...allPokemons];  //envio un array con todos los pokemones
         //Puedo usar Concat tambien return pokemonsDB.concat(pokemonsApi)
+
     } catch (error) {
         throw new Error(error.message);
     }
@@ -99,32 +127,6 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
         throw new Error(error.message);
    }
 }
-
-// Función para obtener la info de la DB
-const getPokemonsDb = async () => {
-    const allPokemonsDb = await Pokemon.findAll({
-      include: {
-        model: Type,
-        attributes: ["name"],
-      },
-    });
-  
-    const pokemones = allPokemonsDb.map( pokemon => {
-      return {
-        id: pokemon.id,
-        name: pokemon.name,
-        image: pokemon.image,
-        attack: pokemon.attack,
-        hp: pokemon.hp,
-        defense: pokemon.defense,
-        speed: pokemon.speed,
-        height: pokemon.height,
-        weight: pokemon.weight,
-        types: pokemon.Types.map( types => types.name),
-      };
-    });
-    return pokemones;
-  };
 
 
 module.exports = {

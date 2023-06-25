@@ -7,7 +7,7 @@ router.get('/', getAllPokemonsHandler);  //All y byName... misma ruta
 
 router.get('/:id', getPokemonsByIdHandler);
 
-router.post('/', createPokemonsHandler);
+router.post('/create', createPokemonsHandler);
 
 
 module.exports = router;

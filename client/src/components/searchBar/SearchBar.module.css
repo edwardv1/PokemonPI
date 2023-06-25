@@ -1,0 +1,13 @@
+.container { 
+   
+    height: 98%;
+    width: 288px;
+    border: 8px solid rgba(0, 0, 0, 0.85);
+    background-color: rgba(184, 142, 50, 0.368);
+	display: flex;
+    flex-direction:column;
+	justify-content: center;
+    text-align: center; /* Centra el texto horizontalmente */
+   
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+}

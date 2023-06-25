@@ -1,0 +1,91 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 33vh;
+    width: 15%;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    
+    border: 6px solid yellow;
+    background-color: rgb(232, 229, 49);
+
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: trasnform 0.90s ease-out;
+
+    box-shadow: 0 0 10px black;
+    &:hover {
+       box-shadow: 0 0 5px red;
+    }
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .topSection {
+    flex: 6%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .middleSection {
+    flex: 64%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 6px solid rgb(182, 182, 8);
+    background-image: linear-gradient(70deg, #ff8fff 0, #ff86ff 3.57%, #ff7ef3 7.14%, #ff78de 10.71%,
+     #ff74c9 14.29%, #ff73b4 17.86%, #ff769f 21.43%, #ff7b8b 25%, #ff8177 28.57%, #ff8a64 32.14%,
+      #ff9352 35.71%, #ff9c40 39.29%, #ffa52e 42.86%, #ffae1b 46.43%, #fbb600 50%, #e9be00 53.57%,
+       #d6c400 57.14%, #c2ca00 60.71%, #add017 64.29%, #96d42c 67.86%, #7cd840 71.43%, #5bdc54 75%,
+        #25df68 78.57%, #00e17d 82.14%, #00e392 85.71%, #00e4a7 89.29%, #00e5bd 92.86%, #00e6d3 96.43%,
+         #00e6e9 100%);
+  }
+
+  .middleSectionText {
+    text-align: center;
+  }
+  
+  .name {
+    font-size: 12px; /* Ajusta el tamaño de fuente según sea necesario */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 70%;
+    
+  }
+  
+  .hp {
+    flex: 30%;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bottomSection {
+    flex: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .text {
+    text-decoration: none;
+    color: black;
+  }
+  /* Colores de fondo según los tipos de Pokémon */
+  .card.grass {
+    background-color: lightgreen;
+  }
+  
+  .card.fire {
+    background-color: tomato;
+  }
+  
+  .card.water {
+    background-color: lightskyblue;
+  }

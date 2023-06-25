@@ -1,0 +1,128 @@
+.backgroundDetail {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: url("../../images/fondoDeatil.jpg");
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 70vh;
+    height: 43vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../../images/fondoDeatil.jpg");
+   
+    border-radius: 8px;
+    box-shadow: 0 0 10px black;
+    &:hover {
+       box-shadow: 0 0 5px red;
+    } 
+}
+
+.topSection {
+    flex: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.topSectionInfo {
+    margin-left: 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
+.topSectionBack {
+    margin-right: 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
+.textLink {
+    text-decoration: none;
+    color: black;
+}
+
+  
+.middleSection {
+    flex: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-left: 3px solid rgb(0, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 17px;
+}
+
+.middleSectionImage {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30vh;
+}
+
+.divisor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.middleSectionImageTop {
+    flex: 30%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.middleSectionImageBottom {
+    flex: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 6px solid black;
+    background-image: linear-gradient(70deg, #ff8fff 0, #ff86ff 3.57%, #ff7ef3 7.14%, #ff78de 10.71%,
+     #ff74c9 14.29%, #ff73b4 17.86%, #ff769f 21.43%, #ff7b8b 25%, #ff8177 28.57%, #ff8a64 32.14%,
+      #ff9352 35.71%, #ff9c40 39.29%, #ffa52e 42.86%, #ffae1b 46.43%, #fbb600 50%, #e9be00 53.57%,
+       #d6c400 57.14%, #c2ca00 60.71%, #add017 64.29%, #96d42c 67.86%, #7cd840 71.43%, #5bdc54 75%,
+        #25df68 78.57%, #00e17d 82.14%, #00e392 85.71%, #00e4a7 89.29%, #00e5bd 92.86%, #00e6d3 96.43%,
+         #00e6e9 100%);
+}
+
+.backgroundImage {
+    background-color: red;
+}
+
+.middleSectionInfo {
+    flex: 50%;
+    display: block;
+    flex-direction: column;
+}
+
+.bottomSection {
+    border-left: 3px solid rgb(0, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0);
+    border-bottom: 3px solid rgb(0, 0, 0);
+    flex: 30%;
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    /* border: 6px solid rgb(182, 182, 8); */
+}
