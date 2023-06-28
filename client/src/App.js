@@ -9,11 +9,9 @@ import Create from './views/create/Create';
 
 function App() {
 
-  async function onSearch(name) {
 
-  }
 
-  const location = useLocation();
+  //const location = useLocation();
   return (
     <div>
       {/* {
@@ -23,7 +21,7 @@ function App() {
       }
       {
         location.pathname !== "/"
-        ? <SearchBar onSearch={onSearch}/> 
+        ? <SearchBar/> 
         : null
       } */}
       <Routes>

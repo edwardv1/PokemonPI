@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPokemonById } from "../../redux/actions";
-import styles from "./Detail.module.css";
-import pokebola from "../../images/pokebola.png";
 import { Link } from "react-router-dom";
+import styles from "./Detail.module.css";
+import pokebola from "../../images/pokebola8.png";
 
 export default function Detail() {
   
@@ -39,8 +39,8 @@ export default function Detail() {
               <div className={styles.middleSectionImageTop}>
                 <h4>{pokemonById[0]?.name.toUpperCase()} </h4>
               </div>
-              <div className={styles.backgroundImage}>
-                <img style={{ width: '20px', height: '20px' }} src={pokebola} alt="pokebola" />
+              <div>
+                <img style={{ width: '25px'}} src={pokebola} alt="pokebola" />
               </div>
             </div>
             <div className={styles.middleSectionImageBottom}>
@@ -59,10 +59,10 @@ export default function Detail() {
         <div className={styles.bottomSection}>
           <h4>Height: {pokemonById[0]?.height}</h4>
           <h4>Weight: {pokemonById[0]?.weight}</h4>
-          {/* <h4>
-            Type: {pokemonById.types[0].charAt(0).toUpperCase() + pokemonById.types[0].slice(1)}  
-            {pokemonById.types[1] ? pokemonById.types[1].charAt(0).toUpperCase() + pokemonById.types[1].slice(1): null}
-          </h4> */}
+          <h4>
+            Type: {pokemonById[0]?.types[0].charAt(0).toUpperCase() + pokemonById[0]?.types[0].slice(1)}  
+            {pokemonById[0]?.types[1] ? " & " + pokemonById[0]?.types[1].charAt(0).toUpperCase() + pokemonById[0]?.types[1].slice(1): null}
+          </h4>
         </div>
       </div>
       </div>

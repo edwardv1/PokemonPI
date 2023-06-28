@@ -43,6 +43,7 @@
        #d6c400 57.14%, #c2ca00 60.71%, #add017 64.29%, #96d42c 67.86%, #7cd840 71.43%, #5bdc54 75%,
         #25df68 78.57%, #00e17d 82.14%, #00e392 85.71%, #00e4a7 89.29%, #00e5bd 92.86%, #00e6d3 96.43%,
          #00e6e9 100%);
+    overflow: hidden;
   }
 
   .middleSectionText {
@@ -69,8 +70,6 @@
   .bottomSection {
     flex: 30%;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   
   .text {

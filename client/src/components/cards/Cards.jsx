@@ -11,8 +11,8 @@ export default function Cards({ allPokemons }) {
   const pokemonsList = allPokemons;
   return (
     <div className={styles.cardsList}>
-      {pokemonsList?.map((pokemon) => ( 
-      <Card pokemon= {pokemon}/>
+      {pokemonsList?.map((pokemon, index) => ( 
+      <Card pokemon= {pokemon} key={index}/>
      ))}
     </div>
   );

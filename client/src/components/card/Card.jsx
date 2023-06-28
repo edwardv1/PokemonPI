@@ -3,10 +3,10 @@ import styles from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 
 export default function Card({pokemon}) {
-  console.log(pokemon);
+  //console.log(pokemon);
   const {id, image, hp, attack, defense, speed, types} = pokemon;
   let { name } = pokemon;
-  console.log(id);
+  //console.log(id);
   
   // Obtener el primer tipo del array de tipos
   //const primaryType = types[0];
@@ -26,7 +26,7 @@ export default function Card({pokemon}) {
           </div>
         </div>
         <div className={styles.middleSection}>
-          <img src={image} alt={name} />
+          <img style={{ width: '200px', height: "110px"}} src={image} alt={name} />
         </div>
         <div className={styles.bottomSection}>
           <div>

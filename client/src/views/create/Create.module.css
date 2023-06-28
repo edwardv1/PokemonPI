@@ -1,0 +1,151 @@
+.container{
+    display: flex;
+    align-items: center;  
+    justify-content: center; 
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-top: 60px;
+    width: 50vh;
+    height: 75vh;
+    /* padding: 10px; */
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgb(188, 188, 22);
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+    box-shadow: 0 0 10px black;
+    &:hover {
+       box-shadow: 0 0 5px red;
+    } 
+}
+
+.form input {
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 20px;
+    color: black;
+    /* outline: none; */
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    margin: 2px;
+    background-color: rgb(246, 246, 101);
+    
+}
+
+.topSection {
+    flex: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* flex-direction: row;
+    justify-content: space-between; */
+    border-bottom: 3px solid rgb(0, 0, 0);
+    width: 50vh;
+    background-color: rgba(128, 128, 128, 0.286);
+    font-family: 'Kavivanar', cursive;
+}
+
+.middleSection {
+    flex: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
+    overflow-x: hidden; /* Oculta la barra de desplazamiento vertical */
+    width: 50vh;
+    font-family: 'Kavivanar', cursive;
+    border-left: 3px solid rgb(0, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0);
+}
+
+.bottomSection {
+    border-left: 3px solid rgb(0, 0, 0);
+    border-right: 3px solid rgb(0, 0, 0);
+    border-bottom: 3px solid rgb(0, 0, 0);
+    flex: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50vh;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    border-top: 3px solid black;
+}
+
+.container select {
+    font-family: 'Kavivanar', cursive;
+    color: black;
+    font-size: 15px;
+    background-color: rgb(246, 246, 101);
+    /* padding: 5px 10px; */
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.buttonCreate {
+    font-family: 'Kavivanar', cursive;
+    color: black;
+    font-size: 15px;
+    background-color: rgb(7, 196, 7);
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 20vh;
+    height: 5vh;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 5px rgb(0, 255, 30);
+     } 
+
+}
+
+.buttonCreate:disabled {
+    opacity: 0.5; 
+    cursor: not-allowed;
+}
+
+.buttonCancel {
+    font-family: 'Kavivanar', cursive;
+    color: black;
+    font-size: 15px;
+    background-color: red;
+    border: 1px solid black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 20vh;
+    height: 5vh;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 5px red;
+     } 
+}
+
+.delete {
+    margin: 5px;
+    margin-right: 10px;
+    margin-top: 3px;
+    /* margin: 2px 2px 0 0; */
+    border-radius: 3px;
+    background-color: red;
+    color: white;
+    box-shadow: 0 3px 3px black;
+    &:hover {
+        color: red;
+        background-color: white;
+        box-shadow: 0 3px 3px red;
+    }
+}
+
+.form p {
+    color:  rgb(226, 0, 0);
+    /* font-weight: bold; */
+    font-size: 15px;
+}
