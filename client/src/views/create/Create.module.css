@@ -56,8 +56,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
-    overflow-x: hidden; /* Oculta la barra de desplazamiento vertical */
+    overflow-y: scroll; 
+    overflow-x: hidden; 
     width: 50vh;
     font-family: 'Kavivanar', cursive;
     border-left: 3px solid rgb(0, 0, 0);

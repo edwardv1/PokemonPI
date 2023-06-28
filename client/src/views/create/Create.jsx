@@ -16,9 +16,9 @@ export default function Create() {
     hp: "",
     attack: "",
     defense: "",
-    speed: "",
-    height: "",
-    weight: "",
+    speed: 0,
+    height: 0,
+    weight: 0,
     types: [],
   });
   
@@ -32,30 +32,33 @@ export default function Create() {
     speed: "",
     height: "",
     weight: "",
-    types: "Required form field!",
+    types: "At least one type must be selected!",
   });
+
+  console.log(errors.types);
   
   const [selectedTypes, setSelectedTypes] = useState([]);
 
-  function handleInputChange(event){
-    let {name, value} = event.target;
+  //funcion que obtiene cada input y los guarda en el estado local
+  function handleInputChange(event) {
+    let { name, value } = event.target;
     setInput({
-      ...input,  //para que no se pisen los inputs anteriores
-      [name]: value, //como tenemos mas de 1 input, hacemos[name] propiedad dinamica de ES6
+      ...input,
+      [name]: value,
     });
-    //Validacion en tiempo real
-    setErrors(
-      validationInputs({
-        ...input,
-        [name]: value,
-      })
-    );
-  };
+  }
+
+  // Este useEffect permite validar los campos en tiempo real
+  useEffect(() => {
+    setErrors(validationInputs(input));
+  }, [input]);
 
   console.log(selectedTypes);
+  console.log(selectedTypes.length);
 
+  //funcion para evitar que seleccionen mas de 2 types
   const handleTypesChange = (event) => {
-    if ([...selectedTypes].length >= 2) {
+    if (selectedTypes.length >= 2) {
       return setErrors({
         ...errors,
         types: "You must choose a maximum of 2 types",
@@ -66,7 +69,7 @@ export default function Create() {
   };
 
   const removeTypes = (typeDeleted) => {
-    let typesFiltered = [...selectedTypes].filter((type) => type !== typeDeleted);
+    let typesFiltered = selectedTypes.filter((type) => type !== typeDeleted);
     setSelectedTypes(typesFiltered);
   };
 
@@ -77,7 +80,7 @@ export default function Create() {
       event.preventDefault();
       setInput({
         ...input,
-        types: input.types.push(...selectedTypes),
+        types: input.types.push(...selectedTypes),  //  ME ROMPE EL CODIGOOOOO ESTO ---> types: [...input.types, ...selectedTypes],
       });
       dispatch(createPokemon(input));
       setInput({
@@ -86,40 +89,25 @@ export default function Create() {
         hp: "",
         attack: "",
         defense: "",
-        speed: "",
-        height: "",
-        weight: "",
+        speed: 0,
+        height: 0,
+        weight: 0,
         types: [],
       });
       setSelectedTypes([]);
     } catch (error) {
-      alert(error.message);
+      window.alert(error.message);
     }
   }
 
-
+  //useEffect para traerme los types cada vez que se monte el componente
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);
 
-  //Funcion que me permite mantener deshabilitado el boton submit siempre que haya al menos un error
-  function disable(){
-    let disabled = true;
-    for(let error in errors){
-      if (errors[error] === "") {
-        disabled = false;
-      } else {
-        disabled = true;
-        break; //si hay al menos un error se corta la ejecucion, y permanece desabilitado
-      }
-    }
-    return disabled;
-  }
-
   return (
     <div className={styles.container}>
       
-
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.topSection}>
           <h3>CREATE POKEMON</h3>
@@ -256,26 +244,55 @@ export default function Create() {
           <hr />
         </div>
         <div className={styles.bottomSection}>
-          <button
-            className={styles.buttonCreate}
-            type="submit"
-            disabled={disable()}
-            onClick={(event) => handleSubmit(event)}
-          >
-            Create
-          </button>
-        
+
+          {input.name !== "" &&
+          input.image !== "" &&
+          input.hp !== "" &&
+          input.attack !== "" &&
+          input.defense !== "" &&
+          input.speed >= 0 &&
+          input.height >= 0 &&
+          input.weight >= 0 &&
+          selectedTypes.length > 0 
+          ? 
+          (
+            <button
+              className={styles.buttonCreate}
+              type="submit"
+              onClick={(event) => handleSubmit(event)}
+            >
+              Create
+            </button>
+          ) 
+          : 
+          (
+            <button disabled className={styles.buttonCreate}>
+              Create
+            </button>
+          )}   
+
           <Link to={`/home`} >
             <button className={styles.buttonCancel}>
               Cancel
             </button>
           </Link>
         </div>
-
       </form>
-
     </div>
     );
   }
   
 //En el submit del form de le envia toda la info recibida por los inputs hacia el back
+/*
+No me funciona sumando:
+  errors.speed === "" &&
+  errors.height === "" &&
+  errors.weight === "" &&
+
+  input.speed >= 0 &&
+          input.height >= 0 &&
+          input.weight >= 0 &&
+
+  por lo que no se valida que dichos datos se envien menores a 0
+*/
+

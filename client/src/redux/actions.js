@@ -79,11 +79,11 @@ export const getAllPokemons = () => {
    return async (dispatch) => {
       try {
          const response = await axios.post(endpoint, payload);
-         console.log(response);
+         //console.log(response); me muestra el mensaje
          window.alert("The pokemon has been created successfully");
          return response;
       } catch (error) {
-         window.alert("The pokemon already exists!");
+         window.alert("An error occurred while creating the pokemon! try again!");
       }
    };
  }

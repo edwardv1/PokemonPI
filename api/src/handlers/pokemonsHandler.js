@@ -1,22 +1,21 @@
-const { getAllPokemons, getPokemonById, getPokemonByName, createPokemon } = require('../controllers/pokemonsController.js')
+const { getAllPokemons, getPokemonById, createPokemon } = require('../controllers/pokemonsController.js')
 
 //En estas funciones obtengo y extraigo info que viene de la request del client
 
 // Recibe la info por query
 const getAllPokemonsHandler = async (req, res) => {
     const { name } = req.query;
-
     try {
         if(name){
-            const pokemonByName = await getPokemonByName(name.toLowerCase());
-            return res.status(200).json(pokemonByName)
+            const pokemonByName = await getAllPokemons(name.toLowerCase());
+            return res.status(200).json(pokemonByName)  
         }else {
             //si invoco la misma ruta pokemons/ pero en este caso no viene con ningun query, traigo todos los pokes  
             const allPokemons = await getAllPokemons();
             return res.status(200).json(allPokemons)
         }
     } catch (error) {
-        return res.status(400).json({error: error.message})
+        return res.status(400).json({error: "Esta llegando al handler"})
     }
 }
 
@@ -39,12 +38,10 @@ const getPokemonsByIdHandler = async (req, res) => {
 const createPokemonsHandler = async (req,res) => {  
     const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
 
-    //AGREGAR TRY CATCH
-    
     if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Faltan datos obligatorios.")
     try {
-        const newPokemon = await createPokemon(name, image, hp, attack, defense, speed, height, weight, types)
-        return res.status(200).send("The pokemon has been created successfully")
+        const newPokemon = await createPokemon(name.toLowerCase(), image, hp, attack, defense, speed, height, weight, types)
+        return res.status(200).json("The pokemon has been created successfully") //"The pokemon has been created successfully"
    } catch (error) {
         return res.status(400).json({error: error.message}) //ESTA ENTRANDO EN ESTE ERROR
    }

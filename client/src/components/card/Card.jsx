@@ -42,6 +42,7 @@ export default function Card({pokemon}) {
     </div>
   );
 }
+
 {/* <Link to={`/detail/${id}`}> 
 </Link> */}
 // `card ${cardClassName ? {cardClassName} : ""}`
