@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import styles from "./SearchBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonByName } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import chooseWisely from "../../images/ChooseWisely2.png"
+import styles from "./SearchBar.module.css";
+
 
 
 
@@ -41,8 +42,6 @@ export default function SearchBar() {
         <h2>Create Pokemon</h2>
       </Link>
 
-      <h2>Filters</h2>
-
       <h2>Search by Name</h2>
       <div>
         <input 
@@ -55,6 +54,12 @@ export default function SearchBar() {
         />
         <button type="submit" onClick={event => handleSubmit(event)}>Search 🔎</button>
       </div>
+      <div>
+        <img style={{ width: '200px'}} src={chooseWisely} alt="chooseWisely" />
+      </div>
+
+      <h2>Refresh Pokemons</h2>
+      <h2>About me</h2>
     </div>
   );
 }

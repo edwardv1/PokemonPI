@@ -4,9 +4,11 @@ export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const GET_TYPES = "GET_TYPES";
 export const CREATE_POKEMON = "CREATE_POKEMON";
-// export const ADD_POKEMON = "ADD_POKEMON";
-// export const FILTER = "FILTER";
-// export const ORDER = "ORDER";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
+export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
+
 //export const REMOVE_POKEMON = "REMOVE_POKEMON";
 //export const ERROR = "ERROR";
 
@@ -42,6 +44,7 @@ export const getAllPokemons = () => {
       }
    };
  }
+
  export const getPokemonByName = (name) => {
    let endpoint = `http://localhost:3001/pokemons/?name=${name}`;  //asi puede coincidir con el endpoint del backend 
    return async (dispatch) => {
@@ -88,3 +91,38 @@ export const getAllPokemons = () => {
    };
  }
 
+ export const orderByName = (order) => {
+    return (dispatch) => {
+       return dispatch({
+         type: ORDER_BY_NAME,
+         payload: order
+       })
+    }
+}
+
+export const orderByAttack = (order) => {
+   return (dispatch) => {
+      return dispatch({
+        type: ORDER_BY_ATTACK,
+        payload: order
+      })
+   }
+}
+
+export const filterByType = (type) => {
+   return (dispatch) => {
+      return dispatch({
+        type: FILTER_BY_TYPE,
+        payload: type
+      })
+   }
+}
+
+export const filterByOrigin = (origin) => {
+   return (dispatch) => {
+      return dispatch({
+        type: FILTER_BY_ORIGIN,
+        payload: origin
+      })
+   }
+}

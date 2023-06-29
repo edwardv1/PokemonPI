@@ -296,3 +296,40 @@ No me funciona sumando:
   por lo que no se valida que dichos datos se envien menores a 0
 */
 
+/*
+let disable;
+useEffect(() => {
+  input.name !== "" &&
+  input.image !== "" &&
+  input.hp !== "" &&
+  input.attack !== "" &&
+  input.defense !== "" &&
+  input.speed >= 0 &&
+  input.height >= 0 &&
+  input.weight >= 0 &&
+  selectedTypes.length > 0 
+  ? disable = true
+  : false 
+
+  }, [input]);
+
+o probar con un estado local...
+
+const [disable, setDisable] = useState(false);
+
+useEffect(() => {
+  input.name !== "" &&
+  input.image !== "" &&
+  input.hp !== "" &&
+  input.attack !== "" &&
+  input.defense !== "" &&
+  input.speed >= 0 &&
+  input.height >= 0 &&
+  input.weight >= 0 &&
+  selectedTypes.length > 0 
+  ? setDisable(true);
+  : setDisable(false)
+  }, [input]);
+
+
+*/

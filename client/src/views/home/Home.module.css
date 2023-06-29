@@ -3,10 +3,79 @@
     height: 100vh; /* Ajusta la altura de la pantalla como desees */
 }
 
-.div1 {
+.divNavbar {
     flex: 20%;
 }
   
-.div2 {
+.divCards {
+    display: flex;
     flex: 80%;
+    flex-direction: column;
 }
+
+.topSection {
+    flex: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* border: 6px solid rgb(0, 0, 0); */
+    margin-top: 5px;
+    margin-right: 20px;
+
+    
+}
+
+.topSection label {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: black;
+
+}
+
+.topSectionLeft {
+    background-color: red;
+    
+    width: 75vh;
+    display: flex;
+    flex-direction: row;
+    justify-content:end;
+    border: 2px solid black;
+    border-top-left-radius: 300px;
+    border-bottom-left-radius: 10px;
+}
+
+.topSectionLeft select {
+    font-family: 'Kavivanar', cursive;
+    color: black;
+    height: 30px;
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.topSectionRight {
+    background-color: white;
+    width: 80vh;
+    border: 2px solid black;
+    border-top-right-radius: 300px;
+    border-bottom-right-radius: 10px;
+}
+
+.topSectionRight select {
+    font-family: 'Kavivanar', cursive;
+    color: white;
+    height: 30px;
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
