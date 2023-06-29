@@ -4,6 +4,7 @@ const validationInputs = (input) => {
     // Validacion de Name 
     let regexNumbers = new RegExp("[0-9]"); 
     if(!input.name) errors.name = "You must enter a pokemon name";
+    if(input.name.length > 12) errors.name = "The name cannot have more than 12 letters";
     if(regexNumbers.test(input.name)) errors.name= "The name must not contain numbers";
   
     // Validacion de Image 

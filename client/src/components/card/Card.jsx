@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Card({pokemon}) {
   //console.log(pokemon);
-  const {id, image, hp, attack, defense, speed, types} = pokemon;
+  const {id, image, hp, attack, defense, types} = pokemon;
   let { name } = pokemon;
   //console.log(id);
   
@@ -30,7 +30,7 @@ export default function Card({pokemon}) {
         </div>
         <div className={styles.bottomSection}>
           <div>
-            <h5 className={styles.middleSectionText}>Attack: {attack} - Defense: {defense} - Speed: {speed}</h5>
+            <h4>Attack: {attack} - Defense: {defense} </h4>
           </div>
           <hr />
           <div>

@@ -4,12 +4,10 @@ import { useDispatch, useSelector} from "react-redux";
 import { getAllPokemons, orderByName, orderByAttack, getTypes, filterByType, filterByOrigin } from "../../redux/actions.js";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import Cards from "../../components/cards/Cards.jsx";
-
+import rayquaza from "../../images/rayquaza.png"
 import styles from "./Home.module.css";
 
 export default function Home() {
-
- 
 
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.allPokemons); //subscribo el componente al Estado global, asi en cada cambio que haya lo va a recibir esta variable/componente
@@ -37,6 +35,7 @@ export default function Home() {
   const filterOrigin = (event) => {
     if(event.target.value !== "filter") dispatch(filterByOrigin(event.target.value));
   }
+  console.log(pokemonsFiltered.length);
   
   useEffect(()=> {
     dispatch(getAllPokemons()); //despacho la action (la action se comunica con el back), la action llega al reducer, modifica el estado con el payload de la action, y lo devuelve a todos los componentes
@@ -96,15 +95,12 @@ export default function Home() {
             </select>
             <label>Filter by Origin</label>
             </div>
-            
 
           </div>
+            { pokemonsFiltered.lenght === 0 ? (<img src={rayquaza} alt="Rayquaza" />) : null}
           
             { filter ? <Cards allPokemons={pokemonsFiltered}/> : <Cards allPokemons={allPokemons}/>}
-    
-
         </div>
-
       </div>
     );
 }

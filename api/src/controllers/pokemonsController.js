@@ -136,14 +136,7 @@ const getPokemonById = async(id) => {
         
     }
 }
-/*
-const getPokemonById = async (id) => {
-    const pokemonsInfo = await getAllPokemons();
-    const pokemonsById = pokemonsInfo.filter((pokemon) => pokemon.id == id);
-    if (pokemonsById.length) return pokemonsById;
-    throw new Error(`No se encontró el pokemon con ID: ${id}`);
-  };
-*/
+
 
 const createPokemon = async( name, image, hp, attack, defense, speed, height, weight, types ) => {
    try {
@@ -169,38 +162,6 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
    }
 }
 
-/*
-const createPokemon = async (
-    name,
-    image,
-    hp,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    types
-  ) => {
-    const [pokemon, created] = await Pokemon.findOrCreate({
-      where: { name },
-      defaults: {
-        name,
-        image,
-        hp,
-        attack,
-        defense,
-        speed,
-        height,
-        weight,
-      },
-    });
-  
-    if (!created) throw new Error("Este pokemon ya existe en la DB");
-  
-    const typesDb = await Type.findAll({ where: { name: types } });
-    pokemon.addType(typesDb);
-  };
-*/
 
 module.exports = {
     getAllPokemons, getPokemonById, createPokemon, getPokemonsDb

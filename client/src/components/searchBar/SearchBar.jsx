@@ -39,7 +39,7 @@ export default function SearchBar() {
   return (
     <div className={styles.container}>
       <Link to="/create" className={styles.text}>
-        <h2>Create Pokemon</h2>
+        <h3>Create Pokemon</h3>
       </Link>
 
       <h2>Search by Name</h2>

@@ -1,18 +1,54 @@
 .container { 
-   
     height: 98%;
     width: 288px;
-    border: 8px solid rgba(0, 0, 0, 0.85);
-    background-color: rgba(184, 142, 50, 0.368);
+    background-color:  rgba(31, 83, 166, 0.206);
 	display: flex;
     flex-direction:column;
 	justify-content: center;
     text-align: center; /* Centra el texto horizontalmente */
-   
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  
+}
+
+.container input {
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 20px;
+    color: black;
+    /* outline: none; */
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    text-align: center;  
+}
+
+.container button {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 32px;
+    background-color: black;
+    color: white;
+    &:hover {
+        box-shadow: 0 0 5px white;
+    }
+}
+
+.container h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    color: black;
+    margin-top: 30px;
 }
 
 .text {
     text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
     color: black;
+    background-color:  rgba(31, 83, 166, 0.653);
+    border-radius: 10px;
+    width: 260px;
+    margin-left: 10px;
+    border-style:inset;
+    &:hover {
+        box-shadow: 0 0 5px white;
+    }
 }

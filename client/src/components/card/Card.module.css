@@ -26,9 +26,8 @@
   }
   
   .topSection {
-    flex: 6%;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
   }
   
   .middleSection {
@@ -46,9 +45,7 @@
     overflow: hidden;
   }
 
-  .middleSectionText {
-    text-align: center;
-  }
+  
   
   .name {
     font-size: 12px; /* Ajusta el tamaño de fuente según sea necesario */
@@ -70,6 +67,11 @@
   .bottomSection {
     flex: 30%;
     overflow: hidden;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
   }
   
   .text {
