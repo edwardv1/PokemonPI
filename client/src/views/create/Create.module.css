@@ -1,7 +1,8 @@
 .container{
     display: flex;
     align-items: center;  
-    justify-content: center; 
+    justify-content: center;
+    flex-wrap: nowrap; 
 }
 
 .form {
@@ -9,8 +10,8 @@
     flex-direction: column;
     align-items: center; 
     margin-top: 60px;
-    width: 50vh;
-    height: 75vh;
+    width: 55vh;
+    height: 60vh;
     /* padding: 10px; */
     border: 2px solid black;
     border-radius: 10px;
@@ -56,13 +57,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: scroll; 
+    overflow-y:visible; 
     overflow-x: hidden; 
-    width: 50vh;
+    /* width: 50vh; */
+    width: 100%;
+  height: 100%;
     font-family: 'Kavivanar', cursive;
     border-left: 3px solid rgb(0, 0, 0);
     border-right: 3px solid rgb(0, 0, 0);
+    background-color: rgb(201, 201, 201);
 }
+
+.middleSection div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap; 
+}
+
 
 .bottomSection {
     border-left: 3px solid rgb(0, 0, 0);
@@ -80,6 +92,8 @@
 }
 
 .container select {
+    position: relative;
+    height: 40px;
     font-family: 'Kavivanar', cursive;
     color: black;
     font-size: 15px;
@@ -88,6 +102,10 @@
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
+}
+.container input {
+    height: 25px;
+    width: 180px;
 }
 
 .buttonCreate {
@@ -153,5 +171,11 @@
     justify-content: center; */
     text-align: center;
     
-    font-size: 12px;
+    font-size: 13px;
+    margin-left: 10px;
+    margin-bottom: 5px;
 }
+
+
+
+

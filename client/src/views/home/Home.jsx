@@ -97,7 +97,7 @@ export default function Home() {
             </div>
 
           </div>
-            { pokemonsFiltered.lenght === 0 ? (<img src={rayquaza} alt="Rayquaza" />) : null}
+            { filters && pokemonsFiltered.lenght === 0 ? (<img style={{ width: '250px' }} src={rayquaza} alt="Rayquaza" />) : null}
           
             { filters ? <Cards allPokemons={pokemonsFiltered}/> : <Cards allPokemons={allPokemons}/>}
         </div>

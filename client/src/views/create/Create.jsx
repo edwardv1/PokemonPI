@@ -114,6 +114,7 @@ export default function Create() {
         </div>  
 
         <div className={styles.middleSection}>
+
           <div>
             <label>Name: </label>
             <input
@@ -215,7 +216,7 @@ export default function Create() {
             {errors.weight ? <p>{errors.weight}</p> : null}
           </div>
 
-          <div>
+           <div>
             {selectedTypes?.map((type) => {
               return (
                 <span key={type}>
@@ -240,9 +241,11 @@ export default function Create() {
               })}
             </select>
             {errors.types ? <p>{errors.types}</p> : null}
-          </div>
-          <hr />
+          </div> 
+      
         </div>
+
+        
         <div className={styles.bottomSection}>
 
           {input.name !== "" &&
