@@ -12,7 +12,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.allPokemons); //subscribo el componente al Estado global, asi en cada cambio que haya lo va a recibir esta variable/componente
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
-  const filter = useSelector((state) => state.filters);
+  const filters = useSelector((state) => state.filters);
   const types = useSelector((state) => state.types);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function Home() {
           </div>
             { pokemonsFiltered.lenght === 0 ? (<img src={rayquaza} alt="Rayquaza" />) : null}
           
-            { filter ? <Cards allPokemons={pokemonsFiltered}/> : <Cards allPokemons={allPokemons}/>}
+            { filters ? <Cards allPokemons={pokemonsFiltered}/> : <Cards allPokemons={allPokemons}/>}
         </div>
       </div>
     );
