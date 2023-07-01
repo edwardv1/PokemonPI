@@ -4,6 +4,13 @@
     background-image: url("../../images/pokewp4.png");
 }
 
+.rayquaza {
+    display: flex;
+    height: 100vh;
+    background-image: url("../../images/create5.jpg");
+}
+
+
 .divNavbar {
     flex: 20%;
 }
@@ -26,13 +33,12 @@
 }
 
 .topSection label {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 5px;
     margin-right: 5px;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
     color: black;
-
 }
 
 .topSectionLeft {
@@ -54,7 +60,7 @@
     font-family: 'Kavivanar', cursive;
     color: black;
     height: 30px;
-    
+    margin-top: 10px;
     font-size: 15px;
     background-color: white;
     border: 1px solid black;
@@ -81,7 +87,7 @@
     font-family: 'Kavivanar', cursive;
     color: white;
     height: 30px;
-    
+    margin-top: 10px;
     font-size: 15px;
     background-color: red;
     border: 1px solid black;

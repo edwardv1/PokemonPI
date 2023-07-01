@@ -7,6 +7,13 @@
     margin-right: 15px;
 }
 
+.cardsList p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    color: yellow;
+    margin-right: 10px;
+}
+
 .bottomSection{
     display: flex;
     flex-direction: row;

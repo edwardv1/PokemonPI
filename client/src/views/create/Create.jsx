@@ -106,7 +106,8 @@ export default function Create() {
   }, [dispatch]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.background}>
+    
       
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.topSection}>

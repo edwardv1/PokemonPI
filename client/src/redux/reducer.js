@@ -47,22 +47,20 @@ const reducer = (state= initialState, {type, payload}) => {
         case ORDER_BY_NAME:
             if(state.filters){
                 if(payload==="Ascending"){
-                    const allPokemonsCopy = [...state.pokemonsFiltered];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((prev, next)=>{
+                        pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
                             if(prev.name > next.name) return -1
                             if(prev.name < next.name) return 1
                             return 0
                         })
                     }
                 } else if(payload==="Descending"){
-                    const allPokemonsCopy = [...state.pokemonsFiltered];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((prev, next)=>{
+                        pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
                             if(prev.name > next.name) return 1
                             if(prev.name < next.name) return -1
                             return 0
@@ -71,22 +69,20 @@ const reducer = (state= initialState, {type, payload}) => {
                 }    
             } else {
                 if(payload==="Ascending"){
-                    const allPokemonsCopy = [...state.allPokemons];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((prev, next)=>{
+                        pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
                             if(prev.name > next.name) return -1
                             if(prev.name < next.name) return 1
                             return 0
                         })
                     }
                 } else if(payload==="Descending"){
-                    const allPokemonsCopy = [...state.allPokemons];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((prev, next)=>{
+                        pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
                             if(prev.name > next.name) return 1
                             if(prev.name < next.name) return -1
                             return 0
@@ -99,34 +95,30 @@ const reducer = (state= initialState, {type, payload}) => {
         case ORDER_BY_ATTACK:
             if(state.filters){
                 if(payload==="Ascending"){
-                    const allPokemonsCopy = [...state.pokemonsFiltered];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((a,b) => a.attack - b.attack)
+                        pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
-                    const allPokemonsCopy = [...state.pokemonsFiltered];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((a,b) => b.attack - a.attack)
+                        pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => b.attack - a.attack)
                     }
                 }    
             } else {
                 if(payload==="Ascending"){
-                    const allPokemonsCopy = [...state.allPokemons];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((a,b) => a.attack - b.attack)
+                        pokemonsFiltered: [...state.allPokemons].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
-                    const allPokemonsCopy = [...state.allPokemons];
                     return{
                         ...state,
                         filters: true,
-                        pokemonsFiltered: allPokemonsCopy.sort((a,b) => b.attack - a.attack)
+                        pokemonsFiltered: [...state.allPokemons].sort((a,b) => b.attack - a.attack)
                     }
                 }    
             }

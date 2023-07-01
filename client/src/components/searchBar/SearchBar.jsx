@@ -42,8 +42,8 @@ export default function SearchBar() {
         <h3>Create Pokemon</h3>
       </Link>
 
-      <h2>Search by Name</h2>
       <div>
+        <h2>Search by Name</h2>
         <input 
           type="text"
           placeholder="Enter a Name..."
@@ -58,7 +58,6 @@ export default function SearchBar() {
         <img style={{ width: '200px'}} src={chooseWisely} alt="chooseWisely" />
       </div>
 
-      <h2>Refresh Pokemons</h2>
       <h2>About me</h2>
     </div>
   );

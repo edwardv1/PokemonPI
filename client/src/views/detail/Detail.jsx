@@ -21,7 +21,7 @@ export default function Detail() {
  
 
     return (
-      <div >
+      <div className={styles.background}>
       <div className={styles.container}>
         <div className={styles.topSection}>
           <div className={styles.topSectionInfo}>
@@ -44,7 +44,7 @@ export default function Detail() {
               </div>
             </div>
             <div className={styles.middleSectionImageBottom}>
-              <img style={{ width: '210px', height: '190px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
+              <img style={{ width: '210px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
             </div>
           </div>
           <div className={styles.middleSectionInfo}>

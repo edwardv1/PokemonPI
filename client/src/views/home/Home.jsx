@@ -4,7 +4,6 @@ import { useDispatch, useSelector} from "react-redux";
 import { getAllPokemons, orderByName, orderByAttack, getTypes, filterByType, filterByOrigin } from "../../redux/actions.js";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import Cards from "../../components/cards/Cards.jsx";
-import rayquaza from "../../images/rayquaza.png"
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -50,8 +49,8 @@ export default function Home() {
   
 
     return (
-      <div className={styles.container}>
-
+      <div className={`${styles.container} ${filters && pokemonsFiltered.length === 0 ? styles.rayquaza : null}`}>
+        
         <div className={styles.divNavbar}>
             <NavBar/>
         </div>
@@ -97,8 +96,6 @@ export default function Home() {
             </div>
 
           </div>
-            { filters && pokemonsFiltered.lenght === 0 ? (<img style={{ width: '250px' }} src={rayquaza} alt="Rayquaza" />) : null}
-          
             { filters ? <Cards allPokemons={pokemonsFiltered}/> : <Cards allPokemons={allPokemons}/>}
         </div>
       </div>

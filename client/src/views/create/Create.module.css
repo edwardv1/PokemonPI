@@ -1,9 +1,13 @@
-.container{
+.background {
+    display: flex;
+    height: 100vh;
+    background-image: url("../../images/create6.jpg");
     display: flex;
     align-items: center;  
     justify-content: center;
     flex-wrap: nowrap; 
 }
+
 
 .form {
     display: flex;

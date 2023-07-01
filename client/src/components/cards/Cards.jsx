@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../card/Card";
+import rayquaza from "../../images/rayquaza.png";
 import styles from "./Cards.module.css";
-
 
 export default function Cards({ allPokemons }) {
   //aqui se hace el paginado
@@ -62,31 +62,47 @@ export default function Cards({ allPokemons }) {
     setItemsFiltered([...pokemonsFiltered].splice(0, ITEMS_PER_PAGE))
   }, [pokemonsFiltered])
 
-  
   return (
     <div>
-    
       <div className={styles.bottomSection}>
         <button onClick={prevPage}>{"<<"} Prev</button>
 
-        <h4>Current page: {currentPage + 1} / {filters ? 
-        Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE) 
-        : Math.ceil(allPokemons.length / ITEMS_PER_PAGE)}</h4>
+        {/* Evita que la pagina actual quede como Nro / 0 */}
+        { 
+          filters && pokemonsFiltered.length === 0 ?
+          <h4>Current page: 0 / {filters ? 
+          Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE) :
+          Math.ceil(allPokemons.length / ITEMS_PER_PAGE)}</h4>
+          :
+          <h4>Current page: {currentPage + 1} / {filters ? 
+          Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE) :
+          Math.ceil(allPokemons.length / ITEMS_PER_PAGE)}</h4>
+        }
+
+        {/* Evita que la pagina actual sea mayor que la cantidad de paginas */}
+        {/*                    +1 */}
+        {filters && currentPage  > Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE) ? 
+        setCurrentPage(Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE) - 1) : null } 
 
         <button onClick={nextPage}>Next {">>"}</button>
       </div>
 
       <div className={styles.cardsList}>
+        {/* Renderiza un pokemon cuando se cumple ciertas condiciones */}
+        { filters && pokemonsFiltered.length === 0 ? (
+        <div>
+          <img style={{ width: '420px' }} src={rayquaza} alt="Rayquaza" />  
+          <p>Rayquaza has appeared!!!</p>
+        </div>
+        ) : null}
+        
         { 
         filters ? 
         itemsFiltered?.map((pokemon, index) => ( <Card pokemon= {pokemon} key={index}/>))
         :
         items?.map((pokemon, index) => (<Card pokemon= {pokemon} key={index}/>))
         }
-      </div>
-   
+      </div> 
     </div>
-
-
   );
 }
