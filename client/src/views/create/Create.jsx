@@ -301,7 +301,11 @@ No me funciona sumando:
 */
 
 /*
+
+const [disable, setDisable] =useState(false);
 let disable;
+
+
 useEffect(() => {
   input.name !== "" &&
   input.image !== "" &&
@@ -312,8 +316,8 @@ useEffect(() => {
   input.height >= 0 &&
   input.weight >= 0 &&
   selectedTypes.length > 0 
-  ? disable = true
-  : false 
+  ? setDisable(true)
+  : setDisable(false) 
 
   }, [input]);
 
