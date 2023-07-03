@@ -8,6 +8,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
 //export const REMOVE_POKEMON = "REMOVE_POKEMON";
 //export const ERROR = "ERROR";
@@ -43,6 +44,12 @@ export const getAllPokemons = () => {
            //HACER EL CONTROL DEL ERROR CON UN DISPATCH
       }
    };
+ }
+
+ export const clearDetail=() => {
+   return {
+     type: CLEAR_DETAIL
+   }
  }
 
  export const getPokemonByName = (name) => {

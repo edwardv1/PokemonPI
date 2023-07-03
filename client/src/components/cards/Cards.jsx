@@ -2,10 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../card/Card";
+import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
 import rayquaza from "../../images/rayquaza.png";
 import styles from "./Cards.module.css";
 
+
 export default function Cards({ allPokemons }) {
+
+  const reproducirSonido = (volumen) => {
+    const audio = new Audio(rugidoRaiquaza);
+    audio.volume = volumen;
+    audio.play();
+  };
+
   //Paginado
  const ITEMS_PER_PAGE = 10; //para setear la cantidad de items que yo quiero que se vean por cada pagina del paginado
   //const allPokemons = useSelector((state) => state.allPokemons);
@@ -104,6 +113,7 @@ export default function Cards({ allPokemons }) {
         <div>
           <img style={{ width: '420px' }} src={rayquaza} alt="Rayquaza" />  
           <p>Rayquaza has appeared!!!</p>
+          {reproducirSonido(0.03)}
         </div>
         ) : null}
         

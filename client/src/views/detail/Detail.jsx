@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getPokemonById } from "../../redux/actions";
+import { getPokemonById, clearDetail } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import styles from "./Detail.module.css";
 import pokebola from "../../images/pokebola8.png";
@@ -16,6 +16,7 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getPokemonById(id));
+    return ()=>{dispatch(clearDetail())}
   }, [dispatch, id]);
 
  

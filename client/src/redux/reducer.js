@@ -1,5 +1,5 @@
 import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, CREATE_POKEMON, 
-        ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN } from "./actions";
+        ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL } from "./actions";
 
 const initialState = {
     allPokemons: [],   //Array de objetos(pokemon)
@@ -24,6 +24,12 @@ const reducer = (state= initialState, {type, payload}) => {
             return {
                 ...state,
                 pokemonDetail: payload,
+            }
+
+        case CLEAR_DETAIL:
+            return {
+                ...state,
+                pokemonDetail: {}
             }
 
         case GET_POKEMON_BY_NAME:
