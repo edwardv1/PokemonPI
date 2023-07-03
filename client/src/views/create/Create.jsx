@@ -32,12 +32,12 @@ export default function Create() {
     speed: "",
     height: "",
     weight: "",
-    types: "At least one type must be selected!",
+    types: "",
   });
-
-  console.log(errors.types);
   
   const [selectedTypes, setSelectedTypes] = useState([]);
+
+  const [disable, setDisable] =useState(false);
 
   //funcion que obtiene cada input y los guarda en el estado local
   function handleInputChange(event) {
@@ -48,23 +48,58 @@ export default function Create() {
     });
   }
 
-  // Este useEffect permite validar los campos en tiempo real
+  // Este useEffect valida los campos en tiempo real
   useEffect(() => {
     setErrors(validationInputs(input));
   }, [input]);
 
-  console.log(selectedTypes);
-  console.log(selectedTypes.length);
+  // Este useEffect constrola que el boton "Create" se habilite o no
+  useEffect(() => {
+    // console.log("name:", errors.name);
+    // console.log("image:", errors.image);
+    // console.log("hp:", errors.hp);
+    // console.log("attack:", errors.attack);
+    // console.log("defense:", errors.defense);
+    // console.log("InputDefense:", input.defense);
+    console.log("speed:", input.speed);
+    console.log("height:", input.height);
+    console.log("weight:", input.weight);
+    // console.log("types:", errors.types);
+    // console.log("types.length:", selectedTypes.length);
+    
+    (input.speed === "" || input.speed >= 0) &&
+    (input.height === "" || input.height >= 0) &&
+    (input.weight === "" || input.weight >= 0) &&
+    errors.name === undefined &&
+    errors.image === undefined &&
+    errors.hp === undefined &&
+    errors.attack === undefined &&
+    errors.defense === undefined &&
+    errors.speed === undefined  &&
+    errors.height === undefined  &&
+    errors.weight === undefined &&
+    (errors.types === "" || errors.types === undefined) &&
+    selectedTypes.length >= 1 
+    ? setDisable(true)
+    : setDisable(false)
+  }, [errors, input, selectedTypes]);
 
-  //funcion para evitar que seleccionen mas de 2 types
+  //console.log(selectedTypes);
+  //console.log(selectedTypes.length);
+  
+ 
+  
+  //Evita que seleccionen mas de 2 types, (error en types no aparece), no lee el .legth cuando elimino, sino cuando agrego
   const handleTypesChange = (event) => {
-    if (selectedTypes.length >= 2) {
-      return setErrors({
+
+    if ([...selectedTypes].length === 2) {
+    return setErrors({
         ...errors,
         types: "You must choose a maximum of 2 types",
       });
     }
-    setErrors({ ...errors, types: "" });
+    
+    setErrors({ ...errors, types: ""});
     setSelectedTypes([...selectedTypes, event.target.value]);
   };
 
@@ -78,20 +113,31 @@ export default function Create() {
   function handleSubmit(event){
     try{
       event.preventDefault();
+      //Antes de enviar, chequeo que los valores de las propiedades no bligatorias sean undefined
+      if(input.speed === ""){
+        setInput({...input, speed: 0})
+      }
+      if(input.height === ""){
+        setInput({...input, height: 0})
+      }
+      if(input.weight === ""){
+        setInput({...input, weight: 0})
+      }
       setInput({
         ...input,
         types: input.types.push(...selectedTypes),  //  ME ROMPE EL CODIGOOOOO ESTO ---> types: [...input.types, ...selectedTypes],
       });
       dispatch(createPokemon(input));
+      
       setInput({
         name: "",
         image: "",
         hp: "",
         attack: "",
         defense: "",
-        speed: 0,
-        height: 0,
-        weight: 0,
+        speed: "",
+        height: "",
+        weight: "",
         types: [],
       });
       setSelectedTypes([]);
@@ -243,22 +289,11 @@ export default function Create() {
             </select>
             {errors.types ? <p>{errors.types}</p> : null}
           </div> 
-      
         </div>
 
-        
         <div className={styles.bottomSection}>
-
-          {input.name !== "" &&
-          input.image !== "" &&
-          input.hp !== "" &&
-          input.attack !== "" &&
-          input.defense !== "" &&
-          input.speed >= 0 &&
-          input.height >= 0 &&
-          input.weight >= 0 &&
-          selectedTypes.length > 0 
-          ? 
+          {
+          disable? 
           (
             <button
               className={styles.buttonCreate}
@@ -287,17 +322,17 @@ export default function Create() {
   }
   
 //En el submit del form de le envia toda la info recibida por los inputs hacia el back
+
 /*
-No me funciona sumando:
-  errors.speed === "" &&
-  errors.height === "" &&
-  errors.weight === "" &&
-
-  input.speed >= 0 &&
-          input.height >= 0 &&
-          input.weight >= 0 &&
-
-  por lo que no se valida que dichos datos se envien menores a 0
+input.name !== "" &&
+input.image !== "" &&
+input.hp !== "" &&
+input.attack !== "" &&
+input.defense !== "" &&
+input.speed >= 0 &&
+input.height >= 0 &&
+input.weight >= 0 &&
+selectedTypes.length > 0 
 */
 
 /*

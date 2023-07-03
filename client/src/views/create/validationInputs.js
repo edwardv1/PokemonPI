@@ -40,7 +40,9 @@ const validationInputs = (input) => {
     if(input.weight > 999) errors.weight = "The value cannot be greater than 999";
 
     // Validacion de Types 
-    if(!input.types) errors.types = "You must choose at least 1 type";
+    //if(!input.types) errors.types = "You must choose at least 1 type";
+    //if(input.types.length === 0) errors.types = "You must choose at least 1 type";
+    if(input.types.length === 1) errors.types = "";
     if(input.types.length === 2) errors.types = "You must choose a maximum of 2 types";
 
     return errors;
