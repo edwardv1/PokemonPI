@@ -11,6 +11,7 @@ export default function Cards({ allPokemons }) {
   //const allPokemons = useSelector((state) => state.allPokemons);
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
+  const orders = useSelector((state) => state.orders);
 
   const [currentPage, setCurrentPage] = useState(0);
   const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE)); //1 a 10
@@ -63,14 +64,17 @@ export default function Cards({ allPokemons }) {
   }, [pokemonsFiltered])
 
   //Evita tener una página adicional cuando el número total de elementos no sea un múltiplo de la cantidad de elementos por página
+  //Cuando se aplican ordenes, la pagina va al inicio evitando bugs
   useEffect(() => {
     if (filters) {
       const filteredPageCount = Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE);
       setNumberPageFiltered(filteredPageCount > 0 ? filteredPageCount - 1 : 0);
+      if(orders) setCurrentPage(0);
     } else {
       setNumberPageAll(Math.floor(allPokemons.length / ITEMS_PER_PAGE));
+      if(orders) setCurrentPage(0);
     }
-  }, [allPokemons, pokemonsFiltered, filters]);
+  }, [allPokemons, pokemonsFiltered, filters, orders]);
 
   //Evita que el número de página actual no sea mayor que la cantidad de páginas disponibles
   useEffect(() => {
@@ -84,7 +88,12 @@ export default function Cards({ allPokemons }) {
       <div className={styles.bottomSection}>
         <button onClick={prevPage}>{"<<"} Prev</button>
 
-        <h4>Current page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
+        {
+          filters && pokemonsFiltered.length === 0 ?
+          <h4>Current page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
+          :
+          <h4>Current page: {currentPage +1} / {filters ? numberPageFiltered +1 : numberPageAll +1}</h4>
+        }
 
         <button onClick={nextPage}>Next {">>"}</button>
       </div>

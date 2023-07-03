@@ -6,7 +6,8 @@ const initialState = {
     pokemonsFiltered: [],
     pokemonDetail: {},
     types: [],
-    filters: false
+    filters: false,
+    orders: false
 };
 
 const reducer = (state= initialState, {type, payload}) => {
@@ -50,6 +51,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
                             if(prev.name > next.name) return -1
                             if(prev.name < next.name) return 1
@@ -60,6 +62,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
                             if(prev.name > next.name) return 1
                             if(prev.name < next.name) return -1
@@ -72,6 +75,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
                             if(prev.name > next.name) return -1
                             if(prev.name < next.name) return 1
@@ -82,6 +86,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
                             if(prev.name > next.name) return 1
                             if(prev.name < next.name) return -1
@@ -98,12 +103,14 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => b.attack - a.attack)
                     }
                 }    
@@ -112,12 +119,14 @@ const reducer = (state= initialState, {type, payload}) => {
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
                     return{
                         ...state,
                         filters: true,
+                        orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((a,b) => b.attack - a.attack)
                     }
                 }    
