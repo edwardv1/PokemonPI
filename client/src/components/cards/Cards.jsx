@@ -99,9 +99,9 @@ export default function Cards({ allPokemons }) {
 
         {
           filters && pokemonsFiltered.length === 0 ?
-          <h4>Current page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
+          <h4>Page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
           :
-          <h4>Current page: {currentPage +1} / {filters ? numberPageFiltered +1 : numberPageAll +1}</h4>
+          <h4>Page: {currentPage +1} / {filters ? numberPageFiltered +1 : numberPageAll +1}</h4>
         }
 
         <button onClick={nextPage}>Next {">>"}</button>

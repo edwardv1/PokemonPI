@@ -14,6 +14,7 @@ export default function Detail() {
   const dispatch = useDispatch();
   const pokemonById = useSelector((state) => state.pokemonDetail);
 
+  //Limpia el estado antes de desmontarse el componente
   useEffect(() => {
     dispatch(getPokemonById(id));
     return ()=>{dispatch(clearDetail())}

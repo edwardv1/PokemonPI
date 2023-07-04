@@ -34,16 +34,11 @@ export default function Home() {
   const filterOrigin = (event) => {
     if(event.target.value !== "filter") dispatch(filterByOrigin(event.target.value));
   }
-  console.log(pokemonsFiltered.length);
+  
   
   useEffect(()=> {
-    dispatch(getAllPokemons()); //despacho la action (la action se comunica con el back), la action llega al reducer, modifica el estado con el payload de la action, y lo devuelve a todos los componentes
-    //PARA HACER UN UNMOUNT antes de que se desmonte el componente, debo hacer:
-    /*
-    return (()=> {
-      clearDetail(); Para que cuando entre al detalle de un pokemon y me quiero regresar, no quiero que se guarde (limpiar el estado cuando te salgas de la pagina)
-    })
-    */
+    dispatch(getAllPokemons()); //despacho la action (la action se comunica con el back), 
+    //la action llega al reducer, modifica el estado con el payload de la action, y lo devuelve a todos los componentes
   }, [dispatch]);
   //Array de dependencias, me indica en que momento quiero que se ejecute la funcion... solo quiero que se ejecute cuando de haga el [ dispatch ]
   

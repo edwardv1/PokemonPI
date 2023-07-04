@@ -15,20 +15,18 @@ export default function SearchBar() {
   //const [inputValue, setInputValue] = useState("");
 
   const allPokemons = useSelector((state) => state.allPokemons);
-  console.log(allPokemons);
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     setName(event.target.value.toLowerCase());
   };
-  console.log(name);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const searchName = allPokemons.filter((pokemon) => pokemon.name.includes(name));
     console.log(searchName);
     if (searchName) {
-      console.log(name);
       dispatch(getPokemonByName(name));
     } else {
       alert("No pokemon found with the entered name");

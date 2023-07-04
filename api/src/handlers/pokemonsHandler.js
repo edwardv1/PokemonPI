@@ -15,7 +15,7 @@ const getAllPokemonsHandler = async (req, res) => {
             return res.status(200).json(allPokemons)
         }
     } catch (error) {
-        return res.status(400).json({error: "Esta llegando al handler"})
+        return res.status(400).json({error: error.message})
     }
 }
 
@@ -36,8 +36,13 @@ const getPokemonsByIdHandler = async (req, res) => {
 // Recibe la info por body, me llega en forma de un json
 
 const createPokemonsHandler = async (req,res) => {  
-    const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
-
+    const { name, image, hp, attack, defense, types } = req.body;
+    let { speed, height, weight} = req.body;
+    
+    if(speed === "" || speed === undefined) speed = 0;
+    if(height === "" || height === undefined) height = 0;
+    if(weight === "" || weight === undefined) weight = 0;
+   
     if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Faltan datos obligatorios.")
     try {
         const newPokemon = await createPokemon(name.toLowerCase(), image, hp, attack, defense, speed, height, weight, types)

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import validationInputs from "./validationInputs";
+import validationCreate from "./validationCreate";
 import { createPokemon, getTypes } from "../../redux/actions";
 import styles from "./Create.module.css";
 
 export default function Create() {
 
+  const message_success = "Data entered correctly...";
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
 
@@ -16,37 +18,31 @@ export default function Create() {
     hp: "",
     attack: "",
     defense: "",
-    speed: 0,
-    height: 0,
-    weight: 0,
+    speed: "",
+    height: "",
+    weight: "",
     types: [],
   });
-  
+
+  //console.log(input.types.length);
+  //console.log(input.types);
+ 
   //Creo un estado de errores para los campos obligatoios, y asi hacer las validaciones
   const [errors, setErrors] = useState({
-    name: "Required form field!",
-    image: "Required form field!",   //puedo agregar un texto aqui para indicar que es un campo obligatorio
-    hp: "Required form field!",
-    attack: "Required form field!",
-    defense: "Required form field!",
+    name: "",
+    image: "", 
+    hp: "",
+    attack: "",
+    defense: "",
     speed: "",
     height: "",
     weight: "",
     types: "",
   });
   
-  const [selectedTypes, setSelectedTypes] = useState([]);
-
   const [disable, setDisable] =useState(false);
 
-  //funcion que obtiene cada input y los guarda en el estado local
-  function handleInputChange(event) {
-    let { name, value } = event.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  }
+  //console.log(errors.types);
 
   // Este useEffect valida los campos en tiempo real
   useEffect(() => {
@@ -54,81 +50,45 @@ export default function Create() {
   }, [input]);
 
   // Este useEffect constrola que el boton "Create" se habilite o no
-  useEffect(() => {
-    // console.log("name:", errors.name);
-    // console.log("image:", errors.image);
-    // console.log("hp:", errors.hp);
-    // console.log("attack:", errors.attack);
-    // console.log("defense:", errors.defense);
-    // console.log("InputDefense:", input.defense);
-    console.log("speed:", input.speed);
-    console.log("height:", input.height);
-    console.log("weight:", input.weight);
-    // console.log("types:", errors.types);
-    // console.log("types.length:", selectedTypes.length);
-    
-    (input.speed === "" || input.speed >= 0) &&
-    (input.height === "" || input.height >= 0) &&
-    (input.weight === "" || input.weight >= 0) &&
-    errors.name === undefined &&
-    errors.image === undefined &&
-    errors.hp === undefined &&
-    errors.attack === undefined &&
-    errors.defense === undefined &&
-    errors.speed === undefined  &&
-    errors.height === undefined  &&
-    errors.weight === undefined &&
-    (errors.types === "" || errors.types === undefined) &&
-    selectedTypes.length >= 1 
+  useEffect(() => { 
+    let errExists = validationCreate(errors, input); //retorna true o false
+    //console.log(errExists);
+    !errExists
     ? setDisable(true)
     : setDisable(false)
-  }, [errors, input, selectedTypes]);
+  }, [errors, input]);
 
-  //console.log(selectedTypes);
-  //console.log(selectedTypes.length);
-  
- 
-  
-  //Evita que seleccionen mas de 2 types, (error en types no aparece), no lee el .legth cuando elimino, sino cuando agrego
-  const handleTypesChange = (event) => {
-
-    if ([...selectedTypes].length === 2) {
-    return setErrors({
-        ...errors,
-        types: "You must choose a maximum of 2 types",
-      });
+  const handleInputChange = (event) => {
+    if (event.target.type === 'checkbox') {
+        if (event.target.checked) {
+            setInput({
+                ...input,
+                types: input.types.concat(event.target.value)
+            })
+        } else {
+            setInput({
+                ...input,
+                types: input.types.filter(type => type !== event.target.value)
+            })
+        }
+    } else {
+        const {name, value} = event.target;
+        setInput({
+            ...input,
+            [name]: value
+        })
+        setErrors(validationInputs({
+            ...input,
+            [name]: value
+        }))
     }
-    
-    setErrors({ ...errors, types: ""});
-    setSelectedTypes([...selectedTypes, event.target.value]);
   };
-
-  const removeTypes = (typeDeleted) => {
-    let typesFiltered = selectedTypes.filter((type) => type !== typeDeleted);
-    setSelectedTypes(typesFiltered);
-  };
-
 
   //la funcion agrega los types al input, despacha el input (info pokemon) y luego setea el input
   function handleSubmit(event){
     try{
       event.preventDefault();
-      //Antes de enviar, chequeo que los valores de las propiedades no bligatorias sean undefined
-      if(input.speed === ""){
-        setInput({...input, speed: 0})
-      }
-      if(input.height === ""){
-        setInput({...input, height: 0})
-      }
-      if(input.weight === ""){
-        setInput({...input, weight: 0})
-      }
-      setInput({
-        ...input,
-        types: input.types.push(...selectedTypes),  //  ME ROMPE EL CODIGOOOOO ESTO ---> types: [...input.types, ...selectedTypes],
-      });
-      dispatch(createPokemon(input));
-      
+      dispatch(createPokemon(input)); 
       setInput({
         name: "",
         image: "",
@@ -140,7 +100,12 @@ export default function Create() {
         weight: "",
         types: [],
       });
-      setSelectedTypes([]);
+
+      types.map(type => {
+        let check = document.getElementById(type.id);
+        check.checked = false;
+        return 0;
+      })
     } catch (error) {
       window.alert(error.message);
     }
@@ -154,7 +119,6 @@ export default function Create() {
   return (
     <div className={styles.background}>
     
-      
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.topSection}>
           <h3>CREATE POKEMON</h3>
@@ -162,158 +126,185 @@ export default function Create() {
 
         <div className={styles.middleSection}>
 
-          <div>
-            <label>Name: </label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={input.name}
-              placeholder="Enter a name..."
-              onChange={handleInputChange}
-            />
-            {errors.name ? <p>{errors.name}</p> : null}
-          </div>
-          
-          <div>
-            <label>Image: </label>
-            <input
-              type="text"
-              name="image"
-              required
-              value={input.image}
-              placeholder="Enter an URL..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.image ? <p>{errors.image}</p> : null}
+            <div className={styles.stylesDiv}>
+              <div>
+                <label>Name: </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={input.name}
+                  placeholder="Enter a name..."
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className={styles.errorInputs}>
+                {errors.name ? <p className={styles.error}>{errors.name}</p> : <p className={styles.message}>{message_success}</p>}
+              </div>
+            </div>
+
+            <div className={styles.stylesDiv}>
+              <div>
+                <label>Image: </label>
+                <input
+                  type="text"
+                  name="image"
+                  required
+                  value={input.image}
+                  placeholder="Enter an URL..."
+                  onChange={(event) => handleInputChange(event)}
+                  />
+              </div>
+              <div className={styles.errorInputs}>
+                {errors.image ? <p className={styles.error}>{errors.image}</p> : <p className={styles.message}>{message_success}</p>}
+              </div>
           </div>
 
-          <div>
-            <label>HP: </label>
-            <input
-              type="number"
-              name="hp"
-              required
-              value={input.hp}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.hp ? <p>{errors.hp}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>HP: </label>
+              <input
+                type="number"
+                name="hp"
+                required
+                value={input.hp}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.hp ? <p className={styles.error}>{errors.hp}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-          <div>
-            <label>Attack: </label>
-            <input
-              type="number"
-              name="attack"
-              required
-              value={input.attack}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.attack ? <p>{errors.attack}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>Attack: </label>
+              <input
+                type="number"
+                name="attack"
+                required
+                value={input.attack}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.attack ? <p className={styles.error}>{errors.attack}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-          <div>
-            <label>Defense: </label>
-            <input
-              type="number"
-              name="defense"
-              required
-              value={input.defense}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.defense ? <p>{errors.defense}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>Defense: </label>
+              <input
+                type="number"
+                name="defense"
+                required
+                value={input.defense}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.defense ? <p className={styles.error}>{errors.defense}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-          <div>
-            <label>Speed: </label>
-            <input
-              type="number"
-              name="speed"
-              value={input.speed}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.speed ? <p>{errors.speed}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>Speed: </label>
+              <input
+                type="number"
+                name="speed"
+                value={input.speed}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.speed ? <p className={styles.error}>{errors.speed}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-          <div>
-            <label>Height: </label>
-            <input
-              type="number"
-              name="height"
-              value={input.height}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.height ? <p>{errors.height}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>Height: </label>
+              <input
+                type="number"
+                name="height"
+                value={input.height}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.height ? <p className={styles.error}>{errors.height}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-          <div>
-            <label>Weight: </label>
-            <input
-              type="number"
-              name="weight"
-              value={input.weight}
-              placeholder="Enter a value..."
-              onChange={(event) => handleInputChange(event)}
-            />
-            {errors.weight ? <p>{errors.weight}</p> : null}
+          <div className={styles.stylesDiv}>
+            <div>
+              <label>Weight: </label>
+              <input
+                type="number"
+                name="weight"
+                value={input.weight}
+                placeholder="Enter a value..."
+                onChange={(event) => handleInputChange(event)}
+              />
+            </div>
+            <div className={styles.errorInputs}>
+              {errors.weight ? <p className={styles.error}>{errors.weight}</p> : <p className={styles.message}>{message_success}</p>}
+            </div>
           </div>
 
-           <div>
-            {selectedTypes?.map((type) => {
-              return (
-                <span key={type}>
-                  {type}
-                  <button 
-                  className={styles.delete}
-                  onClick={() => removeTypes(type)}>X</button>
-                </span>
-              );
-            })}
-          </div>
-
-          <div>
-            <select name="types" onChange={handleTypesChange}>
-              <option>Types</option>
-              {types?.map((type) => {
-                return (
-                  <option key={type.id} value={type.name}>
-                    {type.name}
-                  </option>
-                );
+          <hr className={styles.hr} />
+          <label>Types: </label>
+  
+          <div className={styles.checkboxContainer}>
+            <div>
+              {types?.map( (type, key) => {
+                  return (
+                    <div className={styles.checkboxOrder}>  
+                        <div>
+                          <label>{type.name}</label>
+                        </div>
+                        <div >
+                          <hr className={styles.hr} />
+                        </div>
+                        <div>
+                          <input 
+                          type="checkbox"
+                          name="types"
+                          value={type.name}
+                          key={type.id} 
+                          onChange={handleInputChange}
+                          className={styles.checkbox}
+                          id={type.id}
+                          />
+                        </div>
+                    </div>
+                  )
               })}
-            </select>
-            {errors.types ? <p>{errors.types}</p> : null}
-          </div> 
+            </div>
+          </div>
+          {errors.types ? <p className={styles.error}>{errors.types}</p> : <p className={styles.message}>{message_success}</p>}
         </div>
 
         <div className={styles.bottomSection}>
-          {
-          disable? 
-          (
-            <button
+          { disable? 
+          (<button
               className={styles.buttonCreate}
               type="submit"
               onClick={(event) => handleSubmit(event)}
-            >
-              Create
-            </button>
+            > Create </button>
           ) 
           : 
-          (
-            <button disabled className={styles.buttonCreate}>
-              Create
-            </button>
-          )}   
+          (<button disabled className={styles.buttonCreate}>Create</button>)}   
 
           <Link to={`/home`} >
-            <button className={styles.buttonCancel}>
-              Cancel
-            </button>
+            <button className={styles.buttonCancel}>Cancel</button>
           </Link>
         </div>
       </form>
@@ -322,57 +313,3 @@ export default function Create() {
   }
   
 //En el submit del form de le envia toda la info recibida por los inputs hacia el back
-
-/*
-input.name !== "" &&
-input.image !== "" &&
-input.hp !== "" &&
-input.attack !== "" &&
-input.defense !== "" &&
-input.speed >= 0 &&
-input.height >= 0 &&
-input.weight >= 0 &&
-selectedTypes.length > 0 
-*/
-
-/*
-
-const [disable, setDisable] =useState(false);
-let disable;
-
-
-useEffect(() => {
-  input.name !== "" &&
-  input.image !== "" &&
-  input.hp !== "" &&
-  input.attack !== "" &&
-  input.defense !== "" &&
-  input.speed >= 0 &&
-  input.height >= 0 &&
-  input.weight >= 0 &&
-  selectedTypes.length > 0 
-  ? setDisable(true)
-  : setDisable(false) 
-
-  }, [input]);
-
-o probar con un estado local...
-
-const [disable, setDisable] = useState(false);
-
-useEffect(() => {
-  input.name !== "" &&
-  input.image !== "" &&
-  input.hp !== "" &&
-  input.attack !== "" &&
-  input.defense !== "" &&
-  input.speed >= 0 &&
-  input.height >= 0 &&
-  input.weight >= 0 &&
-  selectedTypes.length > 0 
-  ? setDisable(true);
-  : setDisable(false)
-  }, [input]);
-
-
-*/

@@ -14,15 +14,12 @@
     flex-direction: column;
     align-items: center; 
     margin-top: 60px;
-    width: 55vh;
-    height: 60vh;
-    /* padding: 10px; */
+    width: 60vh;
+    height: 80vh;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: rgb(188, 188, 22);
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
+    background-color: rgba(188, 188, 22, 0.729); 
+    overflow: hidden;
     box-shadow: 0 0 10px black;
     &:hover {
        box-shadow: 0 0 5px red;
@@ -30,16 +27,18 @@
 }
 
 .form input {
-    font-family: 'East Sea Dokdo', cursive;
-    font-size: 20px;
+    font-family: 'Kavivanar', cursive;
+    flex: 50%;
+    font-size: 15px;
     color: black;
-    /* outline: none; */
+    justify-content: start;
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
     margin: 2px;
     background-color: rgb(246, 246, 101);
-    
+    margin-right: 250px;
+    margin-top: 10px;
 }
 
 .topSection {
@@ -47,12 +46,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* flex-direction: row;
-    justify-content: space-between; */
     border-bottom: 3px solid rgb(0, 0, 0);
-    width: 50vh;
-    background-color: rgba(128, 128, 128, 0.286);
+    width: 60vh;
     font-family: 'Kavivanar', cursive;
+    background-color: rgba(188, 188, 22, 0.996); 
 }
 
 .middleSection {
@@ -63,53 +60,40 @@
     align-items: center;
     overflow-y:visible; 
     overflow-x: hidden; 
-    /* width: 50vh; */
     width: 100%;
-  height: 100%;
+    height: 100%;
     font-family: 'Kavivanar', cursive;
     border-left: 3px solid rgb(0, 0, 0);
     border-right: 3px solid rgb(0, 0, 0);
-    background-color: rgb(201, 201, 201);
 }
 
-.middleSection div{
+.stylesDiv{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap; 
 }
 
+.errorInputs {
+    display: flex;
+    flex: 50%;
+    position: fixed;
+    flex-grow: 1;
+    margin-left: 270px;
+}
 
 .bottomSection {
-    border-left: 3px solid rgb(0, 0, 0);
-    border-right: 3px solid rgb(0, 0, 0);
-    border-bottom: 3px solid rgb(0, 0, 0);
+    border-top: 3px solid rgb(0, 0, 0);
     flex: 15%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 50vh;
+    width: 60vh;
     font-family: 'Press Start 2P', cursive;
     font-size: 12px;
     border-top: 3px solid black;
-}
-
-.container select {
-    position: relative;
-    height: 40px;
-    font-family: 'Kavivanar', cursive;
-    color: black;
-    font-size: 15px;
-    background-color: rgb(246, 246, 101);
-    margin-top: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-}
-.container input {
-    height: 25px;
-    width: 180px;
+    background-color: rgba(188, 188, 22, 0.996);
 }
 
 .buttonCreate {
@@ -150,36 +134,51 @@
      } 
 }
 
-.delete {
-    margin: 5px;
-    margin-right: 10px;
-    margin-top: 3px;
-    /* margin: 2px 2px 0 0; */
-    border-radius: 3px;
-    background-color: red;
-    color: white;
-    box-shadow: 0 3px 3px black;
-    &:hover {
-        color: red;
-        background-color: white;
-        box-shadow: 0 3px 3px red;
-    }
-}
 
-.form p {
+.error {
     color:  rgb(226, 0, 0);
-    flex: 1%;
-    /* font-weight: bold; */
-    display: flex;
-    /* align-items: center;  
-    justify-content: center; */
-    text-align: center;
-    
-    font-size: 13px;
-    margin-left: 10px;
-    margin-bottom: 5px;
+    font-size: 15px;
+    margin-left: 25px;
 }
 
+.message {
+    color:  rgb(15, 138, 1);
+    font-size: 15px;
+    margin-left: 20px;
+}
 
+.checkboxContainer {
+    overflow-y: scroll;
+    height: 20vh; 
+    width: 30vh;
+    padding: 10px;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 0, 0.166); 
+}
+
+.checkboxOrder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap; 
+}
+
+.hr {
+   width:18vh;
+   color: black;
+   margin-top: 15px;
+}
+
+.checkbox {
+    margin-bottom: 5px;
+    color: black;
+    background-color: black;
+}
+  
+.checkboxContainer input {
+    margin-right: 5px;
+}
+
+  
 
 

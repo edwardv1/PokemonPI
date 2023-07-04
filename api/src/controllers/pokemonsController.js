@@ -38,7 +38,7 @@ const getPokemonsDb = async () => {
 // Función para obtener pokemones de la API
 const getPokemonsApi = async () => {
     try {
-        const infoApi = (await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=10")).data;
+        const infoApi = (await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=60")).data;
         //const arrResults = await infoApi.results;
         //creo una funcion que me limpie la info que viene de la API
         const cleanPokemonsApi = await infoApi.results.map( async pokemon => {
@@ -70,7 +70,6 @@ const getAllPokemons = async(name) => {
         let pokemonsApi = await getPokemonsApi();
         let allPokemons = [...pokemonsDb, ...pokemonsApi];
          //Puedo usar Concat tambien return   pokemonsDb.concat(pokemonsApi);
-        console.log(allPokemons);
          
         let pokemonByName;
         if(name){
