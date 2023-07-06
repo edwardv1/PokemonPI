@@ -1,16 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 
 export default function Card({pokemon}) {
-  //console.log(pokemon);
+  
   const {id, image, hp, attack, defense, types} = pokemon;
   let { name } = pokemon;
-  //console.log(id);
   
   // Obtener el primer tipo del array de tipos
   //const primaryType = types[0];
-
   // Generar la clase CSS para el color de fondo según el tipo primario
   //let cardClassName = `card.${primaryType}`;
 
@@ -36,13 +34,8 @@ export default function Card({pokemon}) {
           <div>
             <h4>Type: {types[0].charAt(0).toUpperCase() + types[0].slice(1)}  {types[1] ? types[1].charAt(0).toUpperCase() + types[1].slice(1): null}</h4>
           </div>
-      
         </div>
-      </NavLink>
+      </NavLink>  
     </div>
   );
 }
-
-{/* <Link to={`/detail/${id}`}> 
-</Link> */}
-// `card ${cardClassName ? {cardClassName} : ""}`

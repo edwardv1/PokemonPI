@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 export default function Home() {
 
   const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.allPokemons); //subscribo el componente al Estado global, asi en cada cambio que haya lo va a recibir esta variable/componente
+  const allPokemons = useSelector((state) => state.allPokemons);
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
   const types = useSelector((state) => state.types);
@@ -20,11 +20,11 @@ export default function Home() {
 
 
   const alphabeticalOrder = (event) => {
-    if(event.target.value !== "order") dispatch(orderByName(event.target.value)); //event.target.value accede al value= Ascending o Descending
+    if(event.target.value !== "order") dispatch(orderByName(event.target.value));
   }
 
   const attackOrder = (event) => {
-    if(event.target.value !== "order") dispatch(orderByAttack(event.target.value)); //event.target.value accede al value= Ascending o Descending
+    if(event.target.value !== "order") dispatch(orderByAttack(event.target.value));
   }
 
   const filterType = (event) => {
@@ -35,14 +35,10 @@ export default function Home() {
     if(event.target.value !== "filter") dispatch(filterByOrigin(event.target.value));
   }
   
-  
   useEffect(()=> {
-    dispatch(getAllPokemons()); //despacho la action (la action se comunica con el back), 
-    //la action llega al reducer, modifica el estado con el payload de la action, y lo devuelve a todos los componentes
+    dispatch(getAllPokemons());
   }, [dispatch]);
-  //Array de dependencias, me indica en que momento quiero que se ejecute la funcion... solo quiero que se ejecute cuando de haga el [ dispatch ]
   
-
     return (
       <div className={`${styles.container} ${filters && pokemonsFiltered.length === 0 ? styles.rayquaza : null}`}>
         

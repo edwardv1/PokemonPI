@@ -3,45 +3,44 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../card/Card";
 import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
-import rayquaza from "../../images/rayquaza.png";
+//import rayquaza from "../../images/rayquaza.png";
+import gifRay from "../../images/gifRayquaza.gif";
 import styles from "./Cards.module.css";
 
 
 export default function Cards({ allPokemons }) {
-
+  
   const reproducirSonido = (volumen) => {
     const audio = new Audio(rugidoRaiquaza);
     audio.volume = volumen;
     audio.play();
   };
-
+  
   //Paginado
- const ITEMS_PER_PAGE = 10; //para setear la cantidad de items que yo quiero que se vean por cada pagina del paginado
-  //const allPokemons = useSelector((state) => state.allPokemons);
+  const ITEMS_PER_PAGE = 10; 
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
   const orders = useSelector((state) => state.orders);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE)); //1 a 10
+  const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE));
   const [itemsFiltered, setItemsFiltered] = useState([...pokemonsFiltered].splice(0, ITEMS_PER_PAGE));
   const [numberPageAll, setNumberPageAll]  = useState(0);
   const [numberPageFiltered, setNumberPageFiltered]  = useState(0);
   
-
   const nextPage = () => {
-    if (filters) {  //para controlar cuando hacemos filtros (pokemonsFiltered)
+    if (filters) {  
       const next_page = currentPage + 1;
-      const firstIndex = next_page * ITEMS_PER_PAGE; // 1 * 10 = 10
-      if (firstIndex >= pokemonsFiltered.length) return; //verifica que llego al final del array de pokemones, y evita que siga pasando la pagina
-      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE));  //11 a 20
-      setCurrentPage(next_page); //avanza a la siguiente pagina, de 0 a pagina 1
+      const firstIndex = next_page * ITEMS_PER_PAGE;
+      if (firstIndex >= pokemonsFiltered.length) return;
+      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE)); 
+      setCurrentPage(next_page); 
       return;
-    } // else... para controlar cuando no hay filtros (allPokemons)
+    }
     const next_page = currentPage + 1;
     const firstIndex = next_page * ITEMS_PER_PAGE;
     if (firstIndex >= allPokemons.length) return;
-    setItems([...allPokemons].splice(firstIndex, ITEMS_PER_PAGE)) //11 a 20
+    setItems([...allPokemons].splice(firstIndex, ITEMS_PER_PAGE)) 
     setCurrentPage(next_page)
   }
 
@@ -49,8 +48,7 @@ export default function Cards({ allPokemons }) {
     if (filters) {
       const prev_page = currentPage - 1;
       const firstIndex = prev_page * ITEMS_PER_PAGE;
-      //if(next_page > Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE)) return;
-      if (prev_page < 0) return; //evita que entremos a una pagina anterior que no tenga pokemones
+      if (prev_page < 0) return;
       setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE))
       setCurrentPage(prev_page)
       return;
@@ -76,11 +74,14 @@ export default function Cards({ allPokemons }) {
   //Cuando se aplican ordenes, la pagina va al inicio evitando bugs
   useEffect(() => {
     if (filters) {
+      setCurrentPage(0);
       const filteredPageCount = Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE);
       setNumberPageFiltered(filteredPageCount > 0 ? filteredPageCount - 1 : 0);
       if(orders) setCurrentPage(0);
     } else {
-      setNumberPageAll(Math.floor(allPokemons.length / ITEMS_PER_PAGE));
+      setCurrentPage(0);
+      const allPageCount = Math.ceil(allPokemons.length / ITEMS_PER_PAGE);
+      setNumberPageAll(allPageCount > 0 ? allPageCount - 1 : 0);
       if(orders) setCurrentPage(0);
     }
   }, [allPokemons, pokemonsFiltered, filters, orders]);
@@ -110,8 +111,9 @@ export default function Cards({ allPokemons }) {
       <div className={styles.cardsList}>
         {/* Renderiza un pokemon cuando se cumple ciertas condiciones */}
         { filters && pokemonsFiltered.length === 0 ? (
-        <div>
-          <img style={{ width: '420px' }} src={rayquaza} alt="Rayquaza" />  
+        <div className={styles.rayquaza}>
+          <p>It seems that there are no pokemons... But, what is that?</p>
+          <img style={{ width: '700px' }} src={gifRay} alt="Rayquaza" />  
           <p>Rayquaza has appeared!!!</p>
           {reproducirSonido(0.03)}
         </div>

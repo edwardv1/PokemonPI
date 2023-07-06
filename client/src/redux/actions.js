@@ -84,19 +84,19 @@ export const getAllPokemons = () => {
    };
  }
 
- export const createPokemon = (payload) => {
+   export const createPokemon = (payload) => {
    let endpoint = `http://localhost:3001/pokemons/create`;  //asi puede coincidir con el endpoint del backend 
    return async (dispatch) => {
       try {
          const response = await axios.post(endpoint, payload);
          //console.log(response); me muestra el mensaje
-         window.alert("The pokemon has been created successfully");
+         window.alert(response.data);
          return response;
       } catch (error) {
          window.alert("An error occurred while creating the pokemon! try again!");
       }
    };
- }
+}
 
  export const orderByName = (order) => {
     return (dispatch) => {
@@ -105,7 +105,7 @@ export const getAllPokemons = () => {
          payload: order
        })
     }
-}
+ }
 
 export const orderByAttack = (order) => {
    return (dispatch) => {

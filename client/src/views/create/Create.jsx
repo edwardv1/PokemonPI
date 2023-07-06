@@ -24,10 +24,6 @@ export default function Create() {
     types: [],
   });
 
-  //console.log(input.types.length);
-  //console.log(input.types);
- 
-  //Creo un estado de errores para los campos obligatoios, y asi hacer las validaciones
   const [errors, setErrors] = useState({
     name: "",
     image: "", 
@@ -42,17 +38,14 @@ export default function Create() {
   
   const [disable, setDisable] =useState(false);
 
-  //console.log(errors.types);
-
   // Este useEffect valida los campos en tiempo real
   useEffect(() => {
     setErrors(validationInputs(input));
   }, [input]);
 
-  // Este useEffect constrola que el boton "Create" se habilite o no
+  // Este useEffect controla que el boton "Create" se habilite o no
   useEffect(() => { 
     let errExists = validationCreate(errors, input); //retorna true o false
-    //console.log(errExists);
     !errExists
     ? setDisable(true)
     : setDisable(false)
@@ -312,4 +305,3 @@ export default function Create() {
     );
   }
   
-//En el submit del form de le envia toda la info recibida por los inputs hacia el back
