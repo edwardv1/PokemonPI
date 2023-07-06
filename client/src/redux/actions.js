@@ -15,7 +15,7 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
 
 export const getAllPokemons = () => {
-    let endpoint = "http://localhost:3001/pokemons";  //asi puede coincidir con el endpoint del backend
+    let endpoint = "http://localhost:3001/pokemons"; 
     return async (dispatch) => {
        try {
           const { data } = await axios.get(endpoint);
@@ -24,14 +24,13 @@ export const getAllPokemons = () => {
              payload: data,
           });
        } catch (error) {
-            window.alert("An error has occurred while getting pokemons!");
-            //HACER EL CONTROL DEL ERROR CON UN DISPATCH
+            window.alert(error.message);  //"An error has occurred while getting pokemons!"
        }
     };
  };
 
  export const getPokemonById = (id) => {
-   let endpoint = `http://localhost:3001/pokemons/${id}`;  //asi puede coincidir con el endpoint del backend 
+   let endpoint = `http://localhost:3001/pokemons/${id}`;  
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -40,8 +39,7 @@ export const getAllPokemons = () => {
             payload: data,
          });
       } catch (error) {
-           window.alert("An error has occurred while getting a pokemon by ID!");
-           //HACER EL CONTROL DEL ERROR CON UN DISPATCH
+           window.alert(error.message); //"An error has occurred while getting a pokemon by ID!"
       }
    };
  }
@@ -53,7 +51,7 @@ export const getAllPokemons = () => {
  }
 
  export const getPokemonByName = (name) => {
-   let endpoint = `http://localhost:3001/pokemons/?name=${name}`;  //asi puede coincidir con el endpoint del backend 
+   let endpoint = `http://localhost:3001/pokemons/?name=${name}`;  
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -62,14 +60,13 @@ export const getAllPokemons = () => {
             payload: data,
          });
       } catch (error) {
-           window.alert("An error has occurred while getting a pokemon by name!");
-           //HACER EL CONTROL DEL ERROR CON UN DISPATCH
+           window.alert(error.message);  //"An error has occurred while getting a pokemon by name!"
       }
    };
  }
 
  export const getTypes = () => {
-   let endpoint = `http://localhost:3001/types/`;  //asi puede coincidir con el endpoint del backend 
+   let endpoint = `http://localhost:3001/types/`; 
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -78,22 +75,20 @@ export const getAllPokemons = () => {
             payload: data,
          });
       } catch (error) {
-           window.alert("An error has occurred while getting types!");
-           //HACER EL CONTROL DEL ERROR CON UN DISPATCH
+           window.alert(error.message);  //"An error has occurred while getting types!"
       }
    };
  }
 
    export const createPokemon = (payload) => {
-   let endpoint = `http://localhost:3001/pokemons/create`;  //asi puede coincidir con el endpoint del backend 
-   return async (dispatch) => {
+      let endpoint = `http://localhost:3001/pokemons/create`; 
+      return async (dispatch) => {
       try {
          const response = await axios.post(endpoint, payload);
-         //console.log(response); me muestra el mensaje
          window.alert(response.data);
          return response;
       } catch (error) {
-         window.alert("An error occurred while creating the pokemon! try again!");
+         window.alert(error.message); //"An error occurred while creating the pokemon! try again!"
       }
    };
 }

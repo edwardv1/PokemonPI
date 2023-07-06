@@ -2,8 +2,6 @@ const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 
-// * const { v4: uuidv4 } = require('uuid');
-// * id:${uuidv4()}-${genre.id},
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('pokemon', {
@@ -70,7 +68,7 @@ module.exports = (sequelize) => {
 };
 
 
-//DataTypes.UUID: combinacion de nros, letras y guines (codigo alfanumerico)
+//DataTypes.UUID: combinacion de nros, letras y guiones (codigo alfanumerico)
 //defaultValue: DataTypes.UUIDV4: Algoritmo que crea un nro aleatorio de identificacion
 
 //freezeTableName: true --> forzamos nombreTabla === nombreModelo

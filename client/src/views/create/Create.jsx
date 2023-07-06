@@ -77,7 +77,7 @@ export default function Create() {
     }
   };
 
-  //la funcion agrega los types al input, despacha el input (info pokemon) y luego setea el input
+  //Funcion que agrega los types al input, despacha el input (info pokemon) y luego setea el input
   function handleSubmit(event){
     try{
       event.preventDefault();

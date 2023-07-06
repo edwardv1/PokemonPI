@@ -7,12 +7,9 @@ import chooseWisely from "../../images/ChooseWisely2.png"
 import styles from "./SearchBar.module.css";
 
 
-
-
 export default function SearchBar() {
 
   const [name, setName] = useState("");
-  //const [inputValue, setInputValue] = useState("");
 
   const allPokemons = useSelector((state) => state.allPokemons);
   const dispatch = useDispatch();
@@ -20,7 +17,6 @@ export default function SearchBar() {
   const handleInputChange = (event) => {
     setName(event.target.value.toLowerCase());
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -1,8 +1,9 @@
-import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, CREATE_POKEMON, 
-        ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL } from "./actions";
+import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_BY_NAME,
+         ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL } from "./actions";
+    
 
 const initialState = {
-    allPokemons: [],   //Array de objetos(pokemon)
+    allPokemons: [],  
     pokemonsFiltered: [],
     pokemonDetail: {},
     types: [],
@@ -43,12 +44,6 @@ const reducer = (state= initialState, {type, payload}) => {
             return {
                 ...state,
                 types: payload
-            }
-            //no es necesario hacer cambios ya que se crea en la DB
-
-        case CREATE_POKEMON:
-            return {
-                ...state,
             }
 
         case ORDER_BY_NAME:

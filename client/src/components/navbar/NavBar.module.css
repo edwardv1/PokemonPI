@@ -11,7 +11,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
 }
 
-.div1 {
+.topSection {
     flex: 10%;
     text-align: center; /* Centra el texto horizontalmente */
     font-family: 'Press Start 2P', cursive;
@@ -19,17 +19,14 @@
     color: black;
 }
   
-.div2 {
+.middleSection {
     flex: 80%;
 }
   
-.div3 {
+.bottomSection {
     flex: 10%;
     text-align: center; /* Centra el texto horizontalmente */
 }
-
-
-
 
 .containerText {
     text-decoration: none;

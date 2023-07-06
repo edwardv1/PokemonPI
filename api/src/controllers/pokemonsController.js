@@ -38,7 +38,7 @@ const getPokemonsApi = async () => {
         const infoApi = (await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=60")).data;
 
         //Funcion que limpia la info que viene de la API
-        const cleanPokemonsApi = await infoApi.results.map( async pokemon => {
+        const cleanPokemonsApi = await infoApi.results.map( async (pokemon) => {
             const infoPokemon = (await axios.get(pokemon.url)).data;
             return{
                 id: infoPokemon.id,
@@ -104,19 +104,18 @@ const getPokemonById = async(id) => {
 
 const createPokemon = async( name, image, hp, attack, defense, speed, height, weight, types ) => {
    try {
-        const [pokemonDb, exists] =  await Pokemon.findOrCreate({
+        const [pokemonDb, created] =  await Pokemon.findOrCreate({
            where: { name },
            defaults: { name, image, hp, attack, defense, speed, height, weight }
         });
-        if(!pokemonDb.name) throw new Error("Missing required data.")
-        if(!exists) throw new Error("The pokemon you are trying to create already exists.")
+        
+        if(!created) throw new Error("The pokemon you are trying to create already exists.")
         
         // Establece la relación entre el pokemon y el tipo
         const type = await Type.findAll({ where: { name: types } });
         if (!type) throw new Error(`Type '${types}' does not exist.`);
         pokemonDb.setTypes(type); 
 
-        //return pokemonDb;
    } catch (error) {
         throw new Error(error.message);
    }

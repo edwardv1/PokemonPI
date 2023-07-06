@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Landing.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import videoPokemon from "../../images/pokemon.mp4";
 import logoPoke from "../../images/logopoke.png";
 

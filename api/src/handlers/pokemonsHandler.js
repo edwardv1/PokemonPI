@@ -34,7 +34,7 @@ const createPokemonsHandler = async (req,res) => {
     if(height === "" || height === undefined) height = 0;
     if(weight === "" || weight === undefined) weight = 0;
    
-    if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Faltan datos obligatorios.")
+    if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Mandatory data is missing.")
     try {
         const newPokemon = await createPokemon(name.toLowerCase(), image, hp, attack, defense, speed, height, weight, types)
         return res.status(200).send("The pokemon has been created successfully")

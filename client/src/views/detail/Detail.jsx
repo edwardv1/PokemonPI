@@ -8,20 +8,19 @@ import styles from "./Detail.module.css";
 import pokebola from "../../images/pokebola8.png";
 
 export default function Detail() {
-  
-  const { id } = useParams(); //Recibo el valor de id pasado por parametro del path
+  //Recibo el valor de id pasado por parametro del path
+  const { id } = useParams(); 
   
   const dispatch = useDispatch();
   const pokemonById = useSelector((state) => state.pokemonDetail);
 
-  //Limpia el estado antes de desmontarse el componente
+  //Limpia el estado global antes de desmontarse el componente
   useEffect(() => {
     dispatch(getPokemonById(id));
     return ()=>{dispatch(clearDetail())}
   }, [dispatch, id]);
 
  
-
     return (
       <div className={styles.background}>
       <div className={styles.container}>

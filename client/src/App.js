@@ -1,15 +1,12 @@
 import React from 'react';
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Landing from './views/landing/Landing';
 import Home from './views/home/Home';
 import Detail from './views/detail/Detail';
 import Create from './views/create/Create';
-//import NavBar from './components/navbar/NavBar';
-//import SearchBar from './components/searchBar/SearchBar';
+
 
 function App() {
-
-
 
   //const location = useLocation();
   return (
@@ -35,4 +32,3 @@ function App() {
 }
 export default App;
 
-//detail: home/:id
