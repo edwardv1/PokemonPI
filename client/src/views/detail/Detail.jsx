@@ -6,6 +6,7 @@ import { getPokemonById, clearDetail } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import styles from "./Detail.module.css";
 import pokebola from "../../images/pokebola8.png";
+import mew from "../../images/mew.gif";
 
 export default function Detail() {
   //Recibo el valor de id pasado por parametro del path
@@ -23,6 +24,7 @@ export default function Detail() {
  
     return (
       <div className={styles.background}>
+      { pokemonById.length > 0 ? 
       <div className={styles.container}>
         <div className={styles.topSection}>
           <div className={styles.topSectionInfo}>
@@ -66,6 +68,13 @@ export default function Detail() {
           </h4>
         </div>
       </div>
+      :
+      <div className={styles.loading}>
+        <img style={{ width: '300px' }} src={mew} alt="Mew" />
+        <h4>Loading...</h4>
       </div>
+      }
+      </div>
+
     );
   }

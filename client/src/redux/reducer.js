@@ -1,5 +1,5 @@
 import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_BY_NAME,
-         ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL } from "./actions";
+         ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL, REFRESH_POKEMONS, CONTROL_MODAL } from "./actions";
     
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
     pokemonDetail: {},
     types: [],
     filters: false,
-    orders: false
+    orders: false,
+    modal: false
 };
 
 const reducer = (state= initialState, {type, payload}) => {
@@ -50,7 +51,7 @@ const reducer = (state= initialState, {type, payload}) => {
             if(state.filters){
                 if(payload==="Ascending"){
                     return{
-                        ...state,
+                        ...state,   
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
@@ -61,7 +62,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     }
                 } else if(payload==="Descending"){
                     return{
-                        ...state,
+                        ...state,    
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((prev, next)=>{
@@ -74,7 +75,7 @@ const reducer = (state= initialState, {type, payload}) => {
             } else {
                 if(payload==="Ascending"){
                     return{
-                        ...state,
+                        ...state,    
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
@@ -85,7 +86,7 @@ const reducer = (state= initialState, {type, payload}) => {
                     }
                 } else if(payload==="Descending"){
                     return{
-                        ...state,
+                        ...state,   
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((prev, next)=>{
@@ -102,14 +103,14 @@ const reducer = (state= initialState, {type, payload}) => {
             if(state.filters){
                 if(payload==="Ascending"){
                     return{
-                        ...state,
+                        ...state,   
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
                     return{
-                        ...state,
+                        ...state,   
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.pokemonsFiltered].sort((a,b) => b.attack - a.attack)
@@ -119,13 +120,14 @@ const reducer = (state= initialState, {type, payload}) => {
                 if(payload==="Ascending"){
                     return{
                         ...state,
+    
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((a,b) => a.attack - b.attack)
                     }
                 } else if(payload==="Descending"){
                     return{
-                        ...state,
+                        ...state,  
                         filters: true,
                         orders: true,
                         pokemonsFiltered: [...state.allPokemons].sort((a,b) => b.attack - a.attack)
@@ -136,11 +138,7 @@ const reducer = (state= initialState, {type, payload}) => {
 
         case FILTER_BY_TYPE:
             let pokemonFilteredByType;
-            if (payload === "all") {
-                pokemonFilteredByType = [...state.allPokemons];
-            } else {
-                pokemonFilteredByType = [...state.allPokemons].filter((pokemon) => pokemon.types.includes(payload));
-            }
+            pokemonFilteredByType = [...state.allPokemons].filter((pokemon) => pokemon.types.includes(payload));
             return {
                 ...state,
                 filters: true,
@@ -151,13 +149,6 @@ const reducer = (state= initialState, {type, payload}) => {
             let pokemonsFromApi;
             let pokemonsFromDb;
             const regexUUID = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
-            if (payload === "all") {
-                return {
-                    ...state,
-                    filters: true,
-                    pokemonsFiltered: [...state.allPokemons]
-                }
-            } 
             if(payload === "api"){
                 pokemonsFromApi = [...state.allPokemons].filter((pokemon) => typeof(pokemon.id) === "number");
                 return {
@@ -172,6 +163,28 @@ const reducer = (state= initialState, {type, payload}) => {
                     ...state,
                     filters: true,
                     pokemonsFiltered: pokemonsFromDb
+                }
+            }
+        break;
+
+        case REFRESH_POKEMONS:
+            return {
+                ...state,
+                filters: true,
+                pokemonsFiltered: [...state.allPokemons]
+            }
+        
+        case CONTROL_MODAL:
+            if(payload === "isOpened"){
+                return{
+                    ...state,
+                    modal: true
+                }
+            }
+            if(payload === "isClosed"){
+                return{
+                    ...state,
+                    modal: false
                 }
             }
         break;

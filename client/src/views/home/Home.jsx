@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import { getAllPokemons, orderByName, orderByAttack, getTypes, filterByType, filterByOrigin } from "../../redux/actions.js";
+import { getAllPokemons, orderByName, orderByAttack, getTypes, filterByType, filterByOrigin, refreshPokes } from "../../redux/actions.js";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import Cards from "../../components/cards/Cards.jsx";
 import styles from "./Home.module.css";
@@ -34,6 +34,12 @@ export default function Home() {
   const filterOrigin = (event) => {
     if(event.target.value !== "filter") dispatch(filterByOrigin(event.target.value));
   }
+
+  const handleClick = () => {
+    dispatch(refreshPokes());
+  }
+
+
   
   useEffect(()=> {
     dispatch(getAllPokemons());
@@ -62,13 +68,13 @@ export default function Home() {
                   <option value="Descending">Descending: Max - Min</option>
               </select>
             <label>Order by Attack</label>
+
             </div>
 
             <div className={styles.topSectionRight}>
             <label>Filter by Type</label>
             <select onChange={filterType} name="filterType" id="">
-                <option defaultChecked value="filter">Filter</option>
-                <option value="all">All</option>
+                <option defaultChecked value="filter">Filter</option>     
                 {
                 types?.map((type) =>{
                   return (
@@ -78,12 +84,13 @@ export default function Home() {
             </select>
 
             <select onChange={filterOrigin} name="filterOrigin" id="">
-                <option defaultChecked value="filter">Filter</option>
-                <option value="all">All</option>
+                <option defaultChecked value="filter">Filter</option>      
                 <option value="api">API</option>
                 <option value="bdd">Data Base</option>
             </select>
             <label>Filter by Origin</label>
+
+            <button onClick={handleClick} >Refresh Pokemons</button>
             </div>
 
           </div>

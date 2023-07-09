@@ -98,3 +98,19 @@
     }
 }
 
+.topSectionRight button {
+    font-family: 'Kavivanar', cursive;
+    color: white;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 50px;
+    font-size: 15px;
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 10px red;
+    }
+}
+

@@ -9,12 +9,12 @@ const validationInputs = (input) => {
   
     // Validacion de Image 
     let regexImage = /^(http|https):\/\/[^\s]+(\.jpg|\.jpeg|\.png|\.gif)$/;
-    if(!regexImage.test(input.image)) errors.image = "The URL must start with http or https"; //"The URL must start with http or https and end with .jpg, .jpeg, .png or .gif";
+    if(!regexImage.test(input.image)) errors.image = "The URL must end with .jpg, .jpeg, .png or .gif"; //"The URL must start with http or https and end with .jpg, .jpeg, .png or .gif";
     if(!input.image) errors.image = "You must enter an image url";
   
     // Validacion de HP 
     if(!input.hp) errors.hp = "You must enter a HP value";
-    if(input.hp < 1) errors.hp = "The value has to be greater than 0";
+    if(input.hp < 0) errors.hp = "The value has to be greater than 0";
     if(input.hp > 999) errors.hp = "The value cannot be greater than 999";
 
     // Validacion de Attack 

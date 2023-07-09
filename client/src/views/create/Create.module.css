@@ -1,5 +1,4 @@
 .background {
-    display: flex;
     height: 100vh;
     background-image: url("../../images/create6.jpg");
     display: flex;
@@ -37,7 +36,7 @@
     text-align: center;
     margin: 2px;
     background-color: rgb(246, 246, 101);
-    margin-right: 250px;
+    margin-right: 285px;
     margin-top: 10px;
 }
 
@@ -79,7 +78,7 @@
     flex: 50%;
     position: fixed;
     flex-grow: 1;
-    margin-left: 270px;
+    margin-left: 245px;
 }
 
 .bottomSection {
@@ -179,6 +178,15 @@
     margin-right: 5px;
 }
 
+
+.lugia {
+    margin-bottom: 500px;
+    margin-right: 200px;
+}
+.pokemones {
+    margin-top: 600px;
+    margin-left: 200px;
+}
   
 
 

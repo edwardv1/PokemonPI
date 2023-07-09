@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPokemonByName } from "../../redux/actions";
+import { getPokemonByName, handlerModal } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import chooseWisely from "../../images/ChooseWisely2.png"
 import styles from "./SearchBar.module.css";
@@ -30,6 +30,11 @@ export default function SearchBar() {
     setName("");
   };
 
+  const onClickOpen = () => {
+    const open = "isOpened";
+    dispatch(handlerModal(open))
+  }
+
   return (
     <div className={styles.container}>
       <Link to="/create" className={styles.text}>
@@ -46,13 +51,21 @@ export default function SearchBar() {
           value={name}
           onChange={event => handleInputChange(event)}
         />
-        <button type="submit" onClick={event => handleSubmit(event)}>Search 🔎</button>
+        <button type="submit" onClick={event => handleSubmit(event)} className={styles.button}>Search 🔎</button>
       </div>
       <div>
         <img style={{ width: '200px'}} src={chooseWisely} alt="chooseWisely" />
+      </div >
+      <div className={styles.about}>
+        {/* <h3 onClick={onClickOpen}>About me</h3> */}
+        <button onClick={onClickOpen} className={styles.buttonAbout}> About me </button>
       </div>
-
-      <h2>About me</h2>
+      
     </div>
   );
 }
+
+{/* 
+<Link to="/about" className={styles.about}>
+        <h3>About me</h3>
+      </Link> */}

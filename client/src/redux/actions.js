@@ -9,6 +9,8 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const REFRESH_POKEMONS = "REFRESH_POKEMONS";
+export const CONTROL_MODAL = "CONTROL_MODAL";
 
 //export const REMOVE_POKEMON = "REMOVE_POKEMON";
 //export const ERROR = "ERROR";
@@ -125,6 +127,23 @@ export const filterByOrigin = (origin) => {
       return dispatch({
         type: FILTER_BY_ORIGIN,
         payload: origin
+      })
+   }
+}
+
+export const refreshPokes = () => {
+   return (dispatch) => {
+      return dispatch({
+        type: REFRESH_POKEMONS
+      })
+   }
+}
+
+export const handlerModal = (payload) => {
+   return (dispatch) => {
+      return dispatch({
+        type: CONTROL_MODAL,
+        payload: payload
       })
    }
 }

@@ -22,12 +22,26 @@
     text-align: center;  
 }
 
-.container button {
+.button {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 32px;
-    background-color: black;
+    height: 33px;
     color: white;
+    background-color:  black;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 5px white;
+    }
+}
+
+.buttonAbout {
+    border-radius: 10px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    background-color:  rgba(31, 83, 166, 0.653);
+    padding: 10px;
     cursor: pointer;
     &:hover {
         box-shadow: 0 0 5px white;
@@ -39,6 +53,13 @@
     font-size: 16px;
     color: black;
     margin-top: 30px;
+}
+
+.about {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
 }
 
 .text {
