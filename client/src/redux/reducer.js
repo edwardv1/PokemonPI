@@ -1,5 +1,6 @@
 import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_BY_NAME,
-         ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL, REFRESH_POKEMONS, CONTROL_MODAL } from "./actions";
+         ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL, REFRESH_POKEMONS, 
+         CONTROL_MODAL, CREATE_POKEMON, ERROR } from "./actions";
     
 
 const initialState = {
@@ -9,7 +10,9 @@ const initialState = {
     types: [],
     filters: false,
     orders: false,
-    modal: false
+    modal: false,
+    messageCreated: {},
+    errors: {}
 };
 
 const reducer = (state= initialState, {type, payload}) => {
@@ -45,6 +48,11 @@ const reducer = (state= initialState, {type, payload}) => {
             return {
                 ...state,
                 types: payload
+            }
+        case CREATE_POKEMON:
+            return {
+                ...state,
+                messageCreated: payload
             }
 
         case ORDER_BY_NAME:
@@ -188,6 +196,12 @@ const reducer = (state= initialState, {type, payload}) => {
                 }
             }
         break;
+
+        case ERROR:
+            return {
+                ...state,
+                errors: payload
+            }
 
         default:
             return {...state}

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonByName, handlerModal } from "../../redux/actions";
 import { Link } from "react-router-dom";
-import chooseWisely from "../../images/ChooseWisely2.png"
+import chooseWisely from "../../images/ChooseWisely2.png";
 import styles from "./SearchBar.module.css";
 
 
@@ -57,15 +57,9 @@ export default function SearchBar() {
         <img style={{ width: '200px'}} src={chooseWisely} alt="chooseWisely" />
       </div >
       <div className={styles.about}>
-        {/* <h3 onClick={onClickOpen}>About me</h3> */}
         <button onClick={onClickOpen} className={styles.buttonAbout}> About me </button>
       </div>
       
     </div>
   );
 }
-
-{/* 
-<Link to="/about" className={styles.about}>
-        <h3>About me</h3>
-      </Link> */}

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../card/Card";
 import { handlerModal } from "../../redux/actions";
 import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
-//import rayquaza from "../../images/rayquaza.png";
 import gifRay from "../../images/gifRayquaza.gif";
 import styles from "./Cards.module.css";
 import linkedIn from "../../images/LinkedIn_logo_initials.png";
@@ -13,10 +12,7 @@ import github from "../../images/github.png";
 
 
 export default function Cards({ allPokemons }) {
-
-  const modal = useSelector((state) => state.modal);
-  const dispatch = useDispatch();
-
+  
   const reproducirSonido = (volumen) => {
     const audio = new Audio(rugidoRaiquaza);
     audio.volume = volumen;
@@ -29,6 +25,8 @@ export default function Cards({ allPokemons }) {
   const filters = useSelector((state) => state.filters);
   const orders = useSelector((state) => state.orders);
   //const useDetail = useSelector((state) => state.useDetail);
+  const modal = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(0);
   const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE));
@@ -37,7 +35,6 @@ export default function Cards({ allPokemons }) {
   const [numberPageFiltered, setNumberPageFiltered]  = useState(0);
   const [goToPage, setGoToPage] = useState("");
 
-  
   const nextPage = () => {
     if (filters) {  
       const next_page = currentPage + 1;
@@ -212,7 +209,7 @@ export default function Cards({ allPokemons }) {
                 <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
               </a> 
               <a
-              target="blank" 
+              target="blanko" 
               href="https://github.com/edwardv1"
               >     
                 <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
@@ -221,7 +218,38 @@ export default function Cards({ allPokemons }) {
         </div>
       </div>
       :
-      null
+      <div className= {styles.containerModalClosed}>
+          <div className={styles.modalClosed}>
+            <button onClick={onClickClose} className={styles.delete} >X</button>
+            <div>
+              <h3>Desarrollador: Edward Vera</h3>
+              <h3>Acerca del Proyecto:</h3>
+              <p className={styles.text}>
+              En mi proyecto individual del curso de Desarrollador Web FullStack de SoyHenry, utilicé un conjunto de tecnologías que me 
+              permitieron desarrollar una aplicación web completa y funcional. En el lado del Back End, empleé Express como framework de Node.js, 
+              Sequelize como ORM para interactuar con la Base de Datos PostgreSQL. En cuanto al Front End, utilicé React junto con Redux para gestionar
+              el estado de la aplicación y construir la interfaz de usuario, y CSS y HTML para darle estilo y estructura. Estas tecnologías me proporcionaron  
+              las herramientas necesarias para crear una experiencia de usuario fluida y una interacción eficiente con la Base de Datos.
+              </p>
+            </div>
+
+            <div className={styles.contactContainer}>
+              <h1>Find me on Linkedin or Github</h1> 
+              <a
+              target="blank" 
+              href="https://www.linkedin.com/in/edward-vera-20a577188"
+              >     
+                <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
+              </a> 
+              <a
+              target="blank" 
+              href="https://github.com/edwardv1"
+              >     
+                <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
+              </a> 
+            </div>
+        </div>
+      </div>
       }
   </div>
   );

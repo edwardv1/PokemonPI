@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import validationInputs from "./validationInputs";
 import validationCreate from "./validationCreate";
-import { createPokemon, getTypes } from "../../redux/actions";
+import { createPokemon, getTypes, handlerModal, errorModal, successModal } from "../../redux/actions";
 import lugia from "../../images/lugia.gif";
 import pokes from "../../images/evoluciones.gif";
 import styles from "./Create.module.css";
@@ -13,7 +13,14 @@ export default function Create() {
   const message_success = "Data entered correctly...";
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
+  const modal = useSelector((state) => state.modal);
+  let error = useSelector((state) => state.errors);
+  let messageCreated = useSelector((state) => state.messageCreated);
+  console.log(error);
+  console.log(Object.keys(error).length);
 
+  
+  
   const [input, setInput]= useState({
     name: "",
     image: "",
@@ -106,6 +113,28 @@ export default function Create() {
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);
+
+  if(Object.keys(error).length > 0){
+    const open = "isOpened";
+    dispatch(handlerModal(open))
+  }
+  
+  const onClickClose = () => {
+    const close = "isClosed";
+    dispatch(errorModal(""));
+    dispatch(handlerModal(close));
+  }
+
+  if(Object.keys(messageCreated).length > 0){
+    const open = "isOpened";
+    dispatch(handlerModal(open))
+  }
+
+  const onClickCloseCreated = () => {
+    const close = "isClosed";
+    dispatch(successModal(""));
+    dispatch(handlerModal(close));
+  }
 
   return (
     <div className={styles.background}>
@@ -307,6 +336,56 @@ export default function Create() {
       <div className={styles.pokemones}>
         <img style={{ width: '300px' }} src={pokes} alt="Pokemones" />
       </div>
+
+    {
+      modal && Object.keys(error).length > 0 ?
+      <div className= {styles.containerModalOpened}>
+          <div className={styles.modalOpened}>
+            <button onClick={onClickClose} className={styles.delete} >X</button>
+            <div>
+              <h1>ERROR!</h1>
+              <hr />
+              <h2>{error}</h2>
+            </div>
+        </div>
+      </div>
+      :
+      <div className= {styles.containerModalClosed}>
+          <div className={styles.modalClosed}>
+            <button onClick={onClickClose} className={styles.delete} >X</button>
+            <div>
+              <h1>ERROR!</h1>
+              <hr />
+              <h2>Error</h2>
+            </div>
+        </div>
+      </div>
+      }
+
+      {
+      modal && Object.keys(messageCreated).length > 0 ?
+      <div className= {styles.containerModalOpened}>
+          <div className={styles.modalOpenedCreated}>
+            <button onClick={onClickCloseCreated} className={styles.delete} >X</button>
+            <div>
+              <h1>VERY GOOD!</h1>
+              <hr />
+              <h2>{messageCreated}</h2>
+            </div>
+        </div>
+      </div>
+      :
+      <div className= {styles.containerModalClosed}>
+          <div className={styles.modalClosed}>
+            <button onClick={onClickCloseCreated} className={styles.delete} >X</button>
+            <div>
+              <h1>VERY GOOD!</h1>
+              <hr />
+              <h2>Done</h2>
+            </div>
+        </div>
+      </div>
+      } 
     </div>
     );
   }
