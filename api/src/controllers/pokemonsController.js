@@ -71,7 +71,7 @@ const getAllPokemons = async(name) => {
         if(name){
             pokemonByName = allPokemons.filter( pokemon => pokemon.name === name );
             if(pokemonByName.length)  return pokemonByName;
-            throw new Error(`There is no pokemon with the name ${name}`); 
+            throw new Error(`There is no pokemon with the name ${name}.`); 
            
         }
         return allPokemons;  
@@ -121,7 +121,17 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
    }
 }
 
+const deletePokemon = async(id) => {
+    try {
+        const pokemonDeleted = await Pokemon.findByPk(id);  //findOne({where:{id: id}})
+        if(pokemonDeleted) return await Pokemon.destroy({where: {id}});
+        throw new Error(`The pokemon with id ${id} doesnt exists`);
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 module.exports = {
-    getAllPokemons, getPokemonById, createPokemon, getPokemonsDb
+    getAllPokemons, getPokemonById, createPokemon, getPokemonsDb, deletePokemon
 }
 

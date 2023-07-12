@@ -1,6 +1,6 @@
 import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_BY_NAME,
          ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL, REFRESH_POKEMONS, 
-         CONTROL_MODAL, CREATE_POKEMON, ERROR } from "./actions";
+         CONTROL_MODAL, CREATE_POKEMON, ERROR, CONTROL_MODAL_ERROR, REMOVE_POKEMON } from "./actions";
     
 
 const initialState = {
@@ -11,7 +11,9 @@ const initialState = {
     filters: false,
     orders: false,
     modal: false,
+    modalForError: false,
     messageCreated: {},
+    messageDeleted: {},
     errors: {}
 };
 
@@ -53,6 +55,11 @@ const reducer = (state= initialState, {type, payload}) => {
             return {
                 ...state,
                 messageCreated: payload
+            }
+        case REMOVE_POKEMON:
+            return {
+                ...state,
+                messageDeleted: payload
             }
 
         case ORDER_BY_NAME:
@@ -193,6 +200,21 @@ const reducer = (state= initialState, {type, payload}) => {
                 return{
                     ...state,
                     modal: false
+                }
+            }
+        break;
+
+        case CONTROL_MODAL_ERROR:
+            if(payload === "isOpened"){
+                return{
+                    ...state,
+                    modalForError: true
+                }
+            }
+            if(payload === "isClosed"){
+                return{
+                    ...state,
+                    modalForError: false
                 }
             }
         break;

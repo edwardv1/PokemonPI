@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const {getAllPokemonsHandler, getPokemonsByIdHandler, createPokemonsHandler } = require("../handlers/pokemonsHandler.js");
+const {getAllPokemonsHandler, getPokemonsByIdHandler, createPokemonsHandler, deletePokemonsHandler } = require("../handlers/pokemonsHandler.js");
 
 
 router.get('/', getAllPokemonsHandler);  
@@ -8,6 +8,8 @@ router.get('/', getAllPokemonsHandler);
 router.get('/:id', getPokemonsByIdHandler);
 
 router.post('/create', createPokemonsHandler);
+
+router.delete('/:id', deletePokemonsHandler);
 
 
 

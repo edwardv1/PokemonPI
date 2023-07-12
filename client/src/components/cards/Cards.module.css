@@ -149,6 +149,28 @@
     transform: translateY(-200%);
 }
 
+/* Modal Error Opened */
+
+.modalOpenedError {
+    width: 25%;
+    height: 20%;
+    background-image: linear-gradient(to bottom right, red, white);
+    border-radius: 10px;    
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    border: 3px solid black;
+    &:hover {
+        box-shadow: 0 0 10px black;
+    }
+    transition: transform 1s;
+    transform: translateY(0%);
+}
+
 /* Others */
 
 .delete {

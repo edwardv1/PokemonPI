@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getPokemonByName, handlerModal } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import chooseWisely from "../../images/ChooseWisely2.png";
@@ -10,23 +10,16 @@ import styles from "./SearchBar.module.css";
 export default function SearchBar() {
 
   const [name, setName] = useState("");
-
-  const allPokemons = useSelector((state) => state.allPokemons);
+  
   const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     setName(event.target.value.toLowerCase());
   };
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    const searchName = allPokemons.filter((pokemon) => pokemon.name.includes(name));
-    console.log(searchName);
-    if (searchName) {
-      dispatch(getPokemonByName(name));
-    } else {
-      alert("No pokemon found with the entered name");
-    }
+    dispatch(getPokemonByName(name));
     setName("");
   };
 

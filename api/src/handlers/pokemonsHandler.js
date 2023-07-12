@@ -1,8 +1,9 @@
-const { getAllPokemons, getPokemonById, createPokemon } = require('../controllers/pokemonsController.js')
+const { getAllPokemons, getPokemonById, createPokemon, deletePokemon } = require('../controllers/pokemonsController.js')
 
 
 const getAllPokemonsHandler = async (req, res) => {
     const { name } = req.query;
+    if(name === "") return res.status(400).json({error: "You must enter the name of a pokemon."});
     try {
         if(name){
             const pokemonByName = await getAllPokemons(name.toLowerCase());
@@ -12,7 +13,7 @@ const getAllPokemonsHandler = async (req, res) => {
             return res.status(200).json(allPokemons)
         }
     } catch (error) {
-        return res.status(400).json({error: error.message})
+        return res.status(400).send({error: error.message})
     }
 }
 
@@ -36,8 +37,19 @@ const createPokemonsHandler = async (req,res) => {
    
     if(!name || !image || !hp || !attack || !defense) return res.status(400).send("Mandatory data is missing.")
     try {
-        const newPokemon = await createPokemon(name.toLowerCase(), image, hp, attack, defense, speed, height, weight, types)
+        await createPokemon(name.toLowerCase(), image, hp, attack, defense, speed, height, weight, types)
         return res.status(200).send("The pokemon has been created successfully")
+   } catch (error) {
+        return res.status(400).json({error: error.message}) 
+   }
+}
+
+const deletePokemonsHandler = async (req,res) => {  
+    const {id} = req.params;
+    
+    try {
+        await deletePokemon(id);
+        return res.status(200).send(`The pokemon with id ${id} has been deleted successfully`)
    } catch (error) {
         return res.status(400).json({error: error.message}) 
    }
@@ -47,5 +59,6 @@ const createPokemonsHandler = async (req,res) => {
 module.exports = {
     getAllPokemonsHandler,
     getPokemonsByIdHandler,
-    createPokemonsHandler
+    createPokemonsHandler,
+    deletePokemonsHandler
 }

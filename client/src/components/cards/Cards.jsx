@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //import { useLocalStorage } from 'react-use-localstorage';
 import Card from "../card/Card";
-import { handlerModal } from "../../redux/actions";
+import { errorModal, handlerModal, hanlderErrorModal } from "../../redux/actions";
 import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
 import gifRay from "../../images/gifRayquaza.gif";
 import styles from "./Cards.module.css";
@@ -19,15 +19,19 @@ export default function Cards({ allPokemons }) {
     audio.play();
   };
   
-  //Paginado
-  const ITEMS_PER_PAGE = 10; 
+  
+  //Dependencias globales
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
   const orders = useSelector((state) => state.orders);
   //const useDetail = useSelector((state) => state.useDetail);
   const modal = useSelector((state) => state.modal);
+  let error = useSelector((state) => state.errors);
+  let modalForError = useSelector((state) => state.modalForError);
   const dispatch = useDispatch();
 
+  //Paginado
+  const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(0);
   const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE));
   const [itemsFiltered, setItemsFiltered] = useState([...pokemonsFiltered].splice(0, ITEMS_PER_PAGE));
@@ -142,11 +146,28 @@ export default function Cards({ allPokemons }) {
     }
   }, [currentPage, numberPageFiltered, filters]);
 
+
+  //Codigo que controla las ventanas Modal
+
+  //Cierra la ventana Modal cuando se muestra el About
   const onClickClose = () => {
     const close = "isClosed";
     dispatch(handlerModal(close))
   }
 
+  console.log(modalForError);
+  //Abre la ventana Modal si hay un error en el Search Pokemon
+  if(Object.keys(error).length > 0){
+    const open = "isOpened";
+    dispatch(hanlderErrorModal(open));
+  }
+  
+  //Cierra la ventana Modal cuando hay un error
+  const onClickCloseError = () => {
+    const close = "isClosed";
+    dispatch(errorModal(""));
+    dispatch(hanlderErrorModal(close));
+  }
 
   return (
     <div>
@@ -182,9 +203,35 @@ export default function Cards({ allPokemons }) {
         } 
       </div> 
 
-      {/* IMPLEMENTACION DE UN MODAL */}
+      {/* IMPLEMENTACION DE UN MODAL PARA CONTROLAR EL ERROR DEL SEARCH POKEMON */}
       {
-        modal ?
+        modalForError ? 
+        <div className= {styles.containerModalOpened}>
+            <div className={styles.modalOpenedError}>
+              <button onClick={onClickCloseError} className={styles.delete} >X</button>
+              <div>
+                <h1>ERROR!</h1>
+                <hr />
+                <h2>{error}</h2>
+              </div>
+          </div>
+        </div>
+        :
+        <div className= {styles.containerModalClosed}>
+            <div className={styles.modalClosed}>
+              <button onClick={onClickCloseError} className={styles.delete} >X</button>
+              <div>
+                <h1>ERROR!</h1>
+                <hr />
+                <h2>Error</h2>
+              </div>
+          </div>
+        </div>   
+      }
+
+      {/* IMPLEMENTACION DE UN MODAL PARA MOSTRAR EL ABOUT ME */}
+      {
+        modal  ?
         <div className= {styles.containerModalOpened}>
           <div className={styles.modalOpened}>
             <button onClick={onClickClose} className={styles.delete} >X</button>
@@ -221,36 +268,10 @@ export default function Cards({ allPokemons }) {
       <div className= {styles.containerModalClosed}>
           <div className={styles.modalClosed}>
             <button onClick={onClickClose} className={styles.delete} >X</button>
-            <div>
-              <h3>Desarrollador: Edward Vera</h3>
-              <h3>Acerca del Proyecto:</h3>
-              <p className={styles.text}>
-              En mi proyecto individual del curso de Desarrollador Web FullStack de SoyHenry, utilicé un conjunto de tecnologías que me 
-              permitieron desarrollar una aplicación web completa y funcional. En el lado del Back End, empleé Express como framework de Node.js, 
-              Sequelize como ORM para interactuar con la Base de Datos PostgreSQL. En cuanto al Front End, utilicé React junto con Redux para gestionar
-              el estado de la aplicación y construir la interfaz de usuario, y CSS y HTML para darle estilo y estructura. Estas tecnologías me proporcionaron  
-              las herramientas necesarias para crear una experiencia de usuario fluida y una interacción eficiente con la Base de Datos.
-              </p>
-            </div>
-
-            <div className={styles.contactContainer}>
-              <h1>Find me on Linkedin or Github</h1> 
-              <a
-              target="blank" 
-              href="https://www.linkedin.com/in/edward-vera-20a577188"
-              >     
-                <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
-              </a> 
-              <a
-              target="blank" 
-              href="https://github.com/edwardv1"
-              >     
-                <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
-              </a> 
-            </div>
         </div>
       </div>
       }
+
   </div>
   );
 }

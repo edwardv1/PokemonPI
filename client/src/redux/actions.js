@@ -12,8 +12,8 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const REFRESH_POKEMONS = "REFRESH_POKEMONS";
 export const CONTROL_MODAL = "CONTROL_MODAL";
 export const ERROR = "ERROR";
-
-//export const REMOVE_POKEMON = "REMOVE_POKEMON";
+export const CONTROL_MODAL_ERROR = "CONTROL_MODAL_ERROR";
+export const REMOVE_POKEMON = "REMOVE_POKEMON";
 
 
 export const getAllPokemons = () => {
@@ -65,6 +65,7 @@ export const getAllPokemons = () => {
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
+         
          return dispatch({
             type: GET_POKEMON_BY_NAME,
             payload: data,
@@ -73,7 +74,7 @@ export const getAllPokemons = () => {
          //window.alert(error.message);  //"An error has occurred while getting a pokemon by name!"
          return dispatch({
             type: "ERROR",
-            payload: "An error has occurred while getting a pokemon by name!"
+            payload: "Pokemon not found! try again!"
          })
       }
    };
@@ -118,10 +119,39 @@ export const createPokemon = (payload) => {
    };
 }
 
+export const removePokemon = (id) => {
+   let endpoint = `http://localhost:3001/pokemons/${id}`; 
+   return async (dispatch) => {
+      try {
+         const response = await axios.delete(endpoint);
+         //window.alert(response.data);
+         return dispatch({
+            type: REMOVE_POKEMON,
+            payload: response.data
+         });  
+      } catch (error) {
+         //window.alert(error);
+         return dispatch({
+            type: "ERROR",
+            payload: "An error occurred while deleting the pokemon! try again!"
+         })
+      }
+   };
+ }
+
 export const successModal = (payload) => {
    return (dispatch) => {
       return dispatch({
         type: CREATE_POKEMON,
+        payload: payload
+      })
+   }
+}
+
+export const successModalRemove = (payload) => {
+   return (dispatch) => {
+      return dispatch({
+        type: REMOVE_POKEMON,
         payload: payload
       })
    }
@@ -184,6 +214,15 @@ export const errorModal = (payload) => {
    return (dispatch) => {
       return dispatch({
         type: ERROR,
+        payload: payload
+      })
+   }
+}
+
+export const hanlderErrorModal = (payload) => {
+   return (dispatch) => {
+      return dispatch({
+        type: CONTROL_MODAL_ERROR,
         payload: payload
       })
    }

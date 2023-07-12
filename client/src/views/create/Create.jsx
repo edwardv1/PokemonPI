@@ -16,10 +16,6 @@ export default function Create() {
   const modal = useSelector((state) => state.modal);
   let error = useSelector((state) => state.errors);
   let messageCreated = useSelector((state) => state.messageCreated);
-  console.log(error);
-  console.log(Object.keys(error).length);
-
-  
   
   const [input, setInput]= useState({
     name: "",
@@ -337,6 +333,7 @@ export default function Create() {
         <img style={{ width: '300px' }} src={pokes} alt="Pokemones" />
       </div>
 
+    {/* IMPLEMENTACION DE MODAL */}
     {
       modal && Object.keys(error).length > 0 ?
       <div className= {styles.containerModalOpened}>
