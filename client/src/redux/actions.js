@@ -74,7 +74,7 @@ export const getAllPokemons = () => {
          //window.alert(error.message);  //"An error has occurred while getting a pokemon by name!"
          return dispatch({
             type: "ERROR",
-            payload: "Pokemon not found! try again!"
+            payload: "Pokemon not found! Try again!"
          })
       }
    };
@@ -113,7 +113,7 @@ export const createPokemon = (payload) => {
          //window.alert(error.message); //"An error occurred while creating the pokemon! try again!"
          return dispatch({
             type: "ERROR",
-            payload: "An error occurred while creating the pokemon! try again!"
+            payload: "The pokemon you tried to create already exists! Try again!"
          })
       }
    };

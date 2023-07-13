@@ -9,7 +9,7 @@ import gifRay from "../../images/gifRayquaza.gif";
 import styles from "./Cards.module.css";
 import linkedIn from "../../images/LinkedIn_logo_initials.png";
 import github from "../../images/github.png";
-
+import developer from "../../images/edw.jpeg";
 
 export default function Cards({ allPokemons }) {
   
@@ -235,33 +235,47 @@ export default function Cards({ allPokemons }) {
         <div className= {styles.containerModalOpened}>
           <div className={styles.modalOpened}>
             <button onClick={onClickClose} className={styles.delete} >X</button>
-            <div>
-              <h3>Desarrollador: Edward Vera</h3>
-              <h3>Acerca del Proyecto:</h3>
-              <p className={styles.text}>
-              En mi proyecto individual del curso de Desarrollador Web FullStack de SoyHenry, utilicé un conjunto de tecnologías que me 
-              permitieron desarrollar una aplicación web completa y funcional. En el lado del Back End, empleé Express como framework de Node.js, 
-              Sequelize como ORM para interactuar con la Base de Datos PostgreSQL. En cuanto al Front End, utilicé React junto con Redux para gestionar
-              el estado de la aplicación y construir la interfaz de usuario, y CSS y HTML para darle estilo y estructura. Estas tecnologías me proporcionaron  
-              las herramientas necesarias para crear una experiencia de usuario fluida y una interacción eficiente con la Base de Datos.
-              </p>
+            <div className={styles.modalLeft}>
+              
+              <h3 className={styles.dev}>Developer: Edward Vera</h3>
+              <img style={{ width: '300px'}} src={developer} className={styles.image} alt="Owner and developer" />
+
+              <div className={styles.contactContainer}>
+                <h1>Find me on Linkedin or Github</h1> 
+                <a
+                target="blank" 
+                href="https://www.linkedin.com/in/edward-vera-20a577188"
+                >     
+                  <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
+                </a> 
+                <a
+                target="blanko" 
+                href="https://github.com/edwardv1"
+                >     
+                  <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
+                </a> 
+              </div>
             </div>
 
-            <div className={styles.contactContainer}>
-              <h1>Find me on Linkedin or Github</h1> 
-              <a
-              target="blank" 
-              href="https://www.linkedin.com/in/edward-vera-20a577188"
-              >     
-                <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
-              </a> 
-              <a
-              target="blanko" 
-              href="https://github.com/edwardv1"
-              >     
-                <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
-              </a> 
-            </div>
+            <div className={styles.modalRight}>
+              <h3>About the Project:</h3>
+              <p className={styles.text}>
+                This project is based on a Single Page Application (SPA) built with the following technologies: 
+              </p>
+              <h3>Frontend:</h3>
+              <ul>
+                <li>React</li> 
+                <li>Redux</li> 
+                <li>CSS</li> 
+                <li>HTML</li> 
+              </ul>
+              <h3>Backend:</h3>
+              <ul>
+                <li>Express</li> 
+                <li>Sequelize</li> 
+                <li>PostgrSQL</li> 
+              </ul>
+            </div> 
         </div>
       </div>
       :
