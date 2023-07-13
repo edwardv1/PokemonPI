@@ -12,8 +12,13 @@ export default function Card({pokemon}) {
   // Generar la clase CSS para el color de fondo según el tipo primario
   //let cardClassName = `card.${primaryType}`;
 
+  // Obtener el primer tipo del array de tipos
+  const primaryType = types[0];
+  // Generar la clase CSS para el color de fondo según el tipo primario
+  let cardClassName = `${styles.card} ${styles[primaryType]}`;
+
   return (
-    <div className={styles.card}>
+    <div className={cardClassName}>
       <NavLink to={`/detail/${id}`} className={styles.text}>
         <div className={styles.topSection}>
           <div className={styles.name}>

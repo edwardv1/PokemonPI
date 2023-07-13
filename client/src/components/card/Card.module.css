@@ -35,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 6px solid rgb(182, 182, 8);
+    border: 6px solid rgb(221, 221, 0);
     background-image: linear-gradient(70deg, #ff8fff 0, #ff86ff 3.57%, #ff7ef3 7.14%, #ff78de 10.71%,
      #ff74c9 14.29%, #ff73b4 17.86%, #ff769f 21.43%, #ff7b8b 25%, #ff8177 28.57%, #ff8a64 32.14%,
       #ff9352 35.71%, #ff9c40 39.29%, #ffa52e 42.86%, #ffae1b 46.43%, #fbb600 50%, #e9be00 53.57%,
@@ -78,15 +78,88 @@
     text-decoration: none;
     color: black;
   }
+
   /* Colores de fondo según los tipos de Pokémon */
   .card.grass {
-    background-color: lightgreen;
+    background: linear-gradient(180deg, rgba(0,191,54,1) 0%, rgba(69,252,99,1) 100%);
   }
   
   .card.fire {
-    background-color: tomato;
+    background: linear-gradient(180deg, rgba(255,0,0,1) 0%, rgba(252,176,69,1) 100%); 
   }
   
   .card.water {
-    background-color: lightskyblue;
+    background: linear-gradient(180deg, rgba(0,112,255,1) 0%, rgba(69,232,252,1) 100%);
   }
+
+  .card.electric {
+    background: linear-gradient(180deg, rgba(238,222,23,1) 0%, rgba(255,253,59,1) 100%);
+  }
+
+  .card.dragon {
+    background: linear-gradient(180deg, rgba(88,88,82,1) 0%, rgba(226,214,214,1) 100%);
+  }
+
+  .card.fighting {
+    background: linear-gradient(180deg, rgba(227,137,33,1) 0%, rgba(212,66,18,1) 100%);
+  }
+
+  .card.flying {
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(205,196,196,1) 100%);
+  }
+
+  .card.poison {
+    background: linear-gradient(180deg, rgba(160,0,184,1) 0%, rgba(194,132,208,1) 100%);
+  }
+
+  .card.ground {
+    background: linear-gradient(180deg, rgba(255,210,25,1) 0%, rgba(176,121,1,1) 100%);
+  }
+
+  .card.rock {
+    background: radial-gradient(circle, rgba(249,188,89,1) 0%, rgba(203,155,7,1) 100%);
+  }
+
+  .card.bug {
+    background: radial-gradient(circle, rgba(122,249,89,1) 0%, rgba(218,195,11,1) 100%);
+  }
+
+  .card.ghost {
+    background: radial-gradient(circle, rgba(92,0,76,1) 0%, rgba(204,5,183,1) 100%);
+  }
+
+  .card.steel {
+    background: radial-gradient(circle, rgba(59,54,58,1) 0%, rgba(172,172,172,1) 100%);
+  }
+
+  .card.psychic {
+    background: radial-gradient(circle, rgba(176,79,79,1) 0%, rgba(118,0,144,1) 100%);
+  }
+
+  .card.ice {
+    background: radial-gradient(circle, rgba(188,248,255,1) 0%, rgba(0,165,204,1) 100%);
+  }
+
+  .card.dark {
+    background: radial-gradient(circle, rgba(102,50,111,1) 0%, rgba(75,96,101,1) 100%);
+  }
+
+  .card.fairy {
+    background: radial-gradient(circle, rgba(245,52,202,1) 0%, rgba(145,0,88,1) 100%);
+  }
+
+  .card.unknown {
+    background: radial-gradient(circle, rgba(255,163,64,1) 0%, rgba(255,222,73,1) 100%);  
+  }
+
+  .card.shadow {
+    background: radial-gradient(circle, rgba(42,27,22,1) 0%, rgba(108,105,107,1) 100%);
+  }
+
+  .card.normal {
+    background: radial-gradient(circle, rgba(223,214,205,1) 0%, rgba(89,86,71,1) 100%);
+  }
+
+
+
+
