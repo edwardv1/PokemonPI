@@ -8,11 +8,6 @@ export default function Card({pokemon}) {
   let { name } = pokemon;
   
   // Obtener el primer tipo del array de tipos
-  //const primaryType = types[0];
-  // Generar la clase CSS para el color de fondo según el tipo primario
-  //let cardClassName = `card.${primaryType}`;
-
-  // Obtener el primer tipo del array de tipos
   const primaryType = types[0];
   // Generar la clase CSS para el color de fondo según el tipo primario
   let cardClassName = `${styles.card} ${styles[primaryType]}`;
@@ -33,11 +28,11 @@ export default function Card({pokemon}) {
         </div>
         <div className={styles.bottomSection}>
           <div>
-            <h4>Attack: {attack} - Defense: {defense} </h4>
+            <h3>Attack: {attack} - Defense: {defense} </h3>
           </div>
           <hr />
           <div>
-            <h4>Type: {types[0].charAt(0).toUpperCase() + types[0].slice(1)}  {types[1] ? types[1].charAt(0).toUpperCase() + types[1].slice(1): null}</h4>
+            <h3>Type: {types[0].charAt(0).toUpperCase() + types[0].slice(1)}  {types[1] ? types[1].charAt(0).toUpperCase() + types[1].slice(1): null}</h3>
           </div>
         </div>
       </NavLink>  

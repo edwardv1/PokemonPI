@@ -26,6 +26,8 @@ export default function Detail() {
     return ()=>{dispatch(clearDetail())}
   }, [dispatch, id]);
 
+  console.log(pokemonById);
+
   //Despacha la action removePoke
   const handlerDelete = () => {
     dispatch(removePokemon(id));
@@ -62,10 +64,19 @@ export default function Detail() {
     navigate('/home'); 
   }
 
+  //Backgroun by type
+  // Obtener el primer tipo del array de tipos
+  const primaryType = pokemonById[0]?.types[0];
+  // Generar la clase CSS para el color de fondo según el tipo primario
+  let cardClassName = `${styles.card} ${styles[primaryType]}`;
+
     return (
       <div className={styles.background}>
       { pokemonById.length > 0 ? 
       <div className={styles.container}>
+        <div className={cardClassName}>
+
+        
         <div className={styles.topSection}>
           <div className={styles.topSectionInfo}>
               <h3>INFO. POKEMON</h3>
@@ -129,6 +140,7 @@ export default function Detail() {
             <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
           </div>
           }
+          </div>
         </div>    
       </div>
       :
