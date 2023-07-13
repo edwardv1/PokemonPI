@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPokemonById, clearDetail, removePokemon, handlerModal, errorModal, successModalRemove, hanlderErrorModal } from "../../redux/actions";
-import { Link } from "react-router-dom";
 import styles from "./Detail.module.css";
 import pokebola from "../../images/pokebola8.png";
 import pokebolas from "../../images/pokebolas.png";
@@ -12,6 +11,7 @@ import mew from "../../images/mew.gif";
 export default function Detail() {
   //Recibo el valor de id pasado por parametro del path
   const { id } = useParams(); 
+  const navigate = useNavigate();
   const regexUUID = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
   const dispatch = useDispatch();
   const pokemonById = useSelector((state) => state.pokemonDetail);
@@ -19,11 +19,6 @@ export default function Detail() {
   let messageDeleted = useSelector((state) => state.messageDeleted);
   const error = useSelector((state) => state.errors);
   let modalForError = useSelector((state) => state.modalForError);
-
-  console.log(modal);
-  console.log(messageDeleted);
-  console.log(error);
-  console.log(Object.keys(error).length);
   
   //Limpia el estado global antes de desmontarse el componente
   useEffect(() => {
@@ -59,11 +54,12 @@ export default function Detail() {
     dispatch(handlerModal(open))
   }
 
-  //Cierra la ventana Modal
+  //Cierra la ventana Modal y Redirige al usuario al componente Home
   const onClickCloseDeleted = () => {
     const close = "isClosed";
     dispatch(successModalRemove(""));
     dispatch(handlerModal(close));
+    navigate('/home'); 
   }
 
     return (
