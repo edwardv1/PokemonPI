@@ -35,7 +35,7 @@ const getPokemonsDb = async () => {
 // Función para obtener pokemones de la API
 const getPokemonsApi = async () => {
     try {
-        const infoApi = (await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=60")).data;
+        const infoApi = (await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=100")).data;
 
         //Funcion que limpia la info que viene de la API
         const cleanPokemonsApi = await infoApi.results.map( async (pokemon) => {
