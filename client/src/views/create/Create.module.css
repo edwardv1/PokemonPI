@@ -13,11 +13,11 @@
     flex-direction: column;
     align-items: center; 
     margin-top: 60px;
-    width: 60vh;
+    width: 94vh;
     height: 80vh;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: rgba(188, 188, 22, 0.729); 
+    background-color: rgba(211, 211, 39, 0.996);
     overflow: hidden;
     box-shadow: 0 0 10px black;
     &:hover {
@@ -46,39 +46,45 @@
     flex-direction: column;
     align-items: center;
     border-bottom: 3px solid rgb(0, 0, 0);
-    width: 60vh;
+    width: 100vh;
     font-family: 'Kavivanar', cursive;
     background-color: rgba(188, 188, 22, 0.996); 
 }
 
 .middleSection {
-    flex: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow-y:visible; 
-    overflow-x: hidden; 
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-top: 20px;
     width: 100%;
-    height: 100%;
+    height: 50%;
     font-family: 'Kavivanar', cursive;
     border-left: 3px solid rgb(0, 0, 0);
     border-right: 3px solid rgb(0, 0, 0);
 }
 
-.stylesDiv{
+.middle{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: nowrap; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
 }
 
-.errorInputs {
+.stylesDiv{
+    width: 47vh;
     display: flex;
-    flex: 50%;
-    position: fixed;
-    flex-grow: 1;
-    margin-left: 245px;
+    flex-direction: row;
+    align-items: center;
+   
+}
+
+.stylesDiv label {
+    margin: 0px 0px 0px 90px; 
+}
+
+.stylesDiv input {
+    margin: 0px 60px 0px 30px;
+    max-width: 400px;
 }
 
 .bottomSection {
@@ -88,7 +94,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 60vh;
+    width: 100vh;
     font-family: 'Press Start 2P', cursive;
     font-size: 12px;
     border-top: 3px solid black;
@@ -133,7 +139,6 @@
      } 
 }
 
-
 .error {
     color:  rgb(226, 0, 0);
     font-size: 15px;
@@ -163,6 +168,14 @@
 }
 
 .hr {
+   width:80vh;
+   color: black;
+   margin-top: 15px;
+   border: 1px solid black;
+    margin-bottom: 10px
+}
+
+.hrbox {
    width:18vh;
    color: black;
    margin-top: 15px;
@@ -181,15 +194,15 @@
 
 .lugia {
     margin-bottom: 500px;
-    margin-right: 200px;
+    margin-right: 150px;
+    margin-left: 50px;
 }
 .pokemones {
     margin-top: 600px;
-    margin-left: 200px;
+    margin-left: 150px;
+    margin-right: 50px;
 }
   
-
-
 
 /* Modal Opened */
 
