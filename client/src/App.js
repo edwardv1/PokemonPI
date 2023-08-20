@@ -5,7 +5,7 @@ import Home from './views/home/Home';
 import Detail from './views/detail/Detail';
 import Create from './views/create/Create';
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/"; //Consfiguro axios para hacer consultas a esta url
+axios.defaults.baseURL = "https://pokemonpi-production.up.railway.app/"; //"http://localhost:3001/"; //Consfiguro axios para hacer consultas a esta url
 
 function App() {
 
