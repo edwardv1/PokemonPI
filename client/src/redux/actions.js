@@ -17,7 +17,7 @@ export const REMOVE_POKEMON = "REMOVE_POKEMON";
 
 
 export const getAllPokemons = () => {
-    let endpoint = "http://localhost:3001/pokemons"; 
+    let endpoint = "/pokemons"; 
     return async (dispatch) => {
        try {
           const { data } = await axios.get(endpoint);
@@ -36,7 +36,7 @@ export const getAllPokemons = () => {
  };
 
  export const getPokemonById = (id) => {
-   let endpoint = `http://localhost:3001/pokemons/${id}`;  
+   let endpoint = `/pokemons/${id}`;  
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -61,7 +61,7 @@ export const getAllPokemons = () => {
  }
 
  export const getPokemonByName = (name) => {
-   let endpoint = `http://localhost:3001/pokemons/?name=${name}`;  
+   let endpoint = `/pokemons/?name=${name}`;  
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -81,7 +81,7 @@ export const getAllPokemons = () => {
  }
 
 export const getTypes = () => {
-   let endpoint = `http://localhost:3001/types/`; 
+   let endpoint = `/types`; 
    return async (dispatch) => {
       try {
          const { data } = await axios.get(endpoint);
@@ -100,7 +100,7 @@ export const getTypes = () => {
  }
 
 export const createPokemon = (payload) => {
-   let endpoint = `http://localhost:3001/pokemons/create`; 
+   let endpoint = `/pokemons/create`; 
    return async (dispatch) => {
       try {
          const response = await axios.post(endpoint, payload);
@@ -120,7 +120,7 @@ export const createPokemon = (payload) => {
 }
 
 export const removePokemon = (id) => {
-   let endpoint = `http://localhost:3001/pokemons/${id}`; 
+   let endpoint = `/pokemons/${id}`; 
    return async (dispatch) => {
       try {
          const response = await axios.delete(endpoint);
