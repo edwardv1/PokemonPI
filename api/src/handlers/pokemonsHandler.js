@@ -48,8 +48,8 @@ const deletePokemonsHandler = async (req,res) => {
     const {id} = req.params;
     
     try {
-        await deletePokemon(id);
-        return res.status(200).send(`The pokemon with id ${id} has been deleted successfully`)
+        const pokemonDeleted = await deletePokemon(id);
+        return res.status(200).send(`The pokemon ${pokemonDeleted.name} has been deleted successfully`)
    } catch (error) {
         return res.status(400).json({error: error.message}) 
    }
