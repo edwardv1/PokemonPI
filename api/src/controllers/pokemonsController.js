@@ -124,7 +124,10 @@ const createPokemon = async( name, image, hp, attack, defense, speed, height, we
 const deletePokemon = async(id) => {
     try {
         const pokemonDeleted = await Pokemon.findByPk(id);  //findOne({where:{id: id}})
-        if(pokemonDeleted) return await Pokemon.destroy({where: {id}});
+        if(pokemonDeleted) {
+            await Pokemon.destroy({where: {id}});
+            return pokemonDeleted;
+        }
         throw new Error(`The pokemon with id ${id} doesnt exists`);
     } catch (error) {
         throw new Error(error.message);
