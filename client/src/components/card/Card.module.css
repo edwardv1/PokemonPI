@@ -158,10 +158,10 @@
     background: radial-gradient(circle, rgba(223,214,205,1) 0%, rgba(89,86,71,1) 100%);
   }
 
-  @media screen and (max-width: 360px){
+  @media screen and (max-width: 520px){
     .card {
       height: 33vh;
-      width: 60%;
+      width: 45%;
       border-radius: 8px;
       padding: 16px;
       margin-bottom: 16px;

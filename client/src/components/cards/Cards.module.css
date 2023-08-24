@@ -90,7 +90,7 @@
     height: 80vh;
 }
 
-@media screen and (max-width: 360px){
+@media screen and (max-width: 520px){
     .cardsList {
         display: flex;
         align-items: center;

@@ -66,8 +66,8 @@ export default function Home() {
       if (window.matchMedia("(max-width: 600px)").matches) {
         size = "600px";
       }
-      if (window.matchMedia("(max-width: 360px)").matches) {
-        size = "360px";
+      if (window.matchMedia("(max-width: 520px)").matches) {
+        size = "520px";
       }
       setScreenSize(size);
     };
@@ -110,7 +110,7 @@ console.log(screenSize);
         <div className={styles.containerInfo}>
         <div className={styles.topSection}>
 
-          {screenSize === "360px" ?
+          {screenSize === "520px" ?
             <div className={styles.head}>
               <h3>Welcome to Pokemon World</h3>
             </div>
