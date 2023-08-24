@@ -31,44 +31,72 @@ export default function Cards({ allPokemons }) {
   const dispatch = useDispatch();
 
   //Paginado
+  const ITEMS_PER_PAGE_MOBILE = 5;
   const ITEMS_PER_PAGE = 10;
   const [currentPage, setCurrentPage] = useState(0);
-  const [items, setItems] = useState([...allPokemons].splice(0,ITEMS_PER_PAGE));
-  const [itemsFiltered, setItemsFiltered] = useState([...pokemonsFiltered].splice(0, ITEMS_PER_PAGE));
+
+  const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE);
+
+  const [items, setItems] = useState([...allPokemons].splice(0,itemsPerPage));
+  const [itemsFiltered, setItemsFiltered] = useState([...pokemonsFiltered].splice(0, itemsPerPage));
   const [numberPageAll, setNumberPageAll]  = useState(0);
   const [numberPageFiltered, setNumberPageFiltered]  = useState(0);
   const [goToPage, setGoToPage] = useState("");
 
+    //----------------------------------------------------------------------------------------------------
+
+  // Update itemsPerPage based on window width
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+      const newItemsPerPage = isDesktop ? ITEMS_PER_PAGE : ITEMS_PER_PAGE_MOBILE;
+      setItemsPerPage(newItemsPerPage);
+    };
+
+    // Initial setup
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+   //----------------------------------------------------------------------------------------------------
+
   const nextPage = () => {
     if (filters) {  
       const next_page = currentPage + 1;
-      const firstIndex = next_page * ITEMS_PER_PAGE;
+      const firstIndex = next_page * itemsPerPage;
       if (firstIndex >= pokemonsFiltered.length) return;
-      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE)); 
+      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, itemsPerPage)); 
       setCurrentPage(next_page);
 
       return;
     }
     const next_page = currentPage + 1;
-    const firstIndex = next_page * ITEMS_PER_PAGE;
+    const firstIndex = next_page * itemsPerPage;
     if (firstIndex >= allPokemons.length) return;
-    setItems([...allPokemons].splice(firstIndex, ITEMS_PER_PAGE)) 
+    setItems([...allPokemons].splice(firstIndex, itemsPerPage)) 
     setCurrentPage(next_page);
   }
 
   const prevPage = () => {
     if (filters) {
       const prev_page = currentPage - 1;
-      const firstIndex = prev_page * ITEMS_PER_PAGE;
+      const firstIndex = prev_page * itemsPerPage;
       if (prev_page < 0) return;
-      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE));
+      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, itemsPerPage));
       setCurrentPage(prev_page);
       return;
     }
     const prev_page = currentPage - 1;
-    const firstIndex = prev_page * ITEMS_PER_PAGE;
+    const firstIndex = prev_page * itemsPerPage;
     if (prev_page < 0) return;
-    setItems([...allPokemons].splice(firstIndex, ITEMS_PER_PAGE));
+    setItems([...allPokemons].splice(firstIndex, itemsPerPage));
     setCurrentPage(prev_page);
   }
   
@@ -81,12 +109,12 @@ export default function Cards({ allPokemons }) {
     if (isNaN(page) || page < 1) {
       page = 1;
     } else if (filters) {
-      const filteredPageCount = Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE);
+      const filteredPageCount = Math.ceil(pokemonsFiltered.length / itemsPerPage);
       if (page > filteredPageCount) {
         page = filteredPageCount;
       }
     } else {
-      const allPageCount = Math.ceil(allPokemons.length / ITEMS_PER_PAGE);
+      const allPageCount = Math.ceil(allPokemons.length / itemsPerPage);
       if (page > allPageCount) {
         page = allPageCount;
       }
@@ -95,48 +123,50 @@ export default function Cards({ allPokemons }) {
     setGoToPage("");
   };
 
+
+
   //Evita tener una página adicional cuando el número total de elementos no sea un múltiplo de la cantidad de elementos por página
   //Cuando se aplican ordenes, la pagina va al inicio evitando bugs
   useEffect(() => {
     if (filters) {
       setCurrentPage(0);
-      const filteredPageCount = Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE);
+      const filteredPageCount = Math.ceil(pokemonsFiltered.length / itemsPerPage);
       setNumberPageFiltered(filteredPageCount > 0 ? filteredPageCount - 1 : 0);
       if(orders) setCurrentPage(0);
     } else {
       setCurrentPage(0);
-      const allPageCount = Math.ceil(allPokemons.length / ITEMS_PER_PAGE);
+      const allPageCount = Math.ceil(allPokemons.length / itemsPerPage);
       setNumberPageAll(allPageCount > 0 ? allPageCount - 1 : 0);
       if(orders) setCurrentPage(0);
     }
-  }, [allPokemons, pokemonsFiltered, filters, orders]);
+  }, [allPokemons, pokemonsFiltered, filters, orders, itemsPerPage]);
   
   // Permite hacer el paginado una vez se monte/actualice allPokemons y pokemonsFiltered
   useEffect(() => {
-    const firstIndex = currentPage * ITEMS_PER_PAGE;
+    const firstIndex = currentPage * itemsPerPage;
     if (filters) {
-      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, ITEMS_PER_PAGE));
+      setItemsFiltered([...pokemonsFiltered].splice(firstIndex, itemsPerPage));
     } else {
-      setItems([...allPokemons].splice(firstIndex, ITEMS_PER_PAGE));
+      setItems([...allPokemons].splice(firstIndex, itemsPerPage));
     }
-  }, [allPokemons, pokemonsFiltered, currentPage, filters]);
+  }, [allPokemons, pokemonsFiltered, currentPage, filters, itemsPerPage]);
 
   //Controla que se rendericen las cards al cambiar de pagina desde el input
   useEffect(() => {
     if (filters) {
       if(pokemonsFiltered.length === 0){
-        setNumberPageFiltered(Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE));
+        setNumberPageFiltered(Math.ceil(pokemonsFiltered.length / itemsPerPage));
       }else {
-        setNumberPageFiltered(Math.ceil(pokemonsFiltered.length / ITEMS_PER_PAGE)-1);
+        setNumberPageFiltered(Math.ceil(pokemonsFiltered.length / itemsPerPage)-1);
       }
     } else {
       if(allPokemons.length === 0) {
-        setNumberPageAll(Math.ceil(allPokemons.length / ITEMS_PER_PAGE));
+        setNumberPageAll(Math.ceil(allPokemons.length / itemsPerPage));
       }else {
-        setNumberPageAll(Math.ceil(allPokemons.length / ITEMS_PER_PAGE)-1);
+        setNumberPageAll(Math.ceil(allPokemons.length / itemsPerPage)-1);
       } 
     }
-  }, [allPokemons, pokemonsFiltered, filters]);
+  }, [allPokemons, pokemonsFiltered, filters, itemsPerPage]);
   
 
   //Evita que el número de página actual no sea mayor que la cantidad de páginas disponibles
@@ -155,7 +185,6 @@ export default function Cards({ allPokemons }) {
     dispatch(handlerModal(close))
   }
 
-  console.log(modalForError);
   //Abre la ventana Modal si hay un error en el Search Pokemon
   if(Object.keys(error).length > 0){
     const open = "isOpened";
@@ -172,17 +201,20 @@ export default function Cards({ allPokemons }) {
   return (
     <div>
       <div className={styles.bottomSection}>
-        <button className={styles.buttonPage} onClick={prevPage}>{"<<"} Prev</button>
-        {
-          filters && pokemonsFiltered.length === 0 ?
-          <h4>Page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
-          :
-          <h4>Page: {currentPage +1} / {filters ? numberPageFiltered +1 : numberPageAll +1}</h4>
-        }
-        <button className={styles.buttonPage} onClick={nextPage}>Next {">>"}</button>
-
-        <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
-        <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
+        <section className={styles.buttonsPages}>
+          <button className={styles.buttonPage} onClick={prevPage}>{"<<"} Prev</button>
+          {
+            filters && pokemonsFiltered.length === 0 ?
+            <h4>Page: {currentPage} / {filters ? numberPageFiltered : numberPageAll}</h4>
+            :
+            <h4>Page: {currentPage +1} / {filters ? numberPageFiltered +1 : numberPageAll +1}</h4>
+          }
+          <button className={styles.buttonPage} onClick={nextPage}>Next {">>"}</button>
+        </section>
+        <section className={styles.goPage}>
+          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
+        </section>
       </div>
 
       <div className={styles.cardsList}>

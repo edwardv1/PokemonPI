@@ -158,6 +158,28 @@
     background: radial-gradient(circle, rgba(223,214,205,1) 0%, rgba(89,86,71,1) 100%);
   }
 
+  @media screen and (max-width: 360px){
+    .card {
+      height: 33vh;
+      width: 60%;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      
+      border: 6px solid yellow;
+      background-color: rgb(232, 229, 49);
+  
+      -moz-osx-font-smoothing: grayscale;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      transition: trasnform 0.90s ease-out;
+  
+      box-shadow: 0 0 10px black;
+      &:hover {
+         box-shadow: 0 0 5px red;
+      }
+    }
+}
 
 
 

@@ -4,29 +4,32 @@
     background-image: url("../../images/pokewp4.png");
 }
 
-.rayquaza {
+
+
+.containerInfo {
     display: flex;
-    height: 100vh;
-    background-image: url("../../images/create5.jpg");
+    flex: 80%;
+    flex-direction: column;
 }
+
+
 
 
 .divNavbar {
     flex: 20%;
 }
   
-.divCards {
+/* .divCards {
     display: flex;
     flex: 80%;
     flex-direction: column;
-}
+} */
 
 .topSection {
     flex: 15%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /* border: 6px solid rgb(0, 0, 0); */
     margin-top: 5px;
     margin-right: 20px;
     margin-left: 10px;
@@ -41,20 +44,6 @@
     color: black;
 }
 
-.topSectionLeft {
-    background-color: red;
-    padding: 8px;
-    width: 75vh;
-    display: flex;
-    flex-direction: row;
-    justify-content:end;
-    border: 2px solid black;
-    border-top-left-radius: 300px;
-    border-bottom-left-radius: 10px;
-    &:hover {
-        box-shadow: 0 0 5px black;
-    }
-}
 
 .topSectionLeft select {
     font-family: 'Kavivanar', cursive;
@@ -68,6 +57,21 @@
     cursor: pointer;
     &:hover {
         box-shadow: 0 0 10px white;
+    }
+}
+
+.topSectionLeft {
+    background-color: red;
+    padding: 8px;
+    width: 75vh;
+    display: flex;
+    flex-direction: row;
+    justify-content:end;
+    border: 2px solid black;
+    border-top-left-radius: 300px;
+    border-bottom-left-radius: 10px;
+    &:hover {
+        box-shadow: 0 0 5px black;
     }
 }
 
@@ -114,3 +118,80 @@
     }
 }
 
+.rayquaza {
+    display: flex;
+    height: 100vh;
+    background-image: url("../../images/create5.jpg");
+}
+
+
+
+/* @media screen and (min-width: 1550px){
+    .container {
+        background-color: grey; 
+    }
+} */
+
+@media screen and (max-width: 1550px){
+    /* .container {
+        background-color: blue; 
+    } */
+    .divNavbar {
+        display: none;
+    }
+    .button {
+        display: none;
+    }
+    .topSectionRight button {
+        background-color: rgb(31, 83, 166);
+        &:hover {
+            box-shadow: 0 0 10px rgb(31, 83, 166);
+        } 
+    }
+}
+/* @media screen and (max-width: 1200px){
+    .container {
+        background-color: white; 
+    }
+}
+@media screen and (max-width: 992px){
+    .container {
+        background-color: red; 
+    }
+}
+@media screen and (max-width: 768px){
+    .container {
+        background-color: yellow;
+    }
+}
+@media screen and (max-width: 600px){
+    .container {
+        background-color: fuchsia;
+    }
+} */
+@media screen and (max-width: 360px){
+    /* .container {
+        background-color: #F5F5F5; 
+    } */
+    .topSection {
+        /* width: 350px; */
+        width: 100%;
+        height: 150px;
+        background-color: #007F86;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 10px;
+    }
+    .topSectionLeft {
+        display: none;
+    }
+    .topSectionRight {
+        display: none;
+    }
+    .topSection head {
+        text-align: center;
+    }
+}
+  
