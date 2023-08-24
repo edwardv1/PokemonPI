@@ -95,7 +95,7 @@ export default function Home() {
     const open = "isOpened";
     dispatch(handlerModal(open))
   }
-console.log(screenSize);
+// console.log(screenSize);
   return (
     <div
       className={`${styles.container} ${
