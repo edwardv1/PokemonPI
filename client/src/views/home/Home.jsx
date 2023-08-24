@@ -16,7 +16,7 @@ import NavBar from "../../components/navbar/NavBar.jsx";
 import Cards from "../../components/cards/Cards.jsx";
 import styles from "./Home.module.css";
 import ButtonSearch from "../../components/searchBar/ButtonSearch.jsx";
-import { BsFillArrowUpCircleFill } from "react-icons/bs";
+import {BsFillArrowUpCircleFill} from 'react-icons/bs';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ export default function Home() {
   const types = useSelector((state) => state.types);
 
   const [screenSize, setScreenSize] = useState("");
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     dispatch(getTypes());
@@ -62,7 +63,7 @@ export default function Home() {
     const handleResize = () => {
       let size = null;
       if (window.matchMedia("(max-width: 1550px)").matches) {
-        size = "1550px";
+        size = "1550px"
       }
       if (window.matchMedia("(max-width: 600px)").matches) {
         size = "600px";
@@ -87,6 +88,33 @@ export default function Home() {
 
   //----------------------------------------------------------------------------------------------------
 
+  // Función para manejar el clic en el botón
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Animación de desplazamiento suave
+    });
+  };
+
+  // Manejar el evento de desplazamiento para mostrar u ocultar el botón
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
+  // Agregar un listener de scroll cuando el componente se monte
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  //----------------------------------------------------------------------------------------------------
+
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
@@ -94,9 +122,9 @@ export default function Home() {
   //Abre modal AboutMe
   const handleClickOpen = () => {
     const open = "isOpened";
-    dispatch(handlerModal(open));
-  };
-  // console.log(screenSize);
+    dispatch(handlerModal(open))
+  }
+console.log(screenSize);
   return (
     <div
       className={`${styles.container} ${
@@ -107,51 +135,60 @@ export default function Home() {
         <NavBar />
       </div>
 
-      <div className={styles.containerInfo}>
+
+        <div className={styles.containerInfo}>
         <div className={styles.topSection}>
-          {screenSize === "520px" ? (
+
+          {screenSize === "520px" ?
             <div className={styles.head}>
               <h3>Welcome to Pokemon World</h3>
+              <hr />
+              <div>
+                <h3>Filters and Sorts</h3>
+              </div>
             </div>
-          ) : screenSize === "1550px" ? (
-            <div className={styles.topSectionLeft}>
-              <ButtonSearch />
-              <label>Orders</label>
-              <select onChange={alphabeticalOrder} name="alphabetical" id="">
-                <option defaultChecked value="order">
-                  Alphabetical
-                </option>
-                <option value="Ascending">Ascending: Z - A</option>
-                <option value="Descending">Descending: A - Z</option>
-              </select>
-              <select onChange={attackOrder} name="attack" id="">
-                <option defaultChecked value="order">
-                  By Attack
-                </option>
-                <option value="Ascending">Ascending: Min - Max</option>
-                <option value="Descending">Descending: Max - Min</option>
-              </select>
-            </div>
-          ) : (
-            <div className={styles.topSectionLeft}>
-              <label>Alphabetical Order</label>
-              <select onChange={alphabeticalOrder} name="alphabetical" id="">
-                <option defaultChecked value="order">
-                  Order
-                </option>
-                <option value="Ascending">Ascending: Z - A</option>
-                <option value="Descending">Descending: A - Z</option>
-              </select>
-              <select onChange={attackOrder} name="attack" id="">
-                <option defaultChecked value="order">
-                  Order
-                </option>
-                <option value="Ascending">Ascending: Min - Max</option>
-                <option value="Descending">Descending: Max - Min</option>
-              </select>
-              <label>Order by Attack</label>
-            </div>
-          )}
+          
+          :
+          screenSize === "1550px" ? (
+              <div className={styles.topSectionLeft}>
+                <ButtonSearch />
+                <label>Orders</label>
+                <select onChange={alphabeticalOrder} name="alphabetical" id="">
+                  <option defaultChecked value="order">
+                    Alphabetical
+                  </option>
+                  <option value="Ascending">Ascending: Z - A</option>
+                  <option value="Descending">Descending: A - Z</option>
+                </select>
+                <select onChange={attackOrder} name="attack" id="">
+                  <option defaultChecked value="order">
+                    By Attack
+                  </option>
+                  <option value="Ascending">Ascending: Min - Max</option>
+                  <option value="Descending">Descending: Max - Min</option>
+                </select>
+              </div>
+            ) : (
+              <div className={styles.topSectionLeft}>
+                <label>Alphabetical Order</label>
+                <select onChange={alphabeticalOrder} name="alphabetical" id="">
+                  <option defaultChecked value="order">
+                    Order
+                  </option>
+                  <option value="Ascending">Ascending: Z - A</option>
+                  <option value="Descending">Descending: A - Z</option>
+                </select>
+                <select onChange={attackOrder} name="attack" id="">
+                  <option defaultChecked value="order">
+                    Order
+                  </option>
+                  <option value="Ascending">Ascending: Min - Max</option>
+                  <option value="Descending">Descending: Max - Min</option>
+                </select>
+                <label>Order by Attack</label>
+              </div>
+            )}
+          
 
           {screenSize === "1550px" ? (
             <div className={styles.topSectionRight}>
@@ -215,7 +252,9 @@ export default function Home() {
               </button>
             </div>
           )}
+        
         </div>
+
 
         <div className={styles.divCards}>
           {filters ? (
@@ -226,15 +265,18 @@ export default function Home() {
         </div>
 
         {/* Botón para volver al inicio */}
-        {showButton && screenSize === "520px" && (
+        {(showButton && screenSize === "520px") && (
+          
           <div className={styles.buttonArrow}>
+
             <BsFillArrowUpCircleFill
-              size={30}
-              className={`scroll-to-top-button ${showButton ? "show" : ""}`}
-              onClick={scrollToTop}
-            />
+            size={30}
+            className={`scroll-to-top-button ${showButton ? 'show' : ''}`} 
+            onClick={scrollToTop}/>
           </div>
+          
         )}
+
       </div>
     </div>
   );
