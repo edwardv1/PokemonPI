@@ -15,9 +15,7 @@
 }
 
 /* .divCards {
-    display: flex;
-    flex: 80%;
-    flex-direction: column;
+    margin-top: 20px;
 } */
 
 .topSection {
@@ -112,6 +110,32 @@
   }
 }
 
+.filters {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 10px 0px 10px 0px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.511);
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+}
+
+.filters select {
+    width: 120px;
+    margin: 10px;
+    font-size: 15px;
+    font-family: "Kavivanar", cursive;
+    background-color: #96E4E7;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 0 5px whitesmoke;
+    }
+}
 .rayquaza {
   display: flex;
   height: 100vh;
@@ -194,7 +218,6 @@
     background-position: center;
   }
   .topSection {
-    /* width: 350px; */
     margin: 0;
     width: 100%;
     height: 150px;

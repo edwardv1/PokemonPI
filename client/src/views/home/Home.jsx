@@ -143,8 +143,43 @@ console.log(screenSize);
             <div className={styles.head}>
               <h3>Welcome to Pokemon World</h3>
               <hr />
-              <div>
-                <h3>Filters and Sorts</h3>
+                <h3>Sorts and Filters</h3>
+              <div className={styles.filters}>
+                <select onChange={alphabeticalOrder} name="alphabetical" id="">
+                    <option defaultChecked value="order">
+                      Alphabetical
+                    </option>
+                    <option value="Ascending">Asc: Z - A</option>
+                    <option value="Descending">Desc: A - Z</option>
+                  </select>
+                  <select onChange={filterType} name="filterType" id="">
+                    <option defaultChecked value="filter">
+                      By Type
+                    </option>
+                    <option value="all">All</option>
+                    {types?.map((type) => {
+                      return (
+                        <option key={type.id} value={type.name}>
+                          {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <select onChange={attackOrder} name="attack" id="">
+                    <option defaultChecked value="order">
+                      By Attack
+                    </option>
+                    <option value="Ascending">Asc: Min - Max</option>
+                    <option value="Descending">Desc: Max - Min</option>
+                  </select>
+                  <select onChange={filterOrigin} name="filterOrigin" id="">
+                    <option defaultChecked value="filter">
+                      By Origin
+                    </option>
+                    <option value="all">All</option>
+                    <option value="api">API</option>
+                    <option value="bdd">Data Base</option>
+                  </select>
               </div>
             </div>
           
@@ -152,7 +187,7 @@ console.log(screenSize);
           screenSize === "1550px" ? (
               <div className={styles.topSectionLeft}>
                 <ButtonSearch />
-                <label>Orders</label>
+                <label>Sorts</label>
                 <select onChange={alphabeticalOrder} name="alphabetical" id="">
                   <option defaultChecked value="order">
                     Alphabetical
@@ -173,26 +208,26 @@ console.log(screenSize);
                 <label>Alphabetical Order</label>
                 <select onChange={alphabeticalOrder} name="alphabetical" id="">
                   <option defaultChecked value="order">
-                    Order
+                    Sort
                   </option>
                   <option value="Ascending">Ascending: Z - A</option>
                   <option value="Descending">Descending: A - Z</option>
                 </select>
                 <select onChange={attackOrder} name="attack" id="">
                   <option defaultChecked value="order">
-                    Order
+                    Sort
                   </option>
                   <option value="Ascending">Ascending: Min - Max</option>
                   <option value="Descending">Descending: Max - Min</option>
                 </select>
-                <label>Order by Attack</label>
+                <label>Sort by Attack</label>
               </div>
             )}
           
 
           {screenSize === "1550px" ? (
             <div className={styles.topSectionRight}>
-              <label>Filters</label>
+              <label>Sorts</label>
               <select onChange={filterType} name="filterType" id="">
                 <option defaultChecked value="filter">
                   By Type
