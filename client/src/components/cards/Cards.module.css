@@ -123,13 +123,11 @@
       background-color: rgba(31, 83, 166, 0.85);
   }
   .rayquaza p {
-      font-size: 14px;
+      font-size: 10px;
       text-align: center;
   }
   .rayquaza {
       overflow: auto;
-      font-size: 12px;
-      text-align: center;
   }
 }
 
