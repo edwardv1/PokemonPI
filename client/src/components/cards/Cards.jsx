@@ -237,7 +237,7 @@ export default function Cards({ allPokemons }) {
         { filters && pokemonsFiltered.length === 0 ? (
         <div className={styles.rayquaza}>
           <p>It seems that there are no pokemons... But, what is that?</p>
-          <img style={{ width: windowWidth <= 520 ? '400px' : '700px' }} src={gifRay} alt="Rayquaza" />  
+          <img style={{ width: windowWidth <= 520 ? '300px' : '700px' }} src={gifRay} alt="Rayquaza" />  
           <p>Rayquaza has appeared!!!</p>
           {reproducirSonido(0.03)}
         </div>

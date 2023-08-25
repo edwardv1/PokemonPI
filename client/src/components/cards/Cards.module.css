@@ -85,6 +85,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
   height: 80vh;
 }
 
