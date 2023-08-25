@@ -45,7 +45,8 @@
   font-size: 15px;
   background-color: white;
   border: 1px solid black;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   cursor: pointer;
   &:hover {
     box-shadow: 0 0 10px white;
@@ -87,7 +88,8 @@
   font-size: 15px;
   background-color: red;
   border: 1px solid black;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   cursor: pointer;
   &:hover {
     box-shadow: 0 0 10px red;
@@ -114,12 +116,13 @@
     width: 100%;
     height: 100px;
     margin-bottom: 15px;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 15px 0px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.511);
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -160,8 +163,7 @@
 
 .scroll-to-top-button.show {
   opacity: 1; /* Mostrar cuando se aplica la clase "show" */
-  width: 30px;
-  height: 30px;
+  cursor: pointer;
 }
 
 /* @media screen and (min-width: 1550px){
@@ -220,7 +222,7 @@
   .topSection {
     margin: 0;
     width: 100%;
-    height: 150px;
+    height: 240px;
     background-color: #007f86;
     display: flex;
     align-items: center;
@@ -228,6 +230,10 @@
     text-align: center;
     font-family: "Press Start 2P", cursive;
     font-size: 10px;
+  }
+  .topSection h3 {
+    font-family: "Kavivanar", cursive;
+    font-size: 18px;
   }
   .topSection hr {
     border: solid 1px black;
@@ -241,5 +247,18 @@
   }
   .topSection head {
     text-align: center;
+  }
+  .rayquaza {
+    background-image: url("../../images/create5.jpg");
+    position: relative;
+    width: 100%;
+    height: auto; /* Cambia de 100vh a auto */
+    overflow: hidden; /* Para ocultar el desbordamiento del fondo */
+    
+    background-size: cover;
+    background-position: center;
+  }
+  .title{
+    display: flex;
   }
 }

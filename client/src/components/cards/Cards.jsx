@@ -198,6 +198,21 @@ export default function Cards({ allPokemons }) {
     dispatch(hanlderErrorModal(close));
   }
 
+  //Codigo para controlar el tamaño de pantalla
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div>
       <div className={styles.bottomSection}>
@@ -222,7 +237,7 @@ export default function Cards({ allPokemons }) {
         { filters && pokemonsFiltered.length === 0 ? (
         <div className={styles.rayquaza}>
           <p>It seems that there are no pokemons... But, what is that?</p>
-          <img style={{ width: '700px' }} src={gifRay} alt="Rayquaza" />  
+          <img style={{ width: windowWidth <= 520 ? '400px' : '700px' }} src={gifRay} alt="Rayquaza" />  
           <p>Rayquaza has appeared!!!</p>
           {reproducirSonido(0.03)}
         </div>

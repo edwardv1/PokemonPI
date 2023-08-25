@@ -17,6 +17,7 @@ import Cards from "../../components/cards/Cards.jsx";
 import styles from "./Home.module.css";
 import ButtonSearch from "../../components/searchBar/ButtonSearch.jsx";
 import {BsFillArrowUpCircleFill} from 'react-icons/bs';
+import pokebola from "../../images/pokebola8.png";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Home() {
   const types = useSelector((state) => state.types);
 
   const [screenSize, setScreenSize] = useState("");
-  const [showButton, setShowButton] = useState(false);
+  
 
   useEffect(() => {
     dispatch(getTypes());
@@ -65,9 +66,9 @@ export default function Home() {
       if (window.matchMedia("(max-width: 1550px)").matches) {
         size = "1550px"
       }
-      if (window.matchMedia("(max-width: 600px)").matches) {
-        size = "600px";
-      }
+      // if (window.matchMedia("(max-width: 600px)").matches) {
+      //   size = "600px";
+      // }
       if (window.matchMedia("(max-width: 520px)").matches) {
         size = "520px";
       }
@@ -95,23 +96,6 @@ export default function Home() {
       behavior: 'smooth', // Animación de desplazamiento suave
     });
   };
-
-  // Manejar el evento de desplazamiento para mostrar u ocultar el botón
-  const handleScroll = () => {
-    if (window.scrollY > 200) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
-  };
-
-  // Agregar un listener de scroll cuando el componente se monte
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   //----------------------------------------------------------------------------------------------------
 
@@ -141,7 +125,10 @@ console.log(screenSize);
 
           {screenSize === "520px" ?
             <div className={styles.head}>
-              <h3>Welcome to Pokemon World</h3>
+              <div className={styles.title}>
+                <h2>Welcome to Pokemon World</h2>
+                <img style={{ width: '25px', height: "30px", marginTop: "5px"}} src={pokebola} alt="pokebola" />
+              </div>
               <hr />
                 <h3>Sorts and Filters</h3>
               <div className={styles.filters}>
@@ -205,7 +192,7 @@ console.log(screenSize);
               </div>
             ) : (
               <div className={styles.topSectionLeft}>
-                <label>Alphabetical Order</label>
+                <label>Alphabetical Sort</label>
                 <select onChange={alphabeticalOrder} name="alphabetical" id="">
                   <option defaultChecked value="order">
                     Sort
@@ -227,7 +214,7 @@ console.log(screenSize);
 
           {screenSize === "1550px" ? (
             <div className={styles.topSectionRight}>
-              <label>Sorts</label>
+              <label>Filters</label>
               <select onChange={filterType} name="filterType" id="">
                 <option defaultChecked value="filter">
                   By Type
@@ -300,13 +287,13 @@ console.log(screenSize);
         </div>
 
         {/* Botón para volver al inicio */}
-        {(showButton && screenSize === "520px") && (
+        {screenSize <= "520px"  && (
           
           <div className={styles.buttonArrow}>
 
             <BsFillArrowUpCircleFill
             size={30}
-            className={`scroll-to-top-button ${showButton ? 'show' : ''}`} 
+            className={`scroll-to-top-button ${screenSize <= "520px" ? 'show' : ''}`} 
             onClick={scrollToTop}/>
           </div>
           
