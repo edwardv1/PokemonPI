@@ -127,7 +127,7 @@ console.log(screenSize);
             <div className={styles.head}>
               <div className={styles.title}>
                 <h2>Welcome to Pokemon World</h2>
-                <img style={{ width: '25px', height: "30px", marginTop: "5px"}} src={pokebola} alt="pokebola" />
+                <img style={{ width: '25px', height: "30px", marginTop: "2.5px"}} src={pokebola} alt="pokebola" />
               </div>
               <hr />
                 <h3>Sorts and Filters</h3>
@@ -303,3 +303,4 @@ console.log(screenSize);
     </div>
   );
 }
+

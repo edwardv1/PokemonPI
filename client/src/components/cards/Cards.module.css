@@ -126,10 +126,11 @@
       font-size: 14px;
       text-align: center;
   }
-  .rayquaza img {
-      width: 200px;
+  .rayquaza {
+      overflow: auto;
+      font-size: 12px;
+      text-align: center;
   }
-   
 }
 
 /* Modal Opened */
