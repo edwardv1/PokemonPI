@@ -165,14 +165,14 @@
   flex-direction: column;
   width: 100%;
   height: auto;
-  max-height: 100vh; /* Establecer una altura máxima para que pueda haber scroll */
-  overflow-y: auto; /* Habilitar el scroll vertical cuando el contenido exceda la altura máxima */
+  /*max-height: 100vh;  Establecer una altura máxima para que pueda haber scroll */
+  /*overflow-y: auto;  Habilitar el scroll vertical cuando el contenido exceda la altura máxima */
   
 }
 .middleSection {
   display: flex;
   flex-direction: column;
-  font-size: 15px;
+  font-size: 13px;
 }
 .middleSectionInfo {
   background-color: rgba(128, 128, 128, 0.596);
@@ -187,7 +187,7 @@
 }
 .bottomSection {
   margin: 0px auto;
-  font-size: 14px;
+  font-size: 13px;
   display: block;
   flex-direction: column;
 
