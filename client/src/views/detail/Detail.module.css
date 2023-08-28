@@ -104,7 +104,7 @@
   border-bottom: 3px solid rgb(0, 0, 0);
   flex: 30%;
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-direction: column;
@@ -192,7 +192,7 @@
   }
   .middleSectionInfo h4 {
     border-bottom: 1px solid grey;
-    padding: 0px 0px 20px 40px;
+    padding: 0px 0px 20px 30px;
   }
   .bottomSection {
     margin: 0px auto;
@@ -209,7 +209,7 @@
 
   .bottomSection h4 {
     border-bottom: 1px solid grey;
-    padding: 0px 0px 20px 40px;
+    padding: 0px 0px 20px 30px;
   }
 }
 
