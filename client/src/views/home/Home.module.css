@@ -28,6 +28,11 @@
   margin-left: 10px;
 }
 
+.topDivision {
+  display: grid;
+  grid-template-columns: 100% 10%;
+}
+
 .topSection label {
   margin-top: 20px;
   margin-left: 5px;

@@ -17,6 +17,7 @@ import Cards from "../../components/cards/Cards.jsx";
 import styles from "./Home.module.css";
 import ButtonSearch from "../../components/searchBar/ButtonSearch.jsx";
 import {BsFillArrowUpCircleFill} from 'react-icons/bs';
+import {TiArrowBack} from 'react-icons/ti';
 import pokebola from "../../images/pokebola8.png";
 
 export default function Home() {
@@ -118,11 +119,8 @@ console.log(screenSize);
       <div className={styles.divNavbar}>
         <NavBar />
       </div>
-
-
         <div className={styles.containerInfo}>
         <div className={styles.topSection}>
-
           {screenSize === "520px" ?
             <div className={styles.head}>
               <div className={styles.title}>
@@ -130,7 +128,12 @@ console.log(screenSize);
                 <img style={{ width: '25px', height: "30px", marginTop: "2.5px"}} src={pokebola} alt="pokebola" />
               </div>
               <hr />
+              <div className={styles.topDivision}>
                 <h3>Sorts and Filters</h3>
+                <Link to="/">
+                  <TiArrowBack size={30} color="black" cursor={PointerEvent}/>
+                </Link>
+              </div>
               <div className={styles.filters}>
                 <select onChange={alphabeticalOrder} name="alphabetical" id="">
                     <option defaultChecked value="order">
