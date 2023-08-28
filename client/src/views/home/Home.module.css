@@ -30,7 +30,7 @@
 
 .topDivision {
   display: grid;
-  grid-template-columns: 100% 10%;
+  grid-template-columns: 90% 10%;
 }
 
 .topSection label {
