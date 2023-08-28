@@ -49,7 +49,7 @@
 
 .backgroundSmall {
     background-image: url('../../images/pokedex.jpg');
-    height: 700px;
+    height: 760px;
 }
 
 @media screen and (max-width: 520px){

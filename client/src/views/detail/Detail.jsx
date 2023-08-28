@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -25,8 +25,6 @@ export default function Detail() {
     dispatch(getPokemonById(id));
     return ()=>{dispatch(clearDetail())}
   }, [dispatch, id]);
-
-  console.log(pokemonById);
 
   //Despacha la action removePoke
   const handlerDelete = () => {
@@ -64,15 +62,36 @@ export default function Detail() {
     navigate('/home'); 
   }
 
-  //Backgroun by type
+  //Background by type
   // Obtener el primer tipo del array de tipos
   const primaryType = pokemonById[0]?.types[0];
   // Generar la clase CSS para el color de fondo según el tipo primario
   let cardClassName = `${styles.card} ${styles[primaryType]}`;
 
+  //Maps para pokebolas
+  const numberOfImagesForAPI = 7;
+  const numberOfImagesForDB = 4;
+  const imagesArrayAPI = Array.from({ length: numberOfImagesForAPI });
+  const imagesArrayDB = Array.from({ length: numberOfImagesForDB });
+
+  //Codigo para controlar el tamaño de pantalla
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
     return (
       <div className={styles.background}>
-      { pokemonById.length > 0 ? 
+      { pokemonById.length > 0 ?
       <div className={styles.container}>
         <div className={cardClassName}>
 
@@ -91,19 +110,30 @@ export default function Detail() {
           <div className={styles.middleSectionImage}>
             <div className={styles.divisor}>
               <div className={styles.middleSectionImageTop}>
-                <h4>{pokemonById[0]?.name.toUpperCase()} </h4>
+                {
+                  windowWidth <= 520 ?
+                  <h3>{pokemonById[0]?.name.toUpperCase()} </h3>
+                  :
+                  <h4>{pokemonById[0]?.name.toUpperCase()} </h4>
+                }
+                
               </div>
               <div>
                 <img style={{ width: '25px'}} src={pokebola} alt="pokebola" />
               </div>
             </div>
             <div className={styles.middleSectionImageBottom}>
+            {
+              windowWidth <= 520 ?
+              <img style={{ width: '300px', height: "310px" }} src={pokemonById[0]?.image} alt={pokemonById.name} />
+              :
               <img style={{ width: '210px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
+            }
             </div>
           </div>
           <div className={styles.middleSectionInfo}>
-            <h4>N° ID: {pokemonById[0]?.id}</h4>
             <h4>Name: {pokemonById[0]?.name.charAt(0).toUpperCase() + pokemonById[0]?.name.slice(1)}</h4>
+            <h4>N° ID: {pokemonById[0]?.id}</h4>
             <h4>HP: {pokemonById[0]?.hp}</h4>
             <h4>Attack: {pokemonById[0]?.attack}</h4>
             <h4>Defense: {pokemonById[0]?.defense}</h4>
@@ -112,6 +142,7 @@ export default function Detail() {
         </div>
         <div className={styles.bottomSectionPosition}>
           <div className={styles.bottomSection}>
+        {windowWidth <= 520 ? <h4>Others Attributes: </h4> : null}
             <h4>Height: {pokemonById[0]?.height}</h4>
             <h4>Weight: {pokemonById[0]?.weight}</h4>
             <h4>
@@ -123,21 +154,21 @@ export default function Detail() {
           {
             regexUUID.test(id) ?
             <div className={styles.about}>
-              <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-              <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-              <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-              <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <button onClick={handlerDelete} className={styles.buttonAbout}>Delete Pokemon</button>
+              {imagesArrayDB.map((_, index) => (
+                <img key={index} style={{ width: '100px' }} src={pokebolas} alt="pokebolas" />
+              ))}
+              {
+                windowWidth > 520 ?
+                  <button onClick={handlerDelete} className={styles.buttonAbout}>Delete Pokemon</button>
+                  :
+                  null
+              }
           </div>
           : 
           <div>
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
-            <img style={{ width: '100px'}} src={pokebolas} alt="pokebolas" />
+            {imagesArrayAPI.map((_, index) => (
+                <img key={index} style={{ width: '100px' }} src={pokebolas} alt="pokebolas" />
+              ))}
           </div>
           }
           </div>
