@@ -125,7 +125,7 @@ export default function Detail() {
             <div className={styles.middleSectionImageBottom}>
             {
               windowWidth <= 520 ?
-              <img style={{ width: '300px', height: "310px" }} src={pokemonById[0]?.image} alt={pokemonById.name} />
+              <img style={{ width: '280px'}} src={pokemonById[0]?.image} alt={pokemonById.name} />
               :
               <img style={{ width: '210px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
             }
