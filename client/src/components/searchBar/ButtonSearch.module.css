@@ -9,6 +9,7 @@
     border-bottom-right-radius: 10px;
     height: 30px;
     max-width: 90px;
+    border: 1px solid black;
     color: white;
     background-color:  black;
     cursor: pointer;
@@ -44,7 +45,7 @@
 
 @media screen and (max-width: 520px){
     .searchInput {
-        max-height: 17px;
+        max-height: 18px;
         max-width: 100px  
     }
     .container button {

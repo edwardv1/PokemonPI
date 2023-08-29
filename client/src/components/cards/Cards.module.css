@@ -60,7 +60,7 @@
   border-bottom-right-radius: 10px;
   cursor: pointer;
   &:hover {
-      box-shadow: 0 0 10px white;
+      box-shadow: 0 0 5px white;
   }
 }
 
@@ -271,7 +271,7 @@
   }
   .goPage input{
       max-width: 100px;
-      height: 24px;
+      height: 25px;
       margin-top: 15px;
   }
   .goPage button{
