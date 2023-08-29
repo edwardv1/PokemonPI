@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 520px){
     .searchInput {
-        max-height: 18px;
+        max-height: 17.8px;
         max-width: 100px  
     }
     .container button {
