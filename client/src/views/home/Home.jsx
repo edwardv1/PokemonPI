@@ -119,8 +119,11 @@ console.log(screenSize);
       <div className={styles.divNavbar}>
         <NavBar />
       </div>
+
+
         <div className={styles.containerInfo}>
         <div className={styles.topSection}>
+
           {screenSize === "520px" ?
             <div className={styles.head}>
               <div className={styles.title}>
@@ -297,6 +300,7 @@ console.log(screenSize);
             <BsFillArrowUpCircleFill
             size={30}
             className={`scroll-to-top-button ${screenSize <= "520px" ? 'show' : ''}`} 
+            cursor={PointerEvent}
             onClick={scrollToTop}/>
           </div>
           
@@ -306,4 +310,3 @@ console.log(screenSize);
     </div>
   );
 }
-

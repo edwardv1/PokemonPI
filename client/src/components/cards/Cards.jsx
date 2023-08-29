@@ -10,6 +10,7 @@ import styles from "./Cards.module.css";
 import linkedIn from "../../images/LinkedIn_logo_initials.png";
 import github from "../../images/github.png";
 import developer from "../../images/edw.jpeg";
+import ButtonSearch from "../searchBar/ButtonSearch";
 
 export default function Cards({ allPokemons }) {
   
