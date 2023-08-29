@@ -33,6 +33,10 @@
   grid-template-columns: 90% 10%;
 }
 
+.topDivision h3 {
+  padding-left: 40px;
+}
+
 .topSection label {
   margin-top: 20px;
   margin-left: 5px;

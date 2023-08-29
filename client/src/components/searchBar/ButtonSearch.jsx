@@ -29,6 +29,7 @@ export default function ButtonSearch() {
           name="search"
           id="search"
           value={name}
+          className={styles.searchInput}
           onChange={event => handleInputChange(event)}
         />
         <button type="submit" onClick={event => handleSubmit(event)} className={styles.button}>Search 🔎</button>

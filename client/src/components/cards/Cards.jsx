@@ -226,10 +226,18 @@ export default function Cards({ allPokemons }) {
           }
           <button className={styles.buttonPage} onClick={nextPage}>Next {">>"}</button>
         </section>
+        { windowWidth <= 520 ?
+        <div className={styles.goPage}>
+          <ButtonSearch/>
+          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
+        </div>
+        :
         <section className={styles.goPage}>
           <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>
+        }
       </div>
 
       <div className={styles.cardsList}>
@@ -256,11 +264,20 @@ export default function Cards({ allPokemons }) {
         <div className= {styles.containerModalOpened}>
             <div className={styles.modalOpenedError}>
               <button onClick={onClickCloseError} className={styles.delete} >X</button>
-              <div>
-                <h1>ERROR!</h1>
-                <hr />
-                <h2>{error}</h2>
-              </div>
+              {
+                windowWidth <= 520 ?
+                <div>
+                  <h2>ERROR!</h2>
+                  <hr />
+                  <h3>{error}</h3>
+                </div>
+                :
+                <div>
+                  <h1>ERROR!</h1>
+                  <hr />
+                  <h2>{error}</h2>
+                </div>
+              }
           </div>
         </div>
         :
