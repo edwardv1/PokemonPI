@@ -371,3 +371,22 @@
     }
 }
 
+@media screen and (min-width: 641px) and (max-width: 1550px) {
+    .cardsList {
+        width: 98vw;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1551px) {
+    .cardsList {
+        width: 82vw;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 520px) {
+    .buttonGo {
+        margin-right: 15px;
+    }
+}
+

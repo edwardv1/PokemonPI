@@ -215,7 +215,7 @@ export default function Cards({ allPokemons }) {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log(windowWidth);
+  // console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -258,14 +258,14 @@ export default function Cards({ allPokemons }) {
         { windowWidth <= 520 ?
         <div className={styles.goPage}>
           <ButtonSearch/>
-          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </div>
         :
           windowWidth > 520 && windowWidth <= 860 ?
           <>
         <section className={styles.goPage}>
-          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>
         
@@ -275,7 +275,7 @@ export default function Cards({ allPokemons }) {
         </>
           :
           <section className={styles.goPage}>
-          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>
         }

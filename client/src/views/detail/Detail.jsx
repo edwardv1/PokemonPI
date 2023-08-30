@@ -142,7 +142,7 @@ export default function Detail() {
         </div>
         <div className={styles.bottomSectionPosition}>
           <div className={styles.bottomSection}>
-        {windowWidth <= 520 ? <h4>Others Attributes: </h4> : null}
+        {windowWidth <= 520 ? <h4>Other Attributes: </h4> : null}
             <h4>Height: {pokemonById[0]?.height}</h4>
             <h4>Weight: {pokemonById[0]?.weight}</h4>
             <h4>

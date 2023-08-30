@@ -233,7 +233,7 @@ export default function Home() {
                 null
               }
               <Link to={`/`}>
-                <button>Exit</button>
+              <TiArrowBack size={30} color="black" cursor={PointerEvent} className={styles.back}/>
               </Link>
             </div>
           ) : (
