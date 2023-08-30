@@ -302,7 +302,7 @@ export default function Cards({ allPokemons }) {
       {/* IMPLEMENTACION DE UN MODAL PARA CONTROLAR EL ERROR DEL SEARCH POKEMON */}
       {
         modalForError ? 
-        <div className= {styles.containerModalOpened}>
+        <div className= {styles.containerModalOpenedError}>
             <div className={styles.modalOpenedError}>
               <button onClick={onClickCloseError} className={styles.delete} >X</button>
               {
@@ -337,7 +337,7 @@ export default function Cards({ allPokemons }) {
       {/* IMPLEMENTACION DE UN MODAL PARA MOSTRAR EL ABOUT ME */}
       {
         modal  ?
-        <div className= {styles.containerModalOpened}>
+        <div className= {styles.containerModalOpenedAbout}>
           <div className={styles.modalOpened}>
             <button onClick={onClickClose} className={styles.delete} >X</button>
             <div className={styles.modalLeft}>
