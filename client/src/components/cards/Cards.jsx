@@ -11,6 +11,8 @@ import linkedIn from "../../images/LinkedIn_logo_initials.png";
 import github from "../../images/github.png";
 import developer from "../../images/edw.jpeg";
 import ButtonSearch from "../searchBar/ButtonSearch";
+import { Link } from "react-router-dom";
+import {TiArrowBack} from 'react-icons/ti';
 
 export default function Cards({ allPokemons }) {
   
@@ -49,9 +51,21 @@ export default function Cards({ allPokemons }) {
   // Update itemsPerPage based on window width
   useEffect(() => {
     const handleResize = () => {
-      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
-      const newItemsPerPage = isDesktop ? ITEMS_PER_PAGE : ITEMS_PER_PAGE_MOBILE;
-      setItemsPerPage(newItemsPerPage);
+      const screenWidth = window.innerWidth;
+
+        if (screenWidth >= 1841) {
+            setItemsPerPage(ITEMS_PER_PAGE);
+        } else if (screenWidth >= 1151 && screenWidth <= 1840) {
+            setItemsPerPage(8);
+        } else if (screenWidth > 860 && screenWidth <= 1150) {
+            setItemsPerPage(6);
+        } else if (screenWidth > 640 && screenWidth <= 860) {
+            setItemsPerPage(4);
+        } else if (screenWidth > 520 && screenWidth <= 640) {
+          setItemsPerPage(2);
+        } else if (screenWidth <= 520) {
+            setItemsPerPage(ITEMS_PER_PAGE_MOBILE);
+        }
     };
 
     // Initial setup
@@ -201,7 +215,7 @@ export default function Cards({ allPokemons }) {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -218,6 +232,20 @@ export default function Cards({ allPokemons }) {
     <div>
       <div className={styles.bottomSection}>
         <section className={styles.buttonsPages}>
+          {
+            windowWidth > 520 && windowWidth <= 1150 ?
+            <Link to="/create">
+              <button className={styles.buttonCreate}>Create Pokemon</button>
+            </Link>
+            :
+            null
+          }
+          {
+            windowWidth > 520 && windowWidth <= 1550 ?
+            <ButtonSearch />
+            :
+            null
+          }
           <button className={styles.buttonPage} onClick={prevPage}>{"<<"} Prev</button>
           {
             filters && pokemonsFiltered.length === 0 ?
@@ -234,7 +262,19 @@ export default function Cards({ allPokemons }) {
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </div>
         :
+          windowWidth > 520 && windowWidth <= 860 ?
+          <>
         <section className={styles.goPage}>
+          <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
+          <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
+        </section>
+        
+          <Link to="/">
+              <TiArrowBack size={30} color="black" cursor={PointerEvent} className={styles.back}/>
+          </Link>
+        </>
+          :
+          <section className={styles.goPage}>
           <input type="text" placeHolder="Go to a Page..." value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>

@@ -15,7 +15,6 @@ import {
 import NavBar from "../../components/navbar/NavBar.jsx";
 import Cards from "../../components/cards/Cards.jsx";
 import styles from "./Home.module.css";
-import ButtonSearch from "../../components/searchBar/ButtonSearch.jsx";
 import {BsFillArrowUpCircleFill} from 'react-icons/bs';
 import {TiArrowBack} from 'react-icons/ti';
 import pokebola from "../../images/pokebola8.png";
@@ -26,9 +25,6 @@ export default function Home() {
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
   const types = useSelector((state) => state.types);
-
-  const [screenSize, setScreenSize] = useState("");
-  
 
   useEffect(() => {
     dispatch(getTypes());
@@ -60,31 +56,18 @@ export default function Home() {
 
   //----------------------------------------------------------------------------------------------------
 
-  // Update itemsPerPage based on window width
+  //Codigo para controlar el tamaño de pantalla
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
   useEffect(() => {
     const handleResize = () => {
-      let size = null;
-      if (window.matchMedia("(max-width: 1550px)").matches) {
-        size = "1550px"
-      }
-      // if (window.matchMedia("(max-width: 600px)").matches) {
-      //   size = "600px";
-      // }
-      if (window.matchMedia("(max-width: 520px)").matches) {
-        size = "520px";
-      }
-      setScreenSize(size);
+      setWindowWidth(window.innerWidth);
     };
 
-    // Initial setup
-    handleResize();
+    window.addEventListener('resize', handleResize);
 
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Clean up the event listener when component unmounts
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -109,7 +92,7 @@ export default function Home() {
     const open = "isOpened";
     dispatch(handlerModal(open))
   }
-console.log(screenSize);
+
   return (
     <div
       className={`${styles.container} ${
@@ -119,12 +102,10 @@ console.log(screenSize);
       <div className={styles.divNavbar}>
         <NavBar />
       </div>
-
-
         <div className={styles.containerInfo}>
         <div className={styles.topSection}>
 
-          {screenSize === "520px" ?
+          {windowWidth <= 520 ?
             <div className={styles.head}>
               <div className={styles.title}>
                 <h2>Welcome to Pokemon World</h2>
@@ -134,7 +115,7 @@ console.log(screenSize);
               <div className={styles.topDivision}>
                 <h3>Sorts and Filters</h3>
                 <Link to="/">
-                  <TiArrowBack size={30} color="black" cursor={PointerEvent}/>
+                  <TiArrowBack size={30} color="black" cursor={PointerEvent} className={styles.back}/>
                 </Link>
               </div>
               <div className={styles.filters}>
@@ -177,9 +158,13 @@ console.log(screenSize);
             </div>
           
           :
-          screenSize === "1550px" ? (
+         
+
+          windowWidth <= 1640 ? (
               <div className={styles.topSectionLeft}>
-                <ButtonSearch />
+                <Link to="/create">
+                  <button className={styles.buttonCreate}>Create Pokemon</button>
+                </Link>
                 <label>Sorts</label>
                 <select onChange={alphabeticalOrder} name="alphabetical" id="">
                   <option defaultChecked value="order">
@@ -217,8 +202,7 @@ console.log(screenSize);
               </div>
             )}
           
-
-          {screenSize === "1550px" ? (
+          {windowWidth >= 520 && windowWidth < 1640 ? (
             <div className={styles.topSectionRight}>
               <label>Filters</label>
               <select onChange={filterType} name="filterType" id="">
@@ -242,10 +226,12 @@ console.log(screenSize);
                 <option value="api">API</option>
                 <option value="bdd">Data Base</option>
               </select>
-              <Link to="/create">
-                <button className={styles.buttonCreate}>Create Pokemon</button>
-              </Link>
-              <button onClick={handleClickOpen}>About Me</button>
+              {
+                windowWidth >= 1150 && windowWidth < 1640 ?
+                  <button onClick={handleClickOpen}>About Me</button>
+                :
+                null
+              }
               <Link to={`/`}>
                 <button>Exit</button>
               </Link>
@@ -280,9 +266,7 @@ console.log(screenSize);
               </button>
             </div>
           )}
-        
         </div>
-
 
         <div className={styles.divCards}>
           {filters ? (
@@ -290,22 +274,17 @@ console.log(screenSize);
           ) : (
             <Cards allPokemons={allPokemons} />
           )}
-        </div>
-
         {/* Botón para volver al inicio */}
-        {screenSize <= "520px"  && (
-          
+        {windowWidth <= 520  && (
           <div className={styles.buttonArrow}>
-
             <BsFillArrowUpCircleFill
             size={30}
-            className={`scroll-to-top-button ${screenSize <= "520px" ? 'show' : ''}`} 
+            className={`scroll-to-top-button ${windowWidth <= 520 ? 'show' : ''}`} 
             cursor={PointerEvent}
             onClick={scrollToTop}/>
           </div>
-          
         )}
-
+        </div>
       </div>
     </div>
   );

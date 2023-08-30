@@ -27,9 +27,19 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 4.3px;
-    text-align: center;  
+    text-align: center; 
 }
 
+@media screen and (min-width: 1551px){
+    .searchInput {
+        max-width: 160px;
+        margin-left: 20px;
+    }
+    .container button {
+        margin-right: 19px;
+        height: 33px;
+    }
+}
 @media screen and (max-width: 1550px){
     .container {
         /* padding-top: 5px; */
@@ -56,5 +66,30 @@
         &:hover {
             box-shadow: 0 0 10px white;
         }
+    }
+}
+/* and (min-width: 1550px) */
+@media screen and (min-width: 521px) and (max-width: 1550px) {
+    .container button {
+        background-color: red;
+        margin-top: 15px;
+        max-height: 30px;
+        
+    }
+    .container input {
+        max-height: 20px;
+        
+    }
+}
+
+@media screen and (min-width: 566px) and (max-width: 1150px) {
+    .container input{
+        max-width: 100px;
+    }
+}
+
+@media screen and (min-width: 521px) and (max-width: 565px) {
+    .container input{
+        max-width: 60px;   
     }
 }
