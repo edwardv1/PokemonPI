@@ -151,7 +151,7 @@
     align-items: center;
 }
 
-.modalOpened {
+.modalOpenedAbout {
     width: 55%;
     height: 52%;
     background: linear-gradient(180deg, rgba(240,239,235,1) 0%, rgba(148,148,148,1) 100%);  
@@ -167,6 +167,10 @@
     }
     transition: transform 1s;
     transform: translateY(0%);
+}
+
+.hrModal {
+    border: 1px solid black;
 }
 
 .modalLeft{
@@ -258,6 +262,7 @@
     background-color: red;
     color: white;
     box-shadow: 0 3px 3px black;
+    cursor: pointer;
     &:hover {
         color: red;
         background-color: white;
@@ -410,3 +415,76 @@
         margin-right: 15px;
     }
 }
+
+@media screen and (min-width: 1221px) and (max-width: 1550px) {
+    .modalOpenedAbout {
+      margin-right: 400px;
+    }
+  }
+  @media screen and (min-width: 1141px) and (max-width: 1220px) {
+    .modalOpenedAbout {
+      margin-right: 600px;
+    }
+  }
+  @media screen and (max-width: 1140px) {
+    .modalOpenedAbout {
+        margin-right: 750px;
+        width: 28%;
+        height: 70%;
+        background: linear-gradient(180deg, rgba(240,239,235,1) 0%, rgba(148,148,148,1) 100%);  
+        border-radius: 10px;    
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around; 
+        justify-content: center;
+        align-items: center;
+        position: relative; 
+        border: 3px solid black;
+        &:hover {
+            box-shadow: 0 0 10px black;
+        }
+        transition: transform 1s;
+        transform: translateY(0%);
+    }
+    .image {
+        display: none;
+    }
+    .modalLeft{
+        flex: 50%;
+        margin-left: 0px;
+        margin-right: 60px;
+        margin-top: 40px;
+    }
+    .modalRight{
+        margin-right: 0px;
+        margin-top: 0px;
+        padding: 0px 20px 50px 20px;
+    }  
+  }
+
+  @media screen and (min-width: 1001px) and (max-width: 1140px) {
+    .modalOpenedAbout {
+        margin-right: 600px;
+      }
+  }
+  @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .modalOpenedAbout {
+        margin-right: 900px;
+      }
+  }
+  @media screen and (min-width: 681px) and (max-width: 800px) {
+    .modalOpenedAbout {
+      margin-right: 1050px;
+    }
+  }
+  @media screen and (max-width: 680px) {
+    .modalOpenedAbout {
+      margin-right: 1320px;
+      width: 25%;
+    }
+  }
+
+
+
+

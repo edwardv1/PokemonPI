@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-//import { useLocalStorage } from 'react-use-localstorage';
 import Card from "../card/Card";
 import { errorModal, handlerModal, hanlderErrorModal } from "../../redux/actions";
-import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
+//import rugidoRaiquaza from "../../images/rayquazaRugido.mp3";
 import gifRay from "../../images/gifRayquaza.gif";
 import styles from "./Cards.module.css";
 import linkedIn from "../../images/LinkedIn_logo_initials.png";
@@ -15,14 +14,13 @@ import { Link } from "react-router-dom";
 import {TiArrowBack} from 'react-icons/ti';
 
 export default function Cards({ allPokemons }) {
-  
+/*
   const reproducirSonido = (volumen) => {
     const audio = new Audio(rugidoRaiquaza);
     audio.volume = volumen;
     audio.play();
   };
-  
-  
+*/
   //Dependencias globales
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const filters = useSelector((state) => state.filters);
@@ -215,7 +213,7 @@ export default function Cards({ allPokemons }) {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // console.log(windowWidth);
+  //console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -258,14 +256,14 @@ export default function Cards({ allPokemons }) {
         { windowWidth <= 520 ?
         <div className={styles.goPage}>
           <ButtonSearch/>
-          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page..." value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </div>
         :
           windowWidth > 520 && windowWidth <= 860 ?
           <>
         <section className={styles.goPage}>
-          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page..." value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>
         
@@ -275,7 +273,7 @@ export default function Cards({ allPokemons }) {
         </>
           :
           <section className={styles.goPage}>
-          <input type="text" placeHolder="Enter a Page" value={goToPage} onChange={handleGoToPageChange} />
+          <input type="text" placeHolder="Enter a Page..." value={goToPage} onChange={handleGoToPageChange} />
           <button className={styles.buttonGo} onClick={goToPageNumber}>Go</button>
         </section>
         }
@@ -288,7 +286,7 @@ export default function Cards({ allPokemons }) {
           <p>It seems that there are no pokemons... But, what is that?</p>
           <img style={{ width: windowWidth <= 520 ? '300px' : '700px' }} src={gifRay} alt="Rayquaza" />  
           <p>Rayquaza has appeared!!!</p>
-          {reproducirSonido(0.03)}
+          {/* {reproducirSonido(0.03)} */}
         </div>
         ) : null}
         
@@ -309,13 +307,13 @@ export default function Cards({ allPokemons }) {
                 windowWidth <= 520 ?
                 <div>
                   <h2>ERROR!</h2>
-                  <hr />
+                  <hr className={styles.hrModal}/>
                   <h3>{error}</h3>
                 </div>
                 :
                 <div>
                   <h1>ERROR!</h1>
-                  <hr />
+                  <hr className={styles.hrModal}/>
                   <h2>{error}</h2>
                 </div>
               }
@@ -338,14 +336,17 @@ export default function Cards({ allPokemons }) {
       {
         modal  ?
         <div className= {styles.containerModalOpenedAbout}>
-          <div className={styles.modalOpened}>
+          <div className={styles.modalOpenedAbout}>
             <button onClick={onClickClose} className={styles.delete} >X</button>
             <div className={styles.modalLeft}>
               
               <h3 className={styles.dev}>Developer: Edward Vera</h3>
               <img style={{ width: '300px'}} src={developer} className={styles.image} alt="Owner and developer" />
 
-              <div className={styles.contactContainer}>
+              
+              {
+                windowWidth > 1140 ?
+                <div className={styles.contactContainer}>
                 <h1>Find me on Linkedin or Github</h1> 
                 <a
                 target="blank" 
@@ -360,6 +361,10 @@ export default function Cards({ allPokemons }) {
                   <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
                 </a> 
               </div>
+              : 
+              null
+              }
+
             </div>
 
             <div className={styles.modalRight}>
@@ -381,6 +386,26 @@ export default function Cards({ allPokemons }) {
                 <li>PostgrSQL</li> 
               </ul>
             </div> 
+            {
+              windowWidth <= 1140 ?
+              <div className={styles.contactContainer}>
+                <h1>Find me on Linkedin or Github</h1> 
+                <a
+                target="blank" 
+                href="https://www.linkedin.com/in/edward-vera-20a577188"
+                >     
+                  <img style={{ width: '30px', height: 'auto' }} src={linkedIn} alt="linkedin logo" />  
+                </a> 
+                <a
+                target="blanko" 
+                href="https://github.com/edwardv1"
+                >     
+                  <img style={{ width: '65px', height: 'auto' }} src={github} alt="Github logo" />  
+                </a> 
+              </div>
+              :
+              null
+            }
         </div>
       </div>
       :

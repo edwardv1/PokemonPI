@@ -1,6 +1,6 @@
 import { GET_POKEMONS, GET_POKEMON_BY_ID, GET_POKEMON_BY_NAME, GET_TYPES, ORDER_BY_NAME,
     ORDER_BY_ATTACK, FILTER_BY_TYPE, FILTER_BY_ORIGIN, CLEAR_DETAIL, REFRESH_POKEMONS, 
-    CONTROL_MODAL, CREATE_POKEMON, ERROR, CONTROL_MODAL_ERROR, REMOVE_POKEMON } from "./actions";
+    CONTROL_MODAL, CREATE_POKEMON, ERROR, CONTROL_MODAL_ERROR, REMOVE_POKEMON, CONFIRMATION_DELETE_MODAL } from "./actions";
 
 
 const initialState = {
@@ -12,6 +12,7 @@ filters: false,
 orders: false,
 modal: false,
 modalForError: false,
+modalDeleteConfirmation: false,
 messageCreated: {},
 messageDeleted: {},
 errors: {}
@@ -60,6 +61,11 @@ switch (type) {
        return {
            ...state,
            messageDeleted: payload
+       }
+   case CONFIRMATION_DELETE_MODAL:
+       return {
+           ...state,
+           modalDeleteConfirmation: payload
        }
 
    case ORDER_BY_NAME:

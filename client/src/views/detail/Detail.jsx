@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getPokemonById, clearDetail, removePokemon, handlerModal, errorModal, successModalRemove, hanlderErrorModal } from "../../redux/actions";
+import { getPokemonById, clearDetail, removePokemon, handlerModal, errorModal, successModalRemove, hanlderErrorModal, modalConfirmationDelete } from "../../redux/actions";
 import styles from "./Detail.module.css";
 import pokebola from "../../images/pokebola8.png";
 import pokebolas from "../../images/pokebolas.png";
@@ -19,6 +19,7 @@ export default function Detail() {
   let messageDeleted = useSelector((state) => state.messageDeleted);
   const error = useSelector((state) => state.errors);
   let modalForError = useSelector((state) => state.modalForError);
+  let modalConfirmation = useSelector((state) => state.modalDeleteConfirmation);
   
   //Limpia el estado global antes de desmontarse el componente
   useEffect(() => {
@@ -26,9 +27,20 @@ export default function Detail() {
     return ()=>{dispatch(clearDetail())}
   }, [dispatch, id]);
 
-  //Despacha la action removePoke
+  //Abre el modal de confirmacion
   const handlerDelete = () => {
+    dispatch(modalConfirmationDelete(true));
+  }
+  
+  //Despacha la action que elimina a pokemon
+  const handleDeletePokemon = () => {
     dispatch(removePokemon(id));
+    dispatch(modalConfirmationDelete(false));
+  }
+
+  //Cierra el modal de confirmación
+  const handleCloseModalConfirmation = () => {
+    dispatch(modalConfirmationDelete(false));
   }
 
   //Condicionales para las ventanas Modal en caso de error
@@ -76,7 +88,7 @@ export default function Detail() {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  //console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -94,8 +106,6 @@ export default function Detail() {
       { pokemonById.length > 0 ?
       <div className={styles.container}>
         <div className={cardClassName}>
-
-        
         <div className={styles.topSection}>
           <div className={styles.topSectionInfo}>
               <h3>INFO. POKEMON</h3>
@@ -111,21 +121,21 @@ export default function Detail() {
             <div className={styles.divisor}>
               <div className={styles.middleSectionImageTop}>
                 {
-                  windowWidth <= 520 ?
+                  windowWidth <= 660 ?
                   <h3>{pokemonById[0]?.name.toUpperCase()} </h3>
                   :
                   <h4>{pokemonById[0]?.name.toUpperCase()} </h4>
                 }
                 
               </div>
-              <div>
+      
                 <img style={{ width: '25px'}} src={pokebola} alt="pokebola" />
-              </div>
+              
             </div>
             <div className={styles.middleSectionImageBottom}>
             {
-              windowWidth <= 520 ?
-              <img style={{ width: '280px'}} src={pokemonById[0]?.image} alt={pokemonById.name} />
+              windowWidth <= 660 ?
+              <img style={{ width: '280px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
               :
               <img style={{ width: '210px' }} src={pokemonById[0]?.image} alt={pokemonById.name} />
             }
@@ -142,7 +152,7 @@ export default function Detail() {
         </div>
         <div className={styles.bottomSectionPosition}>
           <div className={styles.bottomSection}>
-        {windowWidth <= 520 ? <h4>Other Attributes: </h4> : null}
+        {windowWidth <= 660 ? <h4>Other Attributes: </h4> : null}
             <h4>Height: {pokemonById[0]?.height}</h4>
             <h4>Weight: {pokemonById[0]?.weight}</h4>
             <h4>
@@ -158,7 +168,7 @@ export default function Detail() {
                 <img key={index} style={{ width: '100px' }} src={pokebolas} alt="pokebolas" />
               ))}
               {
-                windowWidth > 520 ?
+                windowWidth > 660 ?
                   <button onClick={handlerDelete} className={styles.buttonAbout}>Delete Pokemon</button>
                   :
                   null
@@ -181,12 +191,14 @@ export default function Detail() {
       </div>
       }
 
-      {/* IMPLEMENTACION DE VENTANA MODAL EN CASO DEERROR*/}
+      {/* IMPLEMENTACION DE VENTANA MODAL EN CASO DE ERROR*/}
       {
       modalForError ?
       <div className= {styles.containerModalOpened}>
           <div className={styles.modalOpened}>
-            <button onClick={onClickCloseError} className={styles.delete} >X</button>
+            <Link to="/home">
+              <button onClick={onClickCloseError} className={styles.delete} >X</button>
+            </Link>
             <div>
               <h1>ERROR!</h1>
               <hr />
@@ -217,7 +229,7 @@ export default function Detail() {
               <h1>VERY GOOD!</h1>
               <hr />
               <h2>{messageDeleted}</h2>
-            </div>
+            </div> 
         </div>
       </div>
       :
@@ -231,8 +243,43 @@ export default function Detail() {
             </div>
         </div>
       </div>
-      } 
+      }
 
+
+      {/* IMPLEMENTACION DE VENTANA MODAL DE CONFIRMACION*/}
+      {modalConfirmation ? (
+        <div className={styles.containerModalOpened}>
+          <div className={styles.modalConfirmationOpened}>
+            <div className={styles.head3}>
+              <h2>Are you sure to delete this Pokemon?</h2>
+              <hr />
+            </div>
+
+            <div className={styles.bottom3}>
+              <button
+                className={styles.buttonRegresar}
+                onClick={handleCloseModalConfirmation}
+              >
+                Back
+              </button>
+              <button
+                className={styles.buttonConfirmar}
+                onClick={() => handleDeletePokemon()}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.containerModalClosed}>
+          <div className={styles.modalClosed}></div>
+        </div>
+      )}
+      
       </div>
     );
   }
+
+
+  

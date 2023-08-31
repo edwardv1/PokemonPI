@@ -197,6 +197,33 @@
   cursor: pointer;
 }
 
+/* Mostrar Cargando cuando no hayan pokemones en Home */
+.loading {
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 300px;
+
+}
+
+.loading h4 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: black;
+}
+@media screen and (min-width: 641px) and (max-width: 1550px) {
+  .loading {
+      width: 98vw;
+  }
+}
+
+@media screen and (min-width: 1551px) {
+  .loading {
+      width: 82vw;
+  }
+}
+
 /* @media screen and (max-width: 1840px){
     .topSectionRight {
         background-color: grey; 

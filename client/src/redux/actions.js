@@ -14,6 +14,7 @@ export const CONTROL_MODAL = "CONTROL_MODAL";
 export const ERROR = "ERROR";
 export const CONTROL_MODAL_ERROR = "CONTROL_MODAL_ERROR";
 export const REMOVE_POKEMON = "REMOVE_POKEMON";
+export const CONFIRMATION_DELETE_MODAL = "CONFIRMATION_DELETE_MODAL";
 
 
 export const getAllPokemons = () => {
@@ -119,6 +120,15 @@ export const createPokemon = (payload) => {
    };
 }
 
+export const successModal = (payload) => {
+   return (dispatch) => {
+      return dispatch({
+        type: CREATE_POKEMON,
+        payload: payload
+      })
+   }
+}
+
 export const removePokemon = (id) => {
    let endpoint = `/pokemons/${id}`; 
    return async (dispatch) => {
@@ -139,10 +149,10 @@ export const removePokemon = (id) => {
    };
  }
 
-export const successModal = (payload) => {
+export const modalConfirmationDelete = (payload) => {
    return (dispatch) => {
       return dispatch({
-        type: CREATE_POKEMON,
+        type: CONFIRMATION_DELETE_MODAL,
         payload: payload
       })
    }

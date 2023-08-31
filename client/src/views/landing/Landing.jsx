@@ -24,12 +24,20 @@ export default function Landing() {
   return (
     <div
     className={`${styles.background} ${
-      windowWidth <= 520 ? styles.backgroundSmall : null
+      windowWidth <= 520 ? styles.backgroundSmall : 
+      windowWidth > 521 && windowWidth <= 1700 ? styles.backgroundMedium
+      :
+      null
     }`}
     >
-      <video className={styles.background} loop autoPlay muted>
-        <source src={videoPokemon} type="video/mp4"></source>
-      </video>
+      {
+        windowWidth > 1700 ?
+        <video className={styles.background} loop autoPlay muted>
+          <source src={videoPokemon} type="video/mp4"></source>
+        </video>
+        :
+        null
+      }
 
       <div className={styles.box}>
         <img style={{height:"120px"}} src={logoPoke} alt="logoPokemon" />

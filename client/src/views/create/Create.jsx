@@ -7,10 +7,13 @@ import { createPokemon, getTypes, handlerModal, errorModal, successModal } from 
 import lugia from "../../images/lugia.gif";
 import pokes from "../../images/evoluciones.gif";
 import styles from "./Create.module.css";
+import {RiArrowLeftSLine} from 'react-icons/ri';
+import {RiArrowRightSLine} from 'react-icons/ri';
+
+
 
 export default function Create() {
 
-  const message_success = "Data entered correctly...";
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
   const modal = useSelector((state) => state.modal);
@@ -137,7 +140,7 @@ export default function Create() {
       <div className={styles.lugia}>
         <img style={{ width: '300px' }} src={lugia} alt="Lugia" />
       </div>
-      <div>
+      
         <form onSubmit={handleSubmit} className={styles.form}>
           
           <div className={styles.topSection}>
@@ -146,122 +149,91 @@ export default function Create() {
 
           <div className={styles.middleSection}>
             <div className={styles.middle}>
-
-              <div className={styles.stylesDiv}>
-                  <label>Name: </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={input.name}
-                    placeholder="Enter a name..."
-                    onChange={handleInputChange}
-                  />
-              </div>
-                {errors.name ? <p className={styles.error}>{errors.name}</p> : <p className={styles.message}>{message_success}</p>}
-                {/* <p className={styles.message}>{message_success}</p> */}
-                
-              <div className={styles.stylesDiv}>
-                  <label>Image: </label>
-                  <input
-                    type="text"
-                    name="image"
-                    value={input.image}
-                    placeholder="Enter an URL..."
-                    onChange={(event) => handleInputChange(event)}
-                    />
-            </div>
-              {errors.image ? <p className={styles.error}>{errors.image}</p> : <p className={styles.message}>{message_success}</p>}
-                
-            <div className={styles.stylesDiv}>
-                <label> HP: </label>
-                <input
-                  type="number"
-                  name="hp"
-                  value={input.hp}
-                  placeholder="Enter a value..."
-                  onChange={(event) => handleInputChange(event)}
-                />
-              </div>
-                {errors.hp ? <p className={styles.error}>{errors.hp}</p> : <p className={styles.message}>{message_success}</p>}
-
-              <div className={styles.stylesDiv}>
-                  <label>Attack: </label>
-                  <input
-                    type="number"
-                    name="attack"
-                    required
-                    value={input.attack}
-                    placeholder="Enter a value..."
-                    onChange={(event) => handleInputChange(event)}
-                  />
+        
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Name:</label>
+                  <input type="text" name="name" placeholder="Enter a name..." value={input.name} className={styles.input} onChange={(event) => handleInputChange(event)}/>
                 </div>
-                  {errors.attack ? <p className={styles.error}>{errors.attack}</p> : <p className={styles.message}>{message_success}</p>}
+                <div className={styles.error}>
+                  {errors.name ? <p >{errors.name}</p> : null}
+                  {/* <p className={styles.message}>{message_success}</p> */}
+                </div>
+                
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Image:</label>
+                  <input type="text" name="image" placeholder="Enter an URL..." value={input.image} className={styles.input} onChange={(event) => handleInputChange(event)}/>
+                </div>
+                <div className={styles.error}>
+                  {errors.image ? <p>{errors.image}</p> : null}  
+                </div>
+                
+  
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>HP:</label>
+                  <input type="number" name="hp" placeholder="Enter a value..." value={input.hp} className={styles.input} onChange={(event) => handleInputChange(event)}/>
+                </div>
+                <div className={styles.error}>
+                  {errors.hp ? <p>{errors.hp}</p> : null}
+                </div>
+
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Attack:</label>
+                  <input type="number" name="attack" placeholder="Enter a value..." value={input.attack} className={styles.input} onChange={(event) => handleInputChange(event)}/>
+                </div>
+                <div className={styles.error}>
+                  {errors.attack ? <p>{errors.attack}</p> : null}
+                </div>   
             </div>
+
             <div className={styles.middle}>
-            
-              <div className={styles.stylesDiv}>
-                  <label>Defense: </label>
-                  <input
-                    type="number"
-                    name="defense"
-                    required
-                    value={input.defense}
-                    placeholder="Enter a value..."
-                    onChange={(event) => handleInputChange(event)}
-                    />
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Defense:</label>
+                  <input type="number" name="defense" placeholder="Enter a value..." value={input.defense} className={styles.input} onChange={(event) => handleInputChange(event)}/>
                 </div>
-                  {errors.defense ? <p className={styles.error}>{errors.defense}</p> : <p className={styles.message}>{message_success}</p>}
-
-              <div className={styles.stylesDiv}>
-                  <label>Speed: </label>
-                  <input
-                    type="number"
-                    name="speed"
-                    value={input.speed}
-                    placeholder="Enter a value..."
-                    onChange={(event) => handleInputChange(event)}
-                    />
+                <div className={styles.error}>
+                  {errors.defense ? <p>{errors.defense}</p> : null}
+                </div> 
+                  
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Speed:</label>
+                  <input type="number" name="speed" placeholder="Enter a value..." value={input.speed} className={styles.input} onChange={(event) => handleInputChange(event)}/>
                 </div>
-                  {errors.speed ? <p className={styles.error}>{errors.speed}</p> : <p className={styles.message}>{message_success}</p>}
+                <div className={styles.error}>
+                  {errors.speed ? <p>{errors.speed}</p> : null}
+                </div> 
               
-              <div className={styles.stylesDiv}>
-                  <label>Height: </label>
-                  <input
-                    type="number"
-                    name="height"
-                    value={input.height}
-                    placeholder="Enter a value..."
-                    onChange={(event) => handleInputChange(event)}
-                    />
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Height:</label>
+                  <input type="number" name="height" placeholder="Enter a value..." value={input.height} className={styles.input} onChange={(event) => handleInputChange(event)}/>
                 </div>
-                  {errors.height ? <p className={styles.error}>{errors.height}</p> : <p className={styles.message}>{message_success}</p>}
+                <div className={styles.error}>
+                  {errors.height ? <p>{errors.height}</p> : null}
+                </div>
               
-              <div className={styles.stylesDiv}>
-                  <label>Weight: </label>
-                  <input
-                    type="number"
-                    name="weight"
-                    value={input.weight}
-                    placeholder="Enter a value..."
-                    onChange={(event) => handleInputChange(event)}
-                    />
+                <div className={styles.coolinput}>
+                  <label for="input" className={styles.text}>Weight:</label>
+                  <input type="number" name="weight" placeholder="Enter a value..." value={input.weight} className={styles.input} onChange={(event) => handleInputChange(event)}/>
                 </div>
-                  {errors.weight ? <p className={styles.error}>{errors.weight}</p> : <p className={styles.message}>{message_success}</p>}
+                <div className={styles.error}>
+                  {errors.weight ? <p>{errors.weight}</p> : null}
+                </div>
             </div>
           </div>
             <hr className={styles.hr} />
           
-            <label style={{paddingBottom: "10px"}}>Types: </label>
+            <label style={{paddingBottom: "20px"}} for="input" className={styles.type}>Types:</label>
             <div className={styles.checkboxContainer}>
               <div>
                 {types?.map( (type, key) => {
                   return (
                     <div className={styles.checkboxOrder}>  
-                          <div>
-                            <label>{type.name}</label>
+                          <div className={styles.typeName}>
+                            <label>{type.name.charAt(0).toUpperCase() + type.name.slice(1)}</label>
                           </div>
-                          <div >
+                          <div className={styles.arrow}>
+                            <RiArrowLeftSLine className={styles.arrows}/>
                             <hr className={styles.hrbox} />
+                            <RiArrowRightSLine className={styles.arrows}/>
                           </div>
                           <div>
                             <input 
@@ -279,8 +251,9 @@ export default function Create() {
                 })}
               </div>
             </div>
-            {errors.types ? <p className={styles.error}>{errors.types}</p> : <p className={styles.message}>{message_success}</p>}
-                
+            <div className={styles.error}>
+              {errors.types ? <p>{errors.types}</p> : null}
+            </div>   
           <div className={styles.bottomSection}>
             { disable? 
             (<button
@@ -296,8 +269,8 @@ export default function Create() {
               <button className={styles.buttonCancel}>Cancel</button>
             </Link>
           </div>
-              </form>
-      </div>
+        </form>
+      
 
       <div className={styles.pokemones}>
         <img style={{ width: '300px' }} src={pokes} alt="Pokemones" />
@@ -311,7 +284,7 @@ export default function Create() {
             <button onClick={onClickClose} className={styles.delete} >X</button>
             <div>
               <h1>ERROR!</h1>
-              <hr />
+              <hr className={styles.hrModal}/>
               <h2>{error}</h2>
             </div>
         </div>
@@ -336,7 +309,7 @@ export default function Create() {
             <button onClick={onClickCloseCreated} className={styles.delete} >X</button>
             <div>
               <h1>VERY GOOD!</h1>
-              <hr />
+              <hr className={styles.hrModal}/>
               <h2>{messageCreated}</h2>
             </div>
         </div>

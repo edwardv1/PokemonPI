@@ -18,6 +18,7 @@ import styles from "./Home.module.css";
 import {BsFillArrowUpCircleFill} from 'react-icons/bs';
 import {TiArrowBack} from 'react-icons/ti';
 import pokebola from "../../images/pokebola8.png";
+import mew from "../../images/mew.gif";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function Home() {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
+  console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -233,7 +234,7 @@ export default function Home() {
                 null
               }
               <Link to={`/`}>
-              <TiArrowBack size={30} color="black" cursor={PointerEvent} className={styles.back}/>
+                <TiArrowBack size={30} color="black" cursor={PointerEvent} className={styles.back}/>
               </Link>
             </div>
           ) : (
@@ -271,7 +272,14 @@ export default function Home() {
         <div className={styles.divCards}>
           {filters ? (
             <Cards allPokemons={pokemonsFiltered} />
-          ) : (
+          ) : 
+            allPokemons.length === 0 ?
+            <div className={styles.loading}>
+              <img style={{ width: '300px' }} src={mew} alt="Mew" />
+              <h4>Loading...</h4>
+            </div>
+          :
+          (
             <Cards allPokemons={allPokemons} />
           )}
         {/* Botón para volver al inicio */}
