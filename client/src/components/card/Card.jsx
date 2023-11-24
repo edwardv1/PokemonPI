@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 
 export default function Card({pokemon}) {
@@ -10,23 +9,23 @@ export default function Card({pokemon}) {
   // Obtener el primer tipo del array de tipos
   const primaryType = types[0];
   // Generar la clase CSS para el color de fondo según el tipo primario
-  let cardClassName = `${styles.card} ${styles[primaryType]}`;
+  let cardClassName = `card_container ${[primaryType]}`;
 
   return (
     <div className={cardClassName}>
-      <NavLink to={`/detail/${id}`} className={styles.text}>
-        <div className={styles.topSection}>
-          <div className={styles.name}>
+      <NavLink to={`/detail/${id}`} className="card_text">
+        <div className="card_topSection">
+          <div className="card_name">
             <h2>{name.charAt(0).toUpperCase() + name.slice(1)}</h2>
           </div>
-          <div className={styles.hp}>
+          <div className="card_hp">
             <h2>{hp} HP</h2>
           </div>
         </div>
-        <div className={styles.middleSection}>
+        <div className="card_middleSection">
           <img style={{ width: '200px', height: "110px"}} src={image} alt={name} />
         </div>
-        <div className={styles.bottomSection}>
+        <div className="card_bottomSection">
           <div>
             <h3>Attack: {attack} - Defense: {defense} </h3>
           </div>

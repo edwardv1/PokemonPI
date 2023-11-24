@@ -59,7 +59,7 @@ export default function Home() {
 
   //Codigo para controlar el tamaño de pantalla
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log(windowWidth);
+  //console.log(windowWidth);
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
