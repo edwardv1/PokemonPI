@@ -360,7 +360,7 @@
   .modalConfirmationOpened {
     width: 480px;
     height: 25%;
-    background-color:  #818df8;
+    background-color: whitesmoke;
     border-radius: 20px;    
     display: grid;
     grid-template-rows: 40% 60%;
